@@ -14,6 +14,7 @@ body {
 
 .main-page__header {
   flex-shrink: 0;
+  height: 60px;
   background-color: aquamarine;
 }
 
@@ -23,6 +24,7 @@ body {
 
 .main-page__footer {
   flex-shrink: 0;
+  height: 60px;
   background-color: aquamarine;
   text-align: center;
 }
