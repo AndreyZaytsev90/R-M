@@ -12,7 +12,8 @@ export const CharacterCard = () => {
         <IconGoBack />
       </button>
       <div className={styles['characters-card__loading']}>
-        <Loading label='Loading character card...' />
+        <Loading label='Loading character card...' size='large' />
+        <Loading label='Loading character card...' size='small' />
       </div>
     </div>
   );

@@ -1,5 +1,29 @@
 .header_header-icon {
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
   height: 100%;
+}
+
+.header_header-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.header_header-buttons__button-theme,
+.header_header-buttons__button-lang {
+  width: 37.92px;
+  height: 38px;
+  box-sizing: border-box;
+  border: 1px solid rgba(57, 57, 57, 1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
 }

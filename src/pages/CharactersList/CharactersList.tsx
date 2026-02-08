@@ -6,7 +6,7 @@ export const CharactersList = () => {
   return (
     <div className={styles['characters-list']}>
       <LogoRickAndMorty className={styles['characters-list__logo']} />
-      <Loading label='Loading characters...' />
+      <Loading label='Loading characters...' size='large' />
     </div>
   );
 };
