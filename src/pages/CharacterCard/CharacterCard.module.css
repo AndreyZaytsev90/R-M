@@ -16,20 +16,6 @@
   padding: 0;
 }
 
-.characters-card__loadingLogo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.characters-card__loading {
   margin-top: 154px;
-  animation: spin 4s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
