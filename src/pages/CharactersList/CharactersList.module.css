@@ -12,3 +12,16 @@
   height: auto;
   max-width: 100%;
 }
+
+.characters-list__loadingLogo {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

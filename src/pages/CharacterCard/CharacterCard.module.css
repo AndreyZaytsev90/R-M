@@ -1,0 +1,35 @@
+.characters-card {
+  display: flex;
+  align-items: center; /* центрирование по вертикали */
+  justify-content: center; /* центрирование по горизонтали */
+  flex-direction: column;
+  margin-top: 26px;
+  width: 100%;
+}
+
+.characters-card__button {
+  align-self: flex-start;
+  display: flex;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.characters-card__loadingLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 154px;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
