@@ -1,7 +1,7 @@
 .characters-card {
   display: flex;
-  align-items: center; /* центрирование по вертикали */
-  justify-content: center; /* центрирование по горизонтали */
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   margin-top: 26px;
   width: 100%;

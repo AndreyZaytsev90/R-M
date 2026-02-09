@@ -1,20 +1,20 @@
-import Icon from '../../../assets/Layer 1.svg';
-import Sun from '../../../assets/sun 1.svg';
-import LangRu from '../../../assets/РУ.svg';
+import MainIcon from '../../../assets/Layer 1.svg';
+import IconThemeSun from '../../../assets/sun 1.svg';
+import IconLangRu from '../../../assets/РУ.svg';
 import styles from './Header.module.css';
 
 export const Header = () => {
   return (
-    <div className={styles['header_header-icon']}>
-      <Icon />
-      <div className={styles['header_header-buttons']}>
-        <button className={styles['header_header-buttons__button-theme']}>
-          <Sun />
+    <header className={styles['header']}>
+      <MainIcon />
+      <div className={styles['header__buttons']}>
+        <button className={styles['header__button']}>
+          <IconThemeSun />
         </button>
-        <button className={styles['header_header-buttons__button-lang']}>
-          <LangRu />
+        <button className={styles['header__button']}>
+          <IconLangRu />
         </button>
       </div>
-    </div>
+    </header>
   );
 };

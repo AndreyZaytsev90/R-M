@@ -1,4 +1,4 @@
-.header_header-icon {
+.header {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -6,15 +6,14 @@
   height: 100%;
 }
 
-.header_header-buttons {
+.header__buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
 }
 
-.header_header-buttons__button-theme,
-.header_header-buttons__button-lang {
+.header__button {
   width: 37.92px;
   height: 38px;
   box-sizing: border-box;

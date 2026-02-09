@@ -4,9 +4,11 @@ import styles from '../CharactersList/CharactersList.module.css';
 
 export const CharactersList = () => {
   return (
-    <div className={styles['characters-list']}>
-      <LogoRickAndMorty className={styles['characters-list__logo']} />
-      <Loading label='Loading characters...' size='large' />
-    </div>
+    <main className={styles['characters-list']}>
+      <LogoRickAndMorty />
+      <section>
+        <Loading label='Loading characters...' size='large' />
+      </section>
+    </main>
   );
 };
