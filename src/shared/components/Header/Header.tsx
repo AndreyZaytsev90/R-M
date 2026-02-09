@@ -5,13 +5,13 @@ import styles from './Header.module.css';
 
 export const Header = () => {
   return (
-    <header className={styles['header']}>
+    <header className={styles.header}>
       <MainIcon />
-      <div className={styles['header__buttons']}>
-        <button className={styles['header__button']}>
+      <div className={styles.headerButtons}>
+        <button className={styles.headerButton}>
           <IconThemeSun />
         </button>
-        <button className={styles['header__button']}>
+        <button className={styles.headerButton}>
           <IconLangRu />
         </button>
       </div>

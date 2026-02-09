@@ -4,7 +4,7 @@ import styles from '../CharactersList/CharactersList.module.css';
 
 export const CharactersList = () => {
   return (
-    <main className={styles['characters-list']}>
+    <main className={styles.container}>
       <LogoRickAndMorty />
       <section>
         <Loading label='Loading characters...' size='large' />

@@ -6,14 +6,14 @@
   height: 100%;
 }
 
-.header__buttons {
+.headerButtons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
 }
 
-.header__button {
+.headerButton {
   width: 37.92px;
   height: 38px;
   box-sizing: border-box;

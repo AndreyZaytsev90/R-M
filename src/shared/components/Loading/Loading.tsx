@@ -9,13 +9,13 @@ interface LoadingProps {
 
 export const Loading = ({ label, size }: LoadingProps) => {
   return (
-    <div className={styles['loading-icon']}>
+    <div className={styles.loading}>
       {size === 'large' ? (
-        <LargeLoadingIcon className={styles['loading-icon__spinner']} />
+        <LargeLoadingIcon className={styles.spinner} />
       ) : (
-        <SmallLoadingIcon className={styles['loading-icon__spinner']} />
+        <SmallLoadingIcon className={styles.spinner} />
       )}
-      {label && <p className={styles['loading-icon__text']}>{label}</p>}
+      {label && <p className={styles.loadingText}>{label}</p>}
     </div>
   );
 };
