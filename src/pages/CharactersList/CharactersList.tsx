@@ -1,5 +1,5 @@
 import { Loading } from '@/shared';
-import styles from '../CharactersList/CharactersList.module.css';
+import styles from './CharactersList.module.css';
 import { LogoRickAndMorty } from '@/assets';
 
 export const CharactersList = () => {
