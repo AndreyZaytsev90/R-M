@@ -1,6 +1,6 @@
-import MainIcon from '../../../assets/Layer 1.svg';
-import IconThemeSun from '../../../assets/sun 1.svg';
-import IconLangRu from '../../../assets/РУ.svg';
+import MainIcon from '@/assets/images/mainIcon.svg';
+import IconLightTheme from '@/assets/images/iconLightTheme.svg';
+import IconLangRus from '@/assets/images/iconLangRus.svg';
 import styles from './Header.module.css';
 
 export const Header = () => {
@@ -9,10 +9,10 @@ export const Header = () => {
       <MainIcon />
       <div className={styles.headerButtons}>
         <button className={styles.headerButton}>
-          <IconThemeSun />
+          <IconLightTheme />
         </button>
         <button className={styles.headerButton}>
-          <IconLangRu />
+          <IconLangRus />
         </button>
       </div>
     </header>

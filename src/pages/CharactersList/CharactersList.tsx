@@ -1,5 +1,5 @@
-import LogoRickAndMorty from '../../assets/LogoRickAndMorty.svg';
-import { Loading } from '../../shared/components/Loading/Loading';
+import LogoRickAndMorty from '@/assets/images/logoRickAndMorty.svg';
+import { Loading } from '@/shared/components/Loading/Loading';
 import styles from '../CharactersList/CharactersList.module.css';
 
 export const CharactersList = () => {
