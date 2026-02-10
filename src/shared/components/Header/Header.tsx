@@ -1,6 +1,4 @@
-import MainIcon from '@/assets/images/mainIcon.svg';
-import IconLightTheme from '@/assets/images/iconLightTheme.svg';
-import IconLangRus from '@/assets/images/iconLangRus.svg';
+import { IconLangRus, IconLightTheme, MainIcon } from '@/assets';
 import styles from './Header.module.css';
 
 export const Header = () => {

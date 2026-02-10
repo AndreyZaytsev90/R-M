@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
 import './App.css';
-import { Footer } from './shared/components/Footer/Footer';
-import { Header } from './shared/components/Header/Header';
+import { Footer } from '@/shared';
+import { Header } from '@/shared';
 
 function App() {
   return (

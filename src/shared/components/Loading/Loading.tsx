@@ -1,5 +1,4 @@
-import LargeLoadingIcon from '@/assets/images/largeLoadingIcon.svg';
-import SmallLoadingIcon from '@/assets/images/smallLoadingIcon.svg';
+import { LargeLoadingIcon, SmallLoadingIcon } from '@/assets';
 import styles from './Loading.module.css';
 
 interface LoadingProps {
