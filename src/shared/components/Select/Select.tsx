@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import { useState, type ComponentType } from 'react';
 
 type Options<T> = {
   label: string;
@@ -26,20 +26,30 @@ export const Select = <T,>({
   DefaultOptionsComponent,
   size = 'large'
 }: SelectProps<T>) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const selectedOption = options.find((option) => option.value === value);
 
+  const onClickHandler = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
-    <select className='select'>
-      <button className='select__button'>{selectedOption ? selectedOption.label : placeholder}</button>
+    <div className='select'>
+      <button className='select__button' onClick={onClickHandler}>
+        {selectedOption ? selectedOption.label : placeholder}
+      </button>
       <ul className='select__options'>
         {options.map((option) => {
           return (
-            <li key={String(option.label)} className='select__option'>
-              {option.value}
-            </li>
+            isOpen && (
+              <li key={String(option.label)} className='select__option'>
+                {option.label}
+              </li>
+            )
           );
         })}
       </ul>
-    </select>
+    </div>
   );
 };
