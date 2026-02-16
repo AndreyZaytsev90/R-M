@@ -5,17 +5,21 @@ type Options<T> = {
   value: T;
 };
 
-type DefaultOptionsComponentProps<T> = {
+type OptionsComponentProps<T> = {
   option: Options<T>;
 };
 
 type SelectProps<T> = {
   options: Options<T>[];
   placeholder?: string;
-  value: T;
-  onChange: (value: T) => void;
-  DefaultOptionsComponent?: ComponentType<DefaultOptionsComponentProps<T>>;
+  value: T | null;
+  onChange: (value: T | null) => void;
+  OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
   size: 'large' | 'small';
+};
+
+const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
+  return <span>{option.label}</span>;
 };
 
 export const Select = <T,>({
@@ -23,7 +27,7 @@ export const Select = <T,>({
   placeholder,
   value,
   onChange,
-  DefaultOptionsComponent,
+  OptionsComponent = DefaultOptionsComponent,
   size = 'large'
 }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,22 +38,41 @@ export const Select = <T,>({
     setIsOpen((prev) => !prev);
   };
 
+  const optionClickHandler = (newValue: T) => {
+    onChange(newValue);
+    setIsOpen(false);
+  };
+
+  const onClickCleanHandler = () => {
+    onChange(null);
+  };
+
   return (
-    <div className='select'>
-      <button className='select__button' onClick={onClickHandler}>
-        {selectedOption ? selectedOption.label : placeholder}
-      </button>
-      <ul className='select__options'>
-        {options.map((option) => {
-          return (
-            isOpen && (
-              <li key={String(option.label)} className='select__option'>
-                {option.label}
+    size && (
+      <div className='select'>
+        <button className='select__button' onClick={onClickHandler}>
+          {selectedOption?.label ? <OptionsComponent option={selectedOption} /> : placeholder}
+        </button>
+        {value !== null && (
+          <button className='select__buttonClean ' onClick={onClickCleanHandler}>
+            X
+          </button>
+        )}
+
+        {isOpen && (
+          <ul className='select__options'>
+            {options.map((option) => (
+              <li
+                key={String(option.value)}
+                className='select__option'
+                onClick={() => optionClickHandler(option.value)}
+              >
+                <OptionsComponent option={option} />
               </li>
-            )
-          );
-        })}
-      </ul>
-    </div>
+            ))}
+          </ul>
+        )}
+      </div>
+    )
   );
 };

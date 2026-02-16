@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { Select } from '@/shared/components/Select/Select';
 
 export const CharactersList = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string | null>(null);
 
-  const handleChange = (newValue: string) => setValue(newValue);
+  const handleChange = (newValue: string | null) => setValue(newValue);
 
   const optionsList = [
     { label: 'human', value: 'Human' },
@@ -19,7 +19,14 @@ export const CharactersList = () => {
 
   return (
     <main className={styles.container}>
-      <Select options={optionsList} placeholder={'Species'} value={value} onChange={handleChange} size={'large'} />
+      <Select
+        options={optionsList}
+        placeholder={'Species'}
+        value={value}
+        onChange={handleChange}
+        size={'large'}
+        OptionsComponent={({ option }) => <span>{option.label} 123</span>}
+      />
       <LogoRickAndMorty />
       <section>
         <Loading label='Loading characters...' size='large' />
