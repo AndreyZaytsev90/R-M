@@ -1,9 +1,9 @@
-.selectWrapper {
+.selectWrapperLarge {
   position: relative;
   width: 240px;
 }
 
-.select {
+.selectLarge {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,15 +17,53 @@
   background: rgba(255, 255, 255, 1);
 }
 
-.selectOptions {
-  position: absolute; /* КЛЮЧЕВОЕ */
-  top: calc(100% + 4px);
-  left: 0;
+.selectOptionsLarge {
+  position: absolute;
   width: 100%;
-
-  margin: 0;
+  margin-top: 8px;
   list-style: none;
   padding: 0 14px 0 14px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(57, 57, 57, 1);
+  border-radius: 6px;
+  background: #fff;
+  z-index: 10;
+}
+
+.selectOptionLarge {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 10px 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.selectWrapperSmall {
+  position: relative;
+  width: 94px;
+}
+
+.selectSmall {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  width: 94px;
+  font-weight: 400;
+  padding: 0 5px 0 5px;
+  height: 21px;
+  border: 1px solid rgba(57, 57, 57, 1);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 1);
+}
+
+.selectOptionsSmall {
+  position: absolute;
+  width: 100%;
+  margin-top: 5px;
+  list-style: none;
+  padding: 0 5px 0 5px;
 
   display: flex;
   flex-direction: column;
@@ -36,10 +74,10 @@
   z-index: 10;
 }
 
-.selectOption {
+.selectOptionSmall {
   list-style: none;
   margin: 0;
-  padding: 10px 0 10px 0;
-  font-size: 16px;
+  padding: 6px 0 6px 0;
+  font-size: 14px;
   font-weight: 400;
 }

@@ -7,6 +7,11 @@ import LargeLoadingIcon from '@/assets/icons/largeLoadingIcon.svg';
 import SmallLoadingIcon from '@/assets/icons/smallLoadingIcon.svg';
 import IconArrowUp from '@/assets/icons/iconArrowDropDownUp.svg';
 import IconArrowDown from '@/assets/icons/iconArrowDropDown.svg';
+import IconArrowUpSmall from '@/assets/icons/iconArrowDropDownUpSmall.svg';
+import IconArrowDownSmall from '@/assets/icons/iconArrowDropDownSmall.svg';
+import IconAliveStatus from '@/assets/icons/iconAliveStatus.svg';
+import IconDeadStatus from '@/assets/icons/iconDeadStatus.svg';
+import IconUnknownStatus from '@/assets/icons/iconUnknownStatus.svg';
 
 export {
   MainIcon,
@@ -17,5 +22,10 @@ export {
   LargeLoadingIcon,
   SmallLoadingIcon,
   IconArrowUp,
-  IconArrowDown
+  IconArrowDown,
+  IconArrowUpSmall,
+  IconArrowDownSmall,
+  IconAliveStatus,
+  IconDeadStatus,
+  IconUnknownStatus
 };
