@@ -1,4 +1,6 @@
 import { useState, type ComponentType } from 'react';
+import styles from './Select.module.css';
+import { IconArrowDown, IconArrowUp } from '@/assets';
 
 type Options<T> = {
   label: string;
@@ -43,28 +45,23 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
-  const onClickCleanHandler = () => {
-    onChange(null);
-  };
+  //   const onClickCleanHandler = () => {
+  //     onChange(null);
+  //   };
 
   return (
     size && (
-      <div className='select'>
-        <button className='select__button' onClick={onClickHandler}>
+      <div className={styles.selectWrapper}>
+        <button className={styles.select} onClick={onClickHandler}>
           {selectedOption?.label ? <OptionsComponent option={selectedOption} /> : placeholder}
+          {isOpen ? <IconArrowUp /> : <IconArrowDown />}
         </button>
-        {value !== null && (
-          <button className='select__buttonClean ' onClick={onClickCleanHandler}>
-            X
-          </button>
-        )}
-
         {isOpen && (
-          <ul className='select__options'>
+          <ul className={styles.selectOptions}>
             {options.map((option) => (
               <li
                 key={String(option.value)}
-                className='select__option'
+                className={styles.selectOption}
                 onClick={() => optionClickHandler(option.value)}
               >
                 <OptionsComponent option={option} />
