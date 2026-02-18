@@ -1,8 +1,10 @@
-import { Loading } from '@/shared';
-import styles from './CharactersList.module.css';
-import { IconAliveStatus, IconDeadStatus, IconUnknownStatus, LogoRickAndMorty } from '@/assets';
 import { useState } from 'react';
+
+import { IconAliveStatus, IconDeadStatus, IconUnknownStatus, LogoRickAndMorty } from '@/assets';
+import { Loading } from '@/shared';
 import { Select } from '@/shared/components/Select/Select';
+
+import styles from './CharactersList.module.css';
 
 type Status = 'Alive' | 'Dead' | 'Unknown';
 

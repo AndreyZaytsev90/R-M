@@ -1,4 +1,5 @@
 import { IconLangRus, IconLightTheme, MainIcon } from '@/assets';
+
 import styles from './Header.module.css';
 
 export const Header = () => {

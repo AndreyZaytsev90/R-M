@@ -1,6 +1,8 @@
-import { useState, type ComponentType } from 'react';
-import styles from './Select.module.css';
+import { type ComponentType, useState } from 'react';
+
 import { IconArrowDown, IconArrowDownSmall, IconArrowUp, IconArrowUpSmall } from '@/assets';
+
+import styles from './Select.module.css';
 
 type Options<T> = {
   label: string;
