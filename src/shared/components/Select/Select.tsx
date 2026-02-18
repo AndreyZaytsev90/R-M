@@ -83,7 +83,9 @@ export const Select = <T,>({
               className={styles.selectOptionSmall}
               onClick={() => optionClickHandler(option.value)}
             >
-              <OptionsComponent option={option} />
+              <span>
+                <OptionsComponent option={option} />
+              </span>
             </li>
           ))}
         </ul>
