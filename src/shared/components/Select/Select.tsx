@@ -20,6 +20,26 @@ type SelectProps<T> = {
   onChange: (value: T | null) => void;
   OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
   size: 'large' | 'small';
+  defaultValue?: T;
+};
+
+const SIZE_CONFIG = {
+  large: {
+    wrapper: styles.selectWrapperLarge,
+    select: styles.selectLarge,
+    options: styles.selectOptionsLarge,
+    option: styles.selectOptionLarge,
+    IconOpen: IconArrowUp,
+    IconClosed: IconArrowDown
+  },
+  small: {
+    wrapper: styles.selectWrapperSmall,
+    select: styles.selectSmall,
+    options: styles.selectOptionsSmall,
+    option: styles.selectOptionSmall,
+    IconOpen: IconArrowUpSmall,
+    IconClosed: IconArrowDownSmall
+  }
 };
 
 const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
@@ -37,6 +57,7 @@ export const Select = <T,>({
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedOption = options.find((option) => option.value === value);
+  const { wrapper, select, options: optionsList, option: optionItem, IconOpen, IconClosed } = SIZE_CONFIG[size];
 
   const onClickHandler = () => {
     setIsOpen((prev) => !prev);
@@ -47,47 +68,23 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
+  // Функция сброса значения
   //   const onClickCleanHandler = () => {
-  //     onChange(null);
+  //     onChange(size === 'large' ? null : ('Alive' as T));
   //   };
 
-  return size === 'large' ? (
-    <div className={styles.selectWrapperLarge}>
-      <button className={styles.selectLarge} onClick={onClickHandler}>
+  return (
+    <div className={wrapper}>
+      <button className={select} onClick={onClickHandler}>
         {selectedOption?.label ? <OptionsComponent option={selectedOption} /> : placeholder}
-        {isOpen ? <IconArrowUp /> : <IconArrowDown />}
+        {isOpen ? <IconOpen /> : <IconClosed />}
       </button>
+      {/* {value && <button onClick={onClickCleanHandler}>✕</button>} */}
       {isOpen && (
-        <ul className={styles.selectOptionsLarge}>
+        <ul className={optionsList}>
           {options.map((option) => (
-            <li
-              key={String(option.value)}
-              className={styles.selectOptionLarge}
-              onClick={() => optionClickHandler(option.value)}
-            >
+            <li key={String(option.value)} className={optionItem} onClick={() => optionClickHandler(option.value)}>
               <OptionsComponent option={option} />
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  ) : (
-    <div className={styles.selectWrapperSmall}>
-      <button className={styles.selectSmall} onClick={onClickHandler}>
-        {selectedOption?.label ? <OptionsComponent option={selectedOption} /> : placeholder}
-        {isOpen ? <IconArrowUpSmall /> : <IconArrowDownSmall />}
-      </button>
-      {isOpen && (
-        <ul className={styles.selectOptionsSmall}>
-          {options.map((option) => (
-            <li
-              key={String(option.value)}
-              className={styles.selectOptionSmall}
-              onClick={() => optionClickHandler(option.value)}
-            >
-              <span>
-                <OptionsComponent option={option} />
-              </span>
             </li>
           ))}
         </ul>

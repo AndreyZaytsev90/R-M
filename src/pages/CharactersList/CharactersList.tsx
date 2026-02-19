@@ -54,8 +54,8 @@ export const CharactersList = () => {
         />
         <Select
           options={optionsSmallList}
-          placeholder={'Alive'}
           value={smallValue}
+          defaultValue={'Alive'}
           onChange={handleChangeSmall}
           size={'small'}
           OptionsComponent={StatusOption}
