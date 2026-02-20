@@ -15,7 +15,7 @@ type OptionsComponentProps<T> = {
 
 type SelectProps<T> = {
   options: Options<T>[];
-  placeholder?: string;
+  placeholder: string;
   value: T | null;
   onChange: (value: T | null) => void;
   OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
