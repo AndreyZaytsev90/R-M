@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router';
-import styles from './CharacterCard.module.css';
-import { Loading } from '@/shared';
+
 import { IconGoBack } from '@/assets';
+import { Loading } from '@/shared';
+
+import styles from './CharacterCard.module.css';
 
 export const CharacterCard = () => {
   const navigate = useNavigate();
