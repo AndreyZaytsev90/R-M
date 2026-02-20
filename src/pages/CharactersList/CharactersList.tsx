@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import { IconAliveStatus, IconDeadStatus, IconUnknownStatus, LogoRickAndMorty } from '@/assets';
-import { Loading } from '@/shared';
-import { Select } from '@/shared/components/Select/Select';
+import { Loading, Select } from '@/shared';
 
 import styles from './CharactersList.module.css';
 
@@ -46,18 +45,19 @@ export const CharactersList = () => {
       <div className={styles.selects}>
         <Select
           options={optionsLargeList}
-          placeholder={'Species'}
+          placeholder='Species'
           value={largeValue}
           onChange={handleChangeLarge}
-          size={'large'}
+          size='large'
           OptionsComponent={({ option }) => <span>{option.value}</span>}
         />
         <Select
           options={optionsSmallList}
           value={smallValue}
-          defaultValue={'Alive'}
+          defaultValue='Alive'
+          placeholder='Alive'
           onChange={handleChangeSmall}
-          size={'small'}
+          size='small'
           OptionsComponent={StatusOption}
         />
       </div>
