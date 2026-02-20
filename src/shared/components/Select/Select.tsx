@@ -68,18 +68,12 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
-  // Функция сброса значения
-  //   const onClickCleanHandler = () => {
-  //     onChange(size === 'large' ? null : ('Alive' as T));
-  //   };
-
   return (
     <div className={wrapper}>
       <button className={select} onClick={onClickHandler}>
-        {selectedOption?.label ? <OptionsComponent option={selectedOption} /> : placeholder}
+        {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
         {isOpen ? <IconOpen /> : <IconClosed />}
       </button>
-      {/* {value && <button onClick={onClickCleanHandler}>✕</button>} */}
       {isOpen && (
         <ul className={optionsList}>
           {options.map((option) => (
