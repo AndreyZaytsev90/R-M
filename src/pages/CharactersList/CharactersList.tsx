@@ -6,13 +6,14 @@ import { Loading, Select } from '@/shared';
 import styles from './CharactersList.module.css';
 
 type Status = 'Alive' | 'Dead' | 'Unknown';
+type StatusOption = { label: string; value: Status };
 
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
-  const [smallValue, setSmallValue] = useState<string | null>('Alive');
+  const [smallValue, setSmallValue] = useState<Status | null>('Alive');
 
   const handleChangeLarge = (newValue: string | null) => setLargeValue(newValue);
-  const handleChangeSmall = (newValue: string | null) => setSmallValue(newValue);
+  const handleChangeSmall = (newValue: Status | null) => setSmallValue(newValue);
 
   const optionsLargeList = [
     { label: 'human', value: 'Human' },
@@ -22,7 +23,7 @@ export const CharactersList = () => {
     { label: 'robot', value: 'Robot' }
   ];
 
-  const optionsSmallList = [
+  const optionsSmallList: StatusOption[] = [
     { label: 'alive', value: 'Alive' },
     { label: 'dead', value: 'Dead' },
     { label: 'unknown', value: 'Unknown' }
@@ -34,9 +35,9 @@ export const CharactersList = () => {
     Unknown: <IconUnknownStatus />
   };
 
-  const StatusOption = ({ option }: { option: { value: string } }) => (
+  const StatusOption = ({ option }: { option: StatusOption }) => (
     <span>
-      {option.value} {STATUS_ICONS[option.value as Status]}
+      {option.value} {STATUS_ICONS[option.value]}
     </span>
   );
 
@@ -49,7 +50,6 @@ export const CharactersList = () => {
           value={largeValue}
           onChange={handleChangeLarge}
           size='large'
-          OptionsComponent={({ option }) => <span>{option.value}</span>}
         />
         <Select
           options={optionsSmallList}

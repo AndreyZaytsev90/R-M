@@ -43,7 +43,7 @@ const SIZE_CONFIG = {
 };
 
 const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
-  return <span>{option.label}</span>;
+  return <span>{String(option.value)}</span>;
 };
 
 export const Select = <T,>({
