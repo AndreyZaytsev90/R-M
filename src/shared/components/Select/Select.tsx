@@ -1,5 +1,7 @@
 import { type ComponentType, useState } from 'react';
 
+import clsx from 'clsx';
+
 import { IconArrowDown, IconArrowDownSmall, IconArrowUp, IconArrowUpSmall } from '@/assets';
 
 import styles from './Select.module.css';
@@ -25,18 +27,18 @@ type SelectProps<T> = {
 
 const SIZE_CONFIG = {
   large: {
-    wrapper: styles.selectWrapperLarge,
-    select: styles.selectLarge,
-    options: styles.selectOptionsLarge,
-    option: styles.selectOptionLarge,
+    wrapper: clsx(styles.selectWrapper, styles.selectWrapperLarge),
+    select: clsx(styles.select, styles.selectLarge),
+    options: clsx(styles.selectOptions, styles.selectOptionsLarge),
+    option: clsx(styles.selectOption, styles.selectOptionLarge),
     IconOpen: IconArrowUp,
     IconClosed: IconArrowDown
   },
   small: {
-    wrapper: styles.selectWrapperSmall,
-    select: styles.selectSmall,
-    options: styles.selectOptionsSmall,
-    option: styles.selectOptionSmall,
+    wrapper: clsx(styles.selectWrapper, styles.selectWrapperSmall),
+    select: clsx(styles.select, styles.selectSmall),
+    options: clsx(styles.selectOptions, styles.selectOptionsSmall),
+    option: clsx(styles.selectOption, styles.selectOptionSmall),
     IconOpen: IconArrowUpSmall,
     IconClosed: IconArrowDownSmall
   }
