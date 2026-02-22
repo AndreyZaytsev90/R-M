@@ -2,7 +2,7 @@ import { type ComponentType, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { IconArrowDown, IconArrowDownSmall, IconArrowUp, IconArrowUpSmall } from '@/assets';
+import { ArrowIcon } from '@/shared';
 
 import styles from './Select.module.css';
 
@@ -30,17 +30,13 @@ const SIZE_CONFIG = {
     wrapper: clsx(styles.selectWrapper, styles.selectWrapperLarge),
     select: clsx(styles.select, styles.selectLarge),
     options: clsx(styles.selectOptions, styles.selectOptionsLarge),
-    option: clsx(styles.selectOption, styles.selectOptionLarge),
-    IconOpen: IconArrowUp,
-    IconClosed: IconArrowDown
+    option: clsx(styles.selectOption, styles.selectOptionLarge)
   },
   small: {
     wrapper: clsx(styles.selectWrapper, styles.selectWrapperSmall),
     select: clsx(styles.select, styles.selectSmall),
     options: clsx(styles.selectOptions, styles.selectOptionsSmall),
-    option: clsx(styles.selectOption, styles.selectOptionSmall),
-    IconOpen: IconArrowUpSmall,
-    IconClosed: IconArrowDownSmall
+    option: clsx(styles.selectOption, styles.selectOptionSmall)
   }
 };
 
@@ -59,7 +55,7 @@ export const Select = <T,>({
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedOption = options.find((option) => option.value === value);
-  const { wrapper, select, options: optionsList, option: optionItem, IconOpen, IconClosed } = SIZE_CONFIG[size];
+  const { wrapper, select, options: optionsList, option: optionItem } = SIZE_CONFIG[size];
 
   const onClickHandler = () => {
     setIsOpen((prev) => !prev);
@@ -74,7 +70,7 @@ export const Select = <T,>({
     <div className={wrapper}>
       <button className={select} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
-        {isOpen ? <IconOpen /> : <IconClosed />}
+        <ArrowIcon direction={isOpen ? 'up' : 'down'} size={size} />
       </button>
       {isOpen && (
         <ul className={optionsList}>
