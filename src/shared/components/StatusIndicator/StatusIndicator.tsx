@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import type { Status } from '@/shared/types';
+import type { Status } from '@/shared';
 
 import styles from './StatusIndicator.module.css';
 

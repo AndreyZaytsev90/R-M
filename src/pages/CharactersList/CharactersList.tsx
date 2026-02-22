@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
 import { LogoRickAndMorty } from '@/assets';
-import { Loading, Select, StatusIndicator } from '@/shared';
-import type { Status } from '@/shared/types';
+import { Loading, Select, type Status, StatusOption } from '@/shared';
 
 import styles from './CharactersList.module.css';
 
-type StatusOption = { label: string; value: Status };
+type StatusOptionType = { label: string; value: Status };
 
 const OPTIONS_LARGE_LIST = [
   { label: 'human', value: 'Human' },
@@ -16,17 +15,11 @@ const OPTIONS_LARGE_LIST = [
   { label: 'robot', value: 'Robot' }
 ];
 
-const OPTIONS_SMALL_LIST: StatusOption[] = [
+const OPTIONS_SMALL_LIST: StatusOptionType[] = [
   { label: 'alive', value: 'Alive' },
   { label: 'dead', value: 'Dead' },
   { label: 'unknown', value: 'Unknown' }
 ];
-
-const StatusOption = ({ option }: { option: StatusOption }) => (
-  <span>
-    {option.value} <StatusIndicator status={option.value} />
-  </span>
-);
 
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
