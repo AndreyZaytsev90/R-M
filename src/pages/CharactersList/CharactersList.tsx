@@ -48,7 +48,7 @@ export const CharactersList = () => {
           OptionsComponent={StatusOption}
         />
       </div>
-      <LogoRickAndMorty />
+      <img src={LogoRickAndMorty} alt='Rick and Morty' />
       <section>
         <Loading label='Loading characters...' size='large' />
       </section>
