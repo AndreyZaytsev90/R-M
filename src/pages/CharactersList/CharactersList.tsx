@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { IconAliveStatus, IconDeadStatus, IconUnknownStatus, LogoRickAndMorty } from '@/assets';
-import { Loading, Select } from '@/shared';
+import { LogoRickAndMorty } from '@/assets';
+import { Loading, Select, StatusIndicator } from '@/shared';
+import type { Status } from '@/shared/types';
 
 import styles from './CharactersList.module.css';
 
-type Status = 'Alive' | 'Dead' | 'Unknown';
 type StatusOption = { label: string; value: Status };
 
 const OPTIONS_LARGE_LIST = [
@@ -22,15 +22,9 @@ const OPTIONS_SMALL_LIST: StatusOption[] = [
   { label: 'unknown', value: 'Unknown' }
 ];
 
-const STATUS_ICONS: Record<Status, React.ReactNode> = {
-  Alive: <IconAliveStatus />,
-  Dead: <IconDeadStatus />,
-  Unknown: <IconUnknownStatus />
-};
-
 const StatusOption = ({ option }: { option: StatusOption }) => (
   <span>
-    {option.value} {STATUS_ICONS[option.value]}
+    {option.value} <StatusIndicator status={option.value} />
   </span>
 );
 
