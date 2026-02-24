@@ -6,3 +6,8 @@
   margin-top: 26px;
   width: 100%;
 }
+
+.selects {
+  display: flex;
+  gap: 42px;
+}

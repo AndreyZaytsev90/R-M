@@ -1,0 +1,23 @@
+.arrow {
+  display: inline-block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.sizeLarge {
+  width: 10px;
+  height: 10px;
+}
+
+.sizeSmall {
+  width: 5px;
+  height: 5px;
+}
+
+.directionDown {
+  transform: rotate(0deg);
+}
+
+.directionUp {
+  transform: rotate(180deg);
+}

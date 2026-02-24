@@ -1,0 +1,19 @@
+.statusIndicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.alive {
+  background-color: rgba(18, 184, 0, 1);
+}
+
+.dead {
+  background-color: rgba(223, 0, 0, 1);
+}
+
+.unknown {
+  background-color: rgba(255, 153, 0, 1);
+}
