@@ -1,6 +1,12 @@
-type InputProps = {};
+type InputProps = {
+  value: string;
+  onChange: (newValue: string) => void;
+  placeholder?: string;
+  icon?: string;
+  variant: 'bordered' | 'underlined';
+};
 
-export const Input = ({}: InputProps) => {
+export const Input = ({ value, onChange, placeholder, icon, variant }: InputProps) => {
   return (
     <div>
       <input type='text' />
