@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { LogoRickAndMorty } from '@/assets';
-import { Loading, Select, type Status, StatusOption } from '@/shared';
+import { Input, Loading, Select, type Status, StatusOption } from '@/shared';
 
 import styles from './CharactersList.module.css';
 
@@ -47,6 +47,8 @@ export const CharactersList = () => {
           size='small'
           OptionsComponent={StatusOption}
         />
+        <Input placeholder='Filter by name...' value={''} onChange={() => {}} variant={'bordered'} />
+        <Input value={''} onChange={() => {}} variant={'underlined'} />
       </div>
       <img src={LogoRickAndMorty} alt='Rick and Morty' />
       <section>
