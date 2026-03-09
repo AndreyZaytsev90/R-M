@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { LogoRickAndMorty } from '@/assets';
+import { IconSearch, LogoRickAndMorty } from '@/assets';
 import { Input, Loading, Select, type Status, StatusOption } from '@/shared';
 
 import styles from './CharactersList.module.css';
@@ -28,6 +28,8 @@ export const CharactersList = () => {
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
   const handleChangeSmall = (value: Status | null) => setSmallValue(value);
 
+  const [inputValue, setInputValue] = useState<string>('');
+
   return (
     <main className={styles.container}>
       <div className={styles.selects}>
@@ -47,8 +49,14 @@ export const CharactersList = () => {
           size='small'
           OptionsComponent={StatusOption}
         />
-        <Input placeholder='Filter by name...' value={''} onChange={() => {}} variant={'bordered'} />
-        <Input value={''} onChange={() => {}} variant={'underlined'} />
+        <Input
+          placeholder='Filter by name...'
+          value={inputValue}
+          onChange={(value) => setInputValue(value)}
+          variant={'bordered'}
+          icon={<IconSearch />}
+        />
+        <Input value={inputValue} onChange={(value) => setInputValue(value)} variant={'underlined'} />
       </div>
       <img src={LogoRickAndMorty} alt='Rick and Morty' />
       <section>
