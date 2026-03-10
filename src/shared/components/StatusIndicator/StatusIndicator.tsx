@@ -1,6 +1,4 @@
-import clsx from 'clsx';
-
-import type { Status } from '@/shared';
+import { type Status, cn } from '@/shared';
 
 import styles from './StatusIndicator.module.css';
 
@@ -16,5 +14,5 @@ const statusClassMap: Record<Status, string> = {
 };
 
 export const StatusIndicator = ({ status, className = '' }: StatusIndicatorProps) => (
-  <span className={clsx(styles.statusIndicator, statusClassMap[status], className)} />
+  <span className={cn(styles.statusIndicator, statusClassMap[status], className)} />
 );

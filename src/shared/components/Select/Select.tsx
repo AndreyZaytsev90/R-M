@@ -1,8 +1,6 @@
 import { type ComponentType, useState } from 'react';
 
-import clsx from 'clsx';
-
-import { ArrowIcon } from '@/shared';
+import { ArrowIcon, cn } from '@/shared';
 
 import styles from './Select.module.css';
 
@@ -27,16 +25,16 @@ type SelectProps<T> = {
 
 const SIZE_CONFIG = {
   large: {
-    wrapper: clsx(styles.selectWrapper, styles.selectWrapperLarge),
-    select: clsx(styles.select, styles.selectLarge),
-    options: clsx(styles.selectOptions, styles.selectOptionsLarge),
-    option: clsx(styles.selectOption, styles.selectOptionLarge)
+    wrapper: cn(styles.selectWrapper, styles.selectWrapperLarge),
+    select: cn(styles.select, styles.selectLarge),
+    options: cn(styles.selectOptions, styles.selectOptionsLarge),
+    option: cn(styles.selectOption, styles.selectOptionLarge)
   },
   small: {
-    wrapper: clsx(styles.selectWrapper, styles.selectWrapperSmall),
-    select: clsx(styles.select, styles.selectSmall),
-    options: clsx(styles.selectOptions, styles.selectOptionsSmall),
-    option: clsx(styles.selectOption, styles.selectOptionSmall)
+    wrapper: cn(styles.selectWrapper, styles.selectWrapperSmall),
+    select: cn(styles.select, styles.selectSmall),
+    options: cn(styles.selectOptions, styles.selectOptionsSmall),
+    option: cn(styles.selectOption, styles.selectOptionSmall)
   }
 };
 

@@ -1,3 +1,6 @@
+export * from './lib/cn';
+export * from './types';
+
 export * from './components/Loading/Loading';
 export * from './components/Header/Header';
 export * from './components/Footer/Footer';
@@ -6,4 +9,3 @@ export * from './components/Input/Input';
 export * from './components/StatusIndicator/StatusIndicator';
 export * from './components/StatusOption/StatusOption';
 export * from './components/ArrowIcon/ArrowIcon';
-export * from './types';
