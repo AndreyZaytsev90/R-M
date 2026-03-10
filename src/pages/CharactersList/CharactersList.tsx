@@ -24,11 +24,11 @@ const OPTIONS_SMALL_LIST: StatusOptionType[] = [
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
   const [smallValue, setSmallValue] = useState<Status | null>('Alive');
+  const [borderedValue, setBorderedValue] = useState<string>('');
+  const [underlinedValue, setUnderlinedValue] = useState<string>('');
 
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
   const handleChangeSmall = (value: Status | null) => setSmallValue(value);
-
-  const [inputValue, setInputValue] = useState<string>('');
 
   return (
     <main className={styles.container}>
@@ -51,12 +51,12 @@ export const CharactersList = () => {
         />
         <Input
           placeholder='Filter by name...'
-          value={inputValue}
-          onChange={(value) => setInputValue(value)}
-          variant={'bordered'}
+          value={borderedValue}
+          onChange={setBorderedValue}
+          variant='bordered'
           icon={<IconSearch />}
         />
-        <Input value={inputValue} onChange={(value) => setInputValue(value)} variant={'underlined'} />
+        <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
       <img src={LogoRickAndMorty} alt='Rick and Morty' />
       <section>

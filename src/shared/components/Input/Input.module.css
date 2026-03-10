@@ -1,57 +1,92 @@
 .container {
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
 }
 
 .bordered {
-  display: flex;
-  align-items: center;
-
   box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  padding-left: 48px;
   width: 240px;
   height: 56px;
-  color: rgba(0, 0, 0, 0.5);
-  font-style: Regular;
+  padding-left: 48px;
+
+  color: rgba(0, 0, 0, 1);
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
-  letter-spacing: 0%;
-  text-align: left;
+
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
 }
 
 .underlined {
-  outline: none;
-  border: none;
-  border-bottom: 2px solid rgba(0, 0, 0, 1);
-  padding: 8px 8px 13px 0px;
+  box-sizing: border-box;
   width: 178px;
-  height: 0;
+  padding: 0 1px 2px;
+
   color: rgba(0, 0, 0, 0.87);
-  font-style: Medium;
   font-size: 20px;
   font-weight: 500;
-  line-height: 30px;
-  letter-spacing: 0.15px;
-  text-align: left;
+  line-height: 1;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.underlined:focus {
+  border-bottom-color: rgba(0, 0, 0, 0.87);
+}
+
+.underlined:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.underlined:focus {
+  border-bottom-color: rgba(0, 0, 0, 0.87);
+}
+
+.underlined:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .icon {
   position: absolute;
+  left: 16px;
   display: flex;
-  padding-left: 16px;
   align-items: center;
   justify-content: center;
   color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 
 .clear {
   position: absolute;
   right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
   background: none;
   border: none;
   cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.clear:hover {
+  opacity: 1;
+}
+
+.clear:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
