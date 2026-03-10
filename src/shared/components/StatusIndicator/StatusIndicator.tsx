@@ -13,6 +13,6 @@ const statusClassMap: Record<Status, string> = {
   Unknown: styles.unknown
 };
 
-export const StatusIndicator = ({ status, className = '' }: StatusIndicatorProps) => (
+export const StatusIndicator = ({ status, className }: StatusIndicatorProps) => (
   <span className={cn(styles.statusIndicator, statusClassMap[status], className)} />
 );

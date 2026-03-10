@@ -20,7 +20,6 @@ type SelectProps<T> = {
   onChange: (value: T | null) => void;
   OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
   size: 'large' | 'small';
-  defaultValue?: T;
 };
 
 const SIZE_CONFIG = {

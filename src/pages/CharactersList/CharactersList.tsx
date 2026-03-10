@@ -43,7 +43,6 @@ export const CharactersList = () => {
         <Select
           options={OPTIONS_SMALL_LIST}
           value={smallValue}
-          defaultValue='Alive'
           placeholder='Alive'
           onChange={handleChangeSmall}
           size='small'
@@ -58,7 +57,7 @@ export const CharactersList = () => {
         />
         <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
-      <img src={LogoRickAndMorty} alt='Rick and Morty' />
+      <img src={LogoRickAndMorty} alt='Rick and Morty' width={600} height={200} />
       <section>
         <Loading label='Loading characters...' size='large' />
       </section>

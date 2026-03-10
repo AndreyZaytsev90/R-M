@@ -1,6 +1,5 @@
-import clsx from 'clsx';
-
 import { IconArrowDropdown } from '@/assets';
+import { cn } from '@/shared';
 
 import styles from './ArrowIcon.module.css';
 
@@ -20,5 +19,5 @@ const directionClassMap = {
 };
 
 export const ArrowIcon = ({ direction, size }: ArrowIconProps) => (
-  <IconArrowDropdown className={clsx(styles.arrow, sizeClassMap[size], directionClassMap[direction])} />
+  <IconArrowDropdown className={cn(styles.arrow, sizeClassMap[size], directionClassMap[direction])} />
 );
