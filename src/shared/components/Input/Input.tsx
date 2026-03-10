@@ -19,8 +19,9 @@ export const Input = ({ value, onChange, placeholder, icon, variant }: InputProp
 
   return (
     <div className={styles.container}>
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {variant === 'bordered' && <span className={styles.icon}>{icon}</span>}
       <input className={styles[variant]} type='text' placeholder={placeholder} value={value} onChange={handleChange} />
+
       {value.length > 0 && (
         <button className={styles.clear} onClick={() => onChange('')}>
           <IconClose />
