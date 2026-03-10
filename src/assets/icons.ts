@@ -1,3 +1,4 @@
+import IconArrowDropdown from '@/assets/icons/iconArrowDropDown.svg';
 import IconClose from '@/assets/icons/iconClose.svg';
 import IconGoBack from '@/assets/icons/iconGoBack.svg';
 import IconLangRus from '@/assets/icons/iconLangRus.svg';
@@ -11,6 +12,7 @@ import SmallLoadingIcon from '@/assets/icons/smallLoadingIcon.svg';
 export {
   MainIcon,
   IconLightTheme,
+  IconArrowDropdown,
   IconLangRus,
   LogoRickAndMorty,
   IconGoBack,

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import IconArrowDropdown from '@/assets/icons/iconArrowDropdown.svg';
+import { IconArrowDropdown } from '@/assets';
 
 import styles from './ArrowIcon.module.css';
 
