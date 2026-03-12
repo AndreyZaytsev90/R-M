@@ -6,10 +6,10 @@ import styles from './Input.module.css';
 
 type InputProps = {
   value: string;
+  variant: 'bordered' | 'underlined';
   onChange: (newValue: string) => void;
   placeholder?: string;
   icon?: ReactNode;
-  variant: 'bordered' | 'underlined';
   disabled?: boolean;
 };
 
@@ -37,7 +37,7 @@ export const Input = ({ value, onChange, placeholder, icon, variant, disabled }:
         disabled={disabled}
       />
 
-      {value.length > 0 && (
+      {value && (
         <button type='button' className={styles.clear} onClick={handleClear} aria-label='Очистить поле'>
           <IconClose />
         </button>

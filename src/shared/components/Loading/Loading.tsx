@@ -3,8 +3,8 @@ import { LargeLoadingIcon, SmallLoadingIcon } from '@/assets';
 import styles from './Loading.module.css';
 
 interface LoadingProps {
-  label?: string;
   size: 'large' | 'small';
+  label?: string;
 }
 
 export const Loading = ({ label, size }: LoadingProps) => {

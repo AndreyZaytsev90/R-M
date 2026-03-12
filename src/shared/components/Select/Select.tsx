@@ -18,8 +18,8 @@ type SelectProps<T> = {
   placeholder: string;
   value: T | null;
   onChange: (value: T | null) => void;
-  OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
   size: 'large' | 'small';
+  OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
 };
 
 const SIZE_CONFIG = {

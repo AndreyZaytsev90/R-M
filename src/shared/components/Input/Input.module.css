@@ -5,7 +5,6 @@
 }
 
 .bordered {
-  box-sizing: border-box;
   width: 240px;
   height: 56px;
   padding-left: 48px;
@@ -50,11 +49,6 @@
 
 .underlined:focus {
   border-bottom-color: rgba(0, 0, 0, 0.87);
-}
-
-.underlined:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .underlined:focus {

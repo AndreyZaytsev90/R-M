@@ -24,8 +24,9 @@ const OPTIONS_SMALL_LIST: StatusOptionType[] = [
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
   const [smallValue, setSmallValue] = useState<Status | null>('Alive');
-  const [borderedValue, setBorderedValue] = useState<string>('');
-  const [underlinedValue, setUnderlinedValue] = useState<string>('');
+
+  const [borderedValue, setBorderedValue] = useState('');
+  const [underlinedValue, setUnderlinedValue] = useState('');
 
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
   const handleChangeSmall = (value: Status | null) => setSmallValue(value);
@@ -57,7 +58,7 @@ export const CharactersList = () => {
         />
         <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
-      <img src={LogoRickAndMorty} alt='Rick and Morty' width={600} height={200} />
+      <img src={LogoRickAndMorty} alt='Logo Rick and Morty' width={600} height={200} />
       <section>
         <Loading label='Loading characters...' size='large' />
       </section>
