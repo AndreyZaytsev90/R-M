@@ -1,4 +1,4 @@
-import { type ComponentType, useState } from 'react';
+import { type ComponentType, useEffect, useRef, useState } from 'react';
 
 import { ArrowIcon, cn } from '@/shared';
 
@@ -36,6 +36,8 @@ export const Select = <T,>({
 }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const ref = useRef<HTMLDivElement>(null);
+
   const selectedOption = options.find((option) => option.value === value);
 
   const onClickHandler = () => {
@@ -47,8 +49,22 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && event.target instanceof Node && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={cn(styles.select, styles[`select--${size}`])}>
+    <div ref={ref} className={cn(styles.select, styles[`select--${size}`])}>
       <button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
         <ArrowIcon direction={isOpen ? 'up' : 'down'} size={size} />
