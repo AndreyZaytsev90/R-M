@@ -59,9 +59,9 @@ export const CharactersList = () => {
         <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
       <img src={LogoRickAndMorty} alt='Logo Rick and Morty' width={600} height={200} />
-      <section>
+      <div>
         <Loading label='Loading characters...' size='large' />
-      </section>
+      </div>
     </main>
   );
 };

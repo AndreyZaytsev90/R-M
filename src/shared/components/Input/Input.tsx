@@ -1,4 +1,4 @@
-import { type ReactNode, useCallback } from 'react';
+import { type ReactNode } from 'react';
 
 import { IconClose } from '@/assets';
 
@@ -14,16 +14,13 @@ type InputProps = {
 };
 
 export const Input = ({ value, onChange, placeholder, icon, variant, disabled }: InputProps) => {
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      onChange(event.target.value);
-    },
-    [onChange]
-  );
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
 
-  const handleClear = useCallback(() => {
+  const handleClear = () => {
     onChange('');
-  }, [onChange]);
+  };
 
   return (
     <div className={styles.container}>
