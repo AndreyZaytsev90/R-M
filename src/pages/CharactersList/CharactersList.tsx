@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { IconSearch, LogoRickAndMorty } from '@/assets';
+import { IconSearch, logoRickAndMorty } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TStatus } from '@/shared/types';
@@ -43,7 +43,7 @@ export const CharactersList = () => {
         />
         <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
-      <img src={LogoRickAndMorty} alt='Logo Rick and Morty' width={600} height={200} />
+      <img src={logoRickAndMorty} alt='Rick and Morty' width={600} height={200} />
       <div>
         <Loading label='Loading characters...' size='large' />
       </div>
