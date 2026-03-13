@@ -1,47 +1,30 @@
-import { type ComponentType, useState } from 'react';
+import { type ComponentType, useEffect, useRef, useState } from 'react';
 
-import clsx from 'clsx';
-
-import { ArrowIcon } from '@/shared';
+import { IconArrowDropdown } from '@/assets';
+import { cn } from '@/shared/lib';
 
 import styles from './Select.module.css';
 
-type Options<T> = {
+type TOption<T> = {
   label: string;
   value: T;
 };
 
-type OptionsComponentProps<T> = {
-  option: Options<T>;
+type TOptionsComponentProps<T> = {
+  option: TOption<T>;
 };
 
-type SelectProps<T> = {
-  options: Options<T>[];
+type TSelectProps<T> = {
+  options: TOption<T>[];
   placeholder: string;
   value: T | null;
   onChange: (value: T | null) => void;
-  OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
   size: 'large' | 'small';
-  defaultValue?: T;
+  OptionsComponent?: ComponentType<TOptionsComponentProps<T>>;
 };
 
-const SIZE_CONFIG = {
-  large: {
-    wrapper: clsx(styles.selectWrapper, styles.selectWrapperLarge),
-    select: clsx(styles.select, styles.selectLarge),
-    options: clsx(styles.selectOptions, styles.selectOptionsLarge),
-    option: clsx(styles.selectOption, styles.selectOptionLarge)
-  },
-  small: {
-    wrapper: clsx(styles.selectWrapper, styles.selectWrapperSmall),
-    select: clsx(styles.select, styles.selectSmall),
-    options: clsx(styles.selectOptions, styles.selectOptionsSmall),
-    option: clsx(styles.selectOption, styles.selectOptionSmall)
-  }
-};
-
-const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
-  return <span>{String(option.value)}</span>;
+const DefaultOptionsComponent = <T,>({ option }: TOptionsComponentProps<T>) => {
+  return <span>{option.label}</span>;
 };
 
 export const Select = <T,>({
@@ -51,11 +34,12 @@ export const Select = <T,>({
   onChange,
   OptionsComponent = DefaultOptionsComponent,
   size
-}: SelectProps<T>) => {
+}: TSelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const ref = useRef<HTMLDivElement>(null);
+
   const selectedOption = options.find((option) => option.value === value);
-  const { wrapper, select, options: optionsList, option: optionItem } = SIZE_CONFIG[size];
 
   const onClickHandler = () => {
     setIsOpen((prev) => !prev);
@@ -66,16 +50,30 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && event.target instanceof Node && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={wrapper}>
-      <button className={select} onClick={onClickHandler}>
+    <div ref={ref} className={cn(styles.select, styles[`select--${size}`])}>
+      <button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
-        <ArrowIcon direction={isOpen ? 'up' : 'down'} size={size} />
+        <IconArrowDropdown className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />
       </button>
       {isOpen && (
-        <ul className={optionsList}>
+        <ul className={styles.select__list}>
           {options.map((option) => (
-            <li key={String(option.value)} className={optionItem} onClick={() => optionClickHandler(option.value)}>
+            <li key={option.label} className={styles.select__option} onClick={() => optionClickHandler(option.value)}>
               <OptionsComponent option={option} />
             </li>
           ))}

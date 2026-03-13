@@ -1,2 +1,2 @@
-export * from '../pages/CharacterCard/CharacterCard';
-export * from '../pages/CharactersList/CharactersList';
+export * from './CharacterCard/CharacterCard';
+export * from './CharactersList/CharactersList';
