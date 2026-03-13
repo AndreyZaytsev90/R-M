@@ -2,25 +2,10 @@ import { useState } from 'react';
 
 import { IconSearch, LogoRickAndMorty } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
+import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TStatus } from '@/shared/types';
 
 import styles from './CharactersList.module.css';
-
-type TStatusOption<T> = { label: string; value: T };
-
-const OPTIONS_LARGE_LIST: TStatusOption<string>[] = [
-  { label: 'human', value: 'Human' },
-  { label: 'alien', value: 'Alien' },
-  { label: 'humanoid', value: 'Humanoid' },
-  { label: 'animal', value: 'Animal' },
-  { label: 'robot', value: 'Robot' }
-];
-
-const OPTIONS_SMALL_LIST: TStatusOption<TStatus>[] = [
-  { label: 'alive', value: 'Alive' },
-  { label: 'dead', value: 'Dead' },
-  { label: 'unknown', value: 'Unknown' }
-];
 
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
@@ -35,14 +20,14 @@ export const CharactersList = () => {
     <main className={styles.container}>
       <div className={styles.selects}>
         <Select
-          options={OPTIONS_LARGE_LIST}
+          options={SPECIES_OPTIONS}
           placeholder='Species'
           value={largeValue}
           onChange={handleChangeLarge}
           size='large'
         />
         <Select
-          options={OPTIONS_SMALL_LIST}
+          options={STATUS_OPTIONS}
           value={smallValue}
           placeholder='Alive'
           onChange={handleChangeSmall}

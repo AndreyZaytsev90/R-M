@@ -8,12 +8,6 @@ type TStatusIndicatorProps = {
   className?: string;
 };
 
-const statusClassMap: Record<TStatus, string> = {
-  Alive: styles.alive,
-  Dead: styles.dead,
-  Unknown: styles.unknown
-};
-
 export const StatusIndicator = ({ status, className }: TStatusIndicatorProps) => (
-  <span className={cn(styles.statusIndicator, statusClassMap[status], className)} />
+  <span className={cn(styles.statusIndicator, styles[`statusIndicator--${status.toLowerCase()}`], className)} />
 );
