@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-import { Footer, Header } from '@/shared';
+import { Footer, Header } from '@/shared/components';
 
 import './App.css';
 

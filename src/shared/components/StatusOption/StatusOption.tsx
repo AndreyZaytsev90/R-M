@@ -1,4 +1,5 @@
-import { StatusIndicator, type TStatus } from '@/shared';
+import { StatusIndicator } from '@/shared/components';
+import { type TStatus } from '@/shared/types';
 
 type TStatusOptionProps = {
   option: { label: string; value: TStatus };

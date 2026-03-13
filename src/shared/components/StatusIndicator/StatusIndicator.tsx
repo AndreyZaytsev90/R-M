@@ -1,4 +1,5 @@
-import { type TStatus, cn } from '@/shared';
+import { cn } from '@/shared/lib';
+import { type TStatus } from '@/shared/types';
 
 import styles from './StatusIndicator.module.css';
 

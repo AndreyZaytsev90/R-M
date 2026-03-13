@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 
 import { IconClose } from '@/assets';
-import { cn } from '@/shared';
+import { cn } from '@/shared/lib';
 
 import styles from './Input.module.css';
 

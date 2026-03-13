@@ -1,7 +1,7 @@
 import { type ComponentType, useEffect, useRef, useState } from 'react';
 
 import { IconArrowDropdown } from '@/assets';
-import { cn } from '@/shared';
+import { cn } from '@/shared/lib';
 
 import styles from './Select.module.css';
 

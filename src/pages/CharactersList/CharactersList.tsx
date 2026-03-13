@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
 import { IconSearch, LogoRickAndMorty } from '@/assets';
-import { Input, Loading, Select, StatusOption, type TStatus } from '@/shared';
+import { Input, Loading, Select, StatusOption } from '@/shared/components';
+import { type TStatus } from '@/shared/types';
 
 import styles from './CharactersList.module.css';
 
-type TStatusOption = { label: string; value: TStatus };
+type TStatusOption<T> = { label: string; value: T };
 
-const OPTIONS_LARGE_LIST = [
+const OPTIONS_LARGE_LIST: TStatusOption<string>[] = [
   { label: 'human', value: 'Human' },
   { label: 'alien', value: 'Alien' },
   { label: 'humanoid', value: 'Humanoid' },
@@ -15,7 +16,7 @@ const OPTIONS_LARGE_LIST = [
   { label: 'robot', value: 'Robot' }
 ];
 
-const OPTIONS_SMALL_LIST: TStatusOption[] = [
+const OPTIONS_SMALL_LIST: TStatusOption<TStatus>[] = [
   { label: 'alive', value: 'Alive' },
   { label: 'dead', value: 'Dead' },
   { label: 'unknown', value: 'Unknown' }
