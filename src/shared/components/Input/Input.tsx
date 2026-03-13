@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 
 import { IconClose } from '@/assets';
+import { cn } from '@/shared';
 
 import styles from './Input.module.css';
 
@@ -23,10 +24,10 @@ export const Input = ({ value, onChange, placeholder, icon, variant, disabled }:
   };
 
   return (
-    <div className={styles.container}>
-      {variant === 'bordered' && icon && <span className={styles.icon}>{icon}</span>}
+    <div className={cn(styles.input, styles[`input--${variant}`])}>
+      {variant === 'bordered' && icon && <span className={styles.input__icon}>{icon}</span>}
       <input
-        className={styles[variant]}
+        className={styles.input__field}
         type='text'
         placeholder={placeholder}
         value={value}
@@ -35,7 +36,7 @@ export const Input = ({ value, onChange, placeholder, icon, variant, disabled }:
       />
 
       {value && (
-        <button type='button' className={styles.clear} onClick={handleClear} aria-label='Очистить поле'>
+        <button type='button' className={styles.input__clear} onClick={handleClear} aria-label='Очистить поле'>
           <IconClose />
         </button>
       )}

@@ -22,21 +22,6 @@ type SelectProps<T> = {
   OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
 };
 
-const SIZE_CONFIG = {
-  large: {
-    wrapper: cn(styles.selectWrapper, styles.selectWrapperLarge),
-    select: cn(styles.select, styles.selectLarge),
-    options: cn(styles.selectOptions, styles.selectOptionsLarge),
-    option: cn(styles.selectOption, styles.selectOptionLarge)
-  },
-  small: {
-    wrapper: cn(styles.selectWrapper, styles.selectWrapperSmall),
-    select: cn(styles.select, styles.selectSmall),
-    options: cn(styles.selectOptions, styles.selectOptionsSmall),
-    option: cn(styles.selectOption, styles.selectOptionSmall)
-  }
-};
-
 const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
   return <span>{option.label}</span>;
 };
@@ -52,7 +37,6 @@ export const Select = <T,>({
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedOption = options.find((option) => option.value === value);
-  const { wrapper, select, options: optionsList, option: optionItem } = SIZE_CONFIG[size];
 
   const onClickHandler = () => {
     setIsOpen((prev) => !prev);
@@ -64,15 +48,15 @@ export const Select = <T,>({
   };
 
   return (
-    <div className={wrapper}>
-      <button className={select} onClick={onClickHandler}>
+    <div className={cn(styles.select, styles[`select--${size}`])}>
+      <button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
         <ArrowIcon direction={isOpen ? 'up' : 'down'} size={size} />
       </button>
       {isOpen && (
-        <ul className={optionsList}>
+        <ul className={styles.select__list}>
           {options.map((option) => (
-            <li key={option.label} className={optionItem} onClick={() => optionClickHandler(option.value)}>
+            <li key={option.label} className={styles.select__option} onClick={() => optionClickHandler(option.value)}>
               <OptionsComponent option={option} />
             </li>
           ))}
