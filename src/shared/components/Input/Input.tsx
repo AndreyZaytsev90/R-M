@@ -24,7 +24,7 @@ export const Input = ({ value, onChange, placeholder, icon, variant, disabled }:
 
   return (
     <div className={styles.container}>
-      {variant === 'bordered' && <span className={styles.icon}>{icon}</span>}
+      {variant === 'bordered' && icon && <span className={styles.icon}>{icon}</span>}
       <input
         className={styles[variant]}
         type='text'

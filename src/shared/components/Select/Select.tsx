@@ -4,17 +4,17 @@ import { ArrowIcon, cn } from '@/shared';
 
 import styles from './Select.module.css';
 
-type Options<T> = {
+type Option<T> = {
   label: string;
   value: T;
 };
 
 type OptionsComponentProps<T> = {
-  option: Options<T>;
+  option: Option<T>;
 };
 
 type SelectProps<T> = {
-  options: Options<T>[];
+  options: Option<T>[];
   placeholder: string;
   value: T | null;
   onChange: (value: T | null) => void;
@@ -38,7 +38,7 @@ const SIZE_CONFIG = {
 };
 
 const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
-  return <span>{String(option.value)}</span>;
+  return <span>{option.label}</span>;
 };
 
 export const Select = <T,>({
@@ -72,7 +72,7 @@ export const Select = <T,>({
       {isOpen && (
         <ul className={optionsList}>
           {options.map((option) => (
-            <li key={String(option.value)} className={optionItem} onClick={() => optionClickHandler(option.value)}>
+            <li key={option.label} className={optionItem} onClick={() => optionClickHandler(option.value)}>
               <OptionsComponent option={option} />
             </li>
           ))}

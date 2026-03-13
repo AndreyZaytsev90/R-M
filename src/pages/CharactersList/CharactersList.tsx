@@ -8,11 +8,11 @@ import styles from './CharactersList.module.css';
 type StatusOptionType = { label: string; value: Status };
 
 const OPTIONS_LARGE_LIST = [
-  { label: 'human', value: 'Human' },
-  { label: 'alien', value: 'Alien' },
-  { label: 'humanoid', value: 'Humanoid' },
-  { label: 'animal', value: 'Animal' },
-  { label: 'robot', value: 'Robot' }
+  { label: 'Human', value: 'human' },
+  { label: 'Alien', value: 'alien' },
+  { label: 'Humanoid', value: 'humanoid' },
+  { label: 'Animal', value: 'animal' },
+  { label: 'Robot', value: 'robot' }
 ];
 
 const OPTIONS_SMALL_LIST: StatusOptionType[] = [
