@@ -6,11 +6,11 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <MainIcon />
-      <div className={styles.headerButtons}>
-        <button className={styles.headerButton}>
+      <div className={styles.header__buttons}>
+        <button className={styles.header__button}>
           <IconLightTheme />
         </button>
-        <button className={styles.headerButton}>
+        <button className={styles.header__button}>
           <IconLangRus />
         </button>
       </div>

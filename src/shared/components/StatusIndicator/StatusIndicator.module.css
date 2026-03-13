@@ -7,13 +7,13 @@
 }
 
 .statusIndicator--alive {
-  background-color: rgba(18, 184, 0, 1);
+  background-color: var(--color-status-alive);
 }
 
 .statusIndicator--dead {
-  background-color: rgba(223, 0, 0, 1);
+  background-color: var(--color-status-dead);
 }
 
 .statusIndicator--unknown {
-  background-color: rgba(255, 153, 0, 1);
+  background-color: var(--color-status-unknown);
 }
