@@ -1,28 +1,29 @@
 import { type ComponentType, useEffect, useRef, useState } from 'react';
 
-import { ArrowIcon, cn } from '@/shared';
+import { IconArrowDropdown } from '@/assets';
+import { cn } from '@/shared';
 
 import styles from './Select.module.css';
 
-type Option<T> = {
+type TOption<T> = {
   label: string;
   value: T;
 };
 
-type OptionsComponentProps<T> = {
-  option: Option<T>;
+type TOptionsComponentProps<T> = {
+  option: TOption<T>;
 };
 
-type SelectProps<T> = {
-  options: Option<T>[];
+type TSelectProps<T> = {
+  options: TOption<T>[];
   placeholder: string;
   value: T | null;
   onChange: (value: T | null) => void;
   size: 'large' | 'small';
-  OptionsComponent?: ComponentType<OptionsComponentProps<T>>;
+  OptionsComponent?: ComponentType<TOptionsComponentProps<T>>;
 };
 
-const DefaultOptionsComponent = <T,>({ option }: OptionsComponentProps<T>) => {
+const DefaultOptionsComponent = <T,>({ option }: TOptionsComponentProps<T>) => {
   return <span>{option.label}</span>;
 };
 
@@ -33,7 +34,7 @@ export const Select = <T,>({
   onChange,
   OptionsComponent = DefaultOptionsComponent,
   size
-}: SelectProps<T>) => {
+}: TSelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -67,7 +68,7 @@ export const Select = <T,>({
     <div ref={ref} className={cn(styles.select, styles[`select--${size}`])}>
       <button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
-        <ArrowIcon direction={isOpen ? 'up' : 'down'} size={size} />
+        <IconArrowDropdown className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />
       </button>
       {isOpen && (
         <ul className={styles.select__list}>

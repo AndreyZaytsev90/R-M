@@ -8,4 +8,3 @@ export * from './components/Select/Select';
 export * from './components/Input/Input';
 export * from './components/StatusIndicator/StatusIndicator';
 export * from './components/StatusOption/StatusOption';
-export * from './components/ArrowIcon/ArrowIcon';

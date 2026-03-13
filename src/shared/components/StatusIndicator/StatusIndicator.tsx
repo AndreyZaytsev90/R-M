@@ -1,18 +1,18 @@
-import { type Status, cn } from '@/shared';
+import { type TStatus, cn } from '@/shared';
 
 import styles from './StatusIndicator.module.css';
 
-type StatusIndicatorProps = {
-  status: Status;
+type TStatusIndicatorProps = {
+  status: TStatus;
   className?: string;
 };
 
-const statusClassMap: Record<Status, string> = {
+const statusClassMap: Record<TStatus, string> = {
   Alive: styles.alive,
   Dead: styles.dead,
   Unknown: styles.unknown
 };
 
-export const StatusIndicator = ({ status, className }: StatusIndicatorProps) => (
+export const StatusIndicator = ({ status, className }: TStatusIndicatorProps) => (
   <span className={cn(styles.statusIndicator, statusClassMap[status], className)} />
 );

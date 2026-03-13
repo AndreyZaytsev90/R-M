@@ -2,12 +2,12 @@ import { LargeLoadingIcon, SmallLoadingIcon } from '@/assets';
 
 import styles from './Loading.module.css';
 
-interface LoadingProps {
+type TLoadingProps = {
   size: 'large' | 'small';
   label?: string;
-}
+};
 
-export const Loading = ({ label, size }: LoadingProps) => {
+export const Loading = ({ label, size }: TLoadingProps) => {
   return (
     <div className={styles.loading}>
       {size === 'large' ? (

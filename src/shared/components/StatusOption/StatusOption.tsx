@@ -1,10 +1,10 @@
-import { type Status, StatusIndicator } from '@/shared';
+import { StatusIndicator, type TStatus } from '@/shared';
 
-type StatusOptionProps = {
-  option: { label: string; value: Status };
+type TStatusOptionProps = {
+  option: { label: string; value: TStatus };
 };
 
-export const StatusOption = ({ option }: StatusOptionProps) => (
+export const StatusOption = ({ option }: TStatusOptionProps) => (
   <span>
     {option.value} <StatusIndicator status={option.value} />
   </span>

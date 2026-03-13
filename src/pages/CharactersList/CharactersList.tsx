@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
 import { IconSearch, LogoRickAndMorty } from '@/assets';
-import { Input, Loading, Select, type Status, StatusOption } from '@/shared';
+import { Input, Loading, Select, StatusOption, type TStatus } from '@/shared';
 
 import styles from './CharactersList.module.css';
 
-type StatusOptionType = { label: string; value: Status };
+type TStatusOption = { label: string; value: TStatus };
 
 const OPTIONS_LARGE_LIST = [
-  { label: 'Human', value: 'human' },
-  { label: 'Alien', value: 'alien' },
-  { label: 'Humanoid', value: 'humanoid' },
-  { label: 'Animal', value: 'animal' },
-  { label: 'Robot', value: 'robot' }
+  { label: 'human', value: 'Human' },
+  { label: 'alien', value: 'Alien' },
+  { label: 'humanoid', value: 'Humanoid' },
+  { label: 'animal', value: 'Animal' },
+  { label: 'robot', value: 'Robot' }
 ];
 
-const OPTIONS_SMALL_LIST: StatusOptionType[] = [
+const OPTIONS_SMALL_LIST: TStatusOption[] = [
   { label: 'alive', value: 'Alive' },
   { label: 'dead', value: 'Dead' },
   { label: 'unknown', value: 'Unknown' }
@@ -23,13 +23,12 @@ const OPTIONS_SMALL_LIST: StatusOptionType[] = [
 
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
-  const [smallValue, setSmallValue] = useState<Status | null>('Alive');
-
-  const [borderedValue, setBorderedValue] = useState('');
-  const [underlinedValue, setUnderlinedValue] = useState('');
+  const [smallValue, setSmallValue] = useState<TStatus | null>('Alive');
+  const [borderedValue, setBorderedValue] = useState<string>('');
+  const [underlinedValue, setUnderlinedValue] = useState<string>('');
 
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
-  const handleChangeSmall = (value: Status | null) => setSmallValue(value);
+  const handleChangeSmall = (value: TStatus | null) => setSmallValue(value);
 
   return (
     <main className={styles.container}>

@@ -5,7 +5,7 @@ import { cn } from '@/shared';
 
 import styles from './Input.module.css';
 
-type InputProps = {
+type TInputProps = {
   value: string;
   variant: 'bordered' | 'underlined';
   onChange: (newValue: string) => void;
@@ -14,7 +14,7 @@ type InputProps = {
   disabled?: boolean;
 };
 
-export const Input = ({ value, onChange, placeholder, icon, variant, disabled }: InputProps) => {
+export const Input = ({ value, onChange, placeholder, icon, variant, disabled }: TInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
