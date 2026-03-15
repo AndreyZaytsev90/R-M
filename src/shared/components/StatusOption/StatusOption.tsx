@@ -7,6 +7,6 @@ type TStatusOptionProps = {
 
 export const StatusOption = ({ option }: TStatusOptionProps) => (
   <span>
-    {option.value} <StatusIndicator status={option.value} />
+    {option.label} <StatusIndicator status={option.value} />
   </span>
 );

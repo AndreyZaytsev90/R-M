@@ -1,1 +1,1 @@
-export type TStatus = 'Alive' | 'Dead' | 'Unknown';
+export type TStatus = 'alive' | 'dead' | 'unknown';
