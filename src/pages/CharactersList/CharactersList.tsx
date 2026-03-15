@@ -9,7 +9,7 @@ import styles from './CharactersList.module.css';
 
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
-  const [smallValue, setSmallValue] = useState<TStatus | null>('Alive');
+  const [smallValue, setSmallValue] = useState<TStatus | null>('alive');
   const [borderedValue, setBorderedValue] = useState<string>('');
   const [underlinedValue, setUnderlinedValue] = useState<string>('');
 
