@@ -1,39 +1,117 @@
-.selectWrapper {
+.select {
   position: relative;
 }
 
-.selectWrapperLarge {
+/* === Модификаторы размера === */
+
+.select--large {
   width: 240px;
 }
 
-.selectWrapperSmall {
+.select--small {
   width: 95px;
 }
 
-.select {
+/* === Элементы === */
+
+.select__button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-background);
+}
+
+.select__list {
+  position: absolute;
+  width: 100%;
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-background);
+  z-index: 10;
+}
+
+.select__option {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* === Размер large === */
+
+.select--large .select__button {
+  font-size: 16px;
+  padding: 0 14px;
+  height: 56px;
+}
+
+.select--large .select__list {
+  margin-top: 8px;
+  padding: 0 14px;
+}
+
+.select--large .select__option {
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+/* === Размер small === */
+
+.select--small .select__button {
+  font-size: 14px;
+  padding: 0 5px;
+  height: 21px;
+}
+
+.select--small .select__list {
+  margin-top: 5px;
+  padding: 0 5px;
+}
+
+.select--small .select__option {
+  padding: 6px 0;
+  font-size: 14px;
+}
+
+.select__arrow {
+  transition: transform 0.2s;
+}
+
+.select__arrow--up {
+  transform: rotate(180deg);
+}
+
+.select--large .select__arrow {
+  width: 24px;
+  height: 24px;
+}
+
+.select--small .select__arrow {
+  width: 16px;
+  height: 16px;
+}
+
+.select--large {
+  width: 240px;
+}
+
+.select--small {
+  width: 95px;
+}
+
+.select__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   border: 1px solid rgba(57, 57, 57, 1);
   border-radius: 6px;
   background: rgba(255, 255, 255, 1);
 }
 
-.selectLarge {
-  font-size: 16px;
-  width: 240px;
-  padding: 0 14px;
-  height: 56px;
-}
-
-.selectSmall {
-  font-size: 14px;
-  width: 95px;
-  padding: 0 5px;
-  height: 21px;
-}
-
-.selectOptions {
+.select__list {
   position: absolute;
   width: 100%;
   list-style: none;
@@ -43,27 +121,57 @@
   z-index: 10;
 }
 
-.selectOptionsLarge {
-  margin-top: 8px;
-  padding: 0 14px;
-}
-
-.selectOptionsSmall {
-  margin-top: 5px;
-  padding: 0 5px;
-}
-
-.selectOption {
+.select__option {
   margin: 0;
   cursor: pointer;
 }
 
-.selectOptionLarge {
+.select--large .select__button {
+  font-size: 16px;
+  padding: 0 14px;
+  height: 56px;
+}
+
+.select--large .select__list {
+  margin-top: 8px;
+  padding: 0 14px;
+}
+
+.select--large .select__option {
   padding: 10px 0;
   font-size: 16px;
 }
 
-.selectOptionSmall {
+.select--small .select__button {
+  font-size: 14px;
+  padding: 0 5px;
+  height: 21px;
+}
+
+.select--small .select__list {
+  margin-top: 5px;
+  padding: 0 5px;
+}
+
+.select--small .select__option {
   padding: 6px 0;
   font-size: 14px;
+}
+
+.select__arrow {
+  transition: transform 0.2s;
+}
+
+.select__arrow--up {
+  transform: rotate(180deg);
+}
+
+.select--large .select__arrow {
+  width: 10px;
+  height: 10px;
+}
+
+.select--small .select__arrow {
+  width: 5px;
+  height: 5px;
 }

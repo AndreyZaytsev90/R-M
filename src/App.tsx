@@ -1,24 +1,24 @@
 import { Outlet } from 'react-router';
 
-import { Footer, Header } from '@/shared';
+import { Footer, Header } from '@/shared/components';
 
-import './App.css';
+import styles from './App.module.css';
 
 function App() {
   return (
-    <div className='main-page'>
-      <div className='main-page__header'>
-        <div className='main-page__container'>
+    <div className={styles.app}>
+      <div className={styles.app__header}>
+        <div className={styles.app__container}>
           <Header />
         </div>
       </div>
-      <div className='main-page__content'>
-        <div className='main-page__container'>
+      <div className={styles.app__content}>
+        <div className={styles.app__container}>
           <Outlet />
         </div>
       </div>
-      <div className='main-page__footer'>
-        <div className='main-page__container'>
+      <div className={styles.app__footer}>
+        <div className={styles.app__container}>
           <Footer />
         </div>
       </div>
