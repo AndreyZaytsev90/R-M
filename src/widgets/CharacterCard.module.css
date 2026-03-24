@@ -6,3 +6,22 @@
   background: rgba(255, 255, 255, 1);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
+
+.character_card__content {
+  display: flex;
+  padding: 3px 7px;
+  gap: 13px;
+}
+
+.character_card__content img {
+  width: 240px;
+  height: 240px;
+  align-items: center;
+  object-fit: cover;
+}
+
+.character_card__title {
+  font-style: Medium;
+  font-size: 16px;
+  font-weight: 500;
+}
