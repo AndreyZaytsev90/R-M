@@ -11,6 +11,9 @@
   --color-border: rgba(57, 57, 57, 1);
   --color-border-secondary: rgba(0, 0, 0, 0.5);
 
+  /* Границы карточки персонажа */
+  --color-border-card: rgba(240, 238, 238, 1);
+
   /* Статусы */
   --color-status-alive: rgba(18, 184, 0, 1);
   --color-status-dead: rgba(223, 0, 0, 1);

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { IconGoBack } from '@/assets';
 import { Loading } from '@/shared/components';
 
-import styles from './CharacterCard.module.css';
+import styles from './CharacterCardPage.module.css';
 
 export const CharacterCard = () => {
   const navigate = useNavigate();

@@ -4,8 +4,9 @@ import { IconSearch, logoRickAndMorty } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TStatus } from '@/shared/types';
+import { CharacterCard } from '@/widgets/CharacterCard';
 
-import styles from './CharactersList.module.css';
+import styles from './CharactersListPage.module.css';
 
 export const CharactersList = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
@@ -15,6 +16,15 @@ export const CharactersList = () => {
 
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
   const handleChangeSmall = (value: TStatus | null) => setSmallValue(value);
+
+  const character = {
+    id: 1,
+    name: 'Rick Sanchez',
+    gender: 'Male',
+    species: 'Human',
+    location: 'Earth (C-137)',
+    status: 'Alive'
+  };
 
   return (
     <main className={styles.container}>
@@ -45,6 +55,7 @@ export const CharactersList = () => {
       </div>
       <img src={logoRickAndMorty} alt='Rick and Morty' width={600} height={200} />
       <div>
+        <CharacterCard character={character} />
         <Loading label='Loading characters...' size='large' />
       </div>
     </main>
