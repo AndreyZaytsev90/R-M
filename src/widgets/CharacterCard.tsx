@@ -1,4 +1,4 @@
-import { avatarRickSanchez } from '@/assets';
+import { EditIcon, RickSanchezIcon } from '@/assets';
 import type { TGender, TSpecies, TStatus } from '@/shared';
 
 import styles from './CharacterCard.module.css';
@@ -19,9 +19,10 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   return (
     <div className={styles.character_card}>
       <div className={styles.character_card__content}>
-        <img src={avatarRickSanchez} alt='avatarRickSanchez' />
+        <img src={RickSanchezIcon} alt='RickSanchezMainIcon' />
         <div>
           <h2 className={styles.character_card__name}>{character.name}</h2>
+          <EditIcon className={styles.character_card__edit}></EditIcon>
           <div className={styles.character_card__characteristics}>
             <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Gender</p>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { IconSearch, logoRickAndMorty } from '@/assets';
+import { RickAndMortyIcon, SearchIcon } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TStatus } from '@/shared/types';
@@ -20,9 +20,9 @@ export const CharactersList = () => {
   const character: TCharacter = {
     id: 1,
     name: 'Rick Sanchez',
-    gender: 'male',
+    gender: 'Male',
     species: 'Human',
-    location: 'Earth (C-137)',
+    location: 'Earth',
     status: 'alive'
   };
 
@@ -49,11 +49,11 @@ export const CharactersList = () => {
           value={borderedValue}
           onChange={setBorderedValue}
           variant='bordered'
-          icon={<IconSearch />}
+          icon={<SearchIcon />}
         />
         <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
-      <img src={logoRickAndMorty} alt='Rick and Morty' width={600} height={200} />
+      <img src={RickAndMortyIcon} alt='Rick and Morty' width={600} height={200} />
       <div>
         <CharacterCard character={character} />
         <Loading label='Loading characters...' size='large' />

@@ -1,4 +1,4 @@
-import { IconLoadingLarge, IconLoadingSmall } from '@/assets';
+import { LargeLoadingIcon, SmallLoadingIcon } from '@/assets';
 
 import styles from './Loading.module.css';
 
@@ -11,9 +11,9 @@ export const Loading = ({ label, size }: TLoadingProps) => {
   return (
     <div className={styles.loading}>
       {size === 'large' ? (
-        <IconLoadingLarge className={styles.spinner} />
+        <LargeLoadingIcon className={styles.spinner} />
       ) : (
-        <IconLoadingSmall className={styles.spinner} />
+        <SmallLoadingIcon className={styles.spinner} />
       )}
       {label && <p className={styles.loadingText}>{label}</p>}
     </div>

@@ -1,17 +1,17 @@
-import { IconLangRus, IconLightTheme, IconMain } from '@/assets';
+import { LangRusIcon, LightThemeIcon, MainIcon } from '@/assets';
 
 import styles from './Header.module.css';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
-      <IconMain />
+      <MainIcon />
       <div className={styles.header__buttons}>
         <button className={styles.header__button}>
-          <IconLightTheme />
+          <LightThemeIcon />
         </button>
         <button className={styles.header__button}>
-          <IconLangRus />
+          <LangRusIcon />
         </button>
       </div>
     </header>

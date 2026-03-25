@@ -1,6 +1,6 @@
 import { type ComponentType, useEffect, useRef, useState } from 'react';
 
-import { IconArrowDropdown } from '@/assets';
+import { ArrowDropdownIcon } from '@/assets';
 import { cn } from '@/shared/lib';
 
 import styles from './Select.module.css';
@@ -68,7 +68,7 @@ export const Select = <T,>({
     <div ref={ref} className={cn(styles.select, styles[`select--${size}`])}>
       <button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
-        <IconArrowDropdown className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />
+        <ArrowDropdownIcon className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />
       </button>
       {isOpen && (
         <ul className={styles.select__list}>

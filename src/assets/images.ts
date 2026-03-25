@@ -1,4 +1,4 @@
-import avatarRickSanchez from '@/assets/icons/avatarRickSanchez.png';
-import logoRickAndMorty from '@/assets/icons/logoRickAndMorty.png';
+import RickAndMortyIcon from '@/assets/icons/RickAndMortyIcon.png';
+import RickSanchezIcon from '@/assets/icons/RickSanchezIcon.png';
 
-export { logoRickAndMorty, avatarRickSanchez };
+export { RickAndMortyIcon, RickSanchezIcon };

@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { IconClose } from '@/assets';
+import { CloseIcon } from '@/assets';
 import { cn } from '@/shared/lib';
 
 import styles from './Input.module.css';
@@ -37,7 +37,7 @@ export const Input = ({ value, onChange, placeholder, icon, variant, disabled }:
 
       {value && (
         <button type='button' className={styles.input__clear} onClick={handleClear} aria-label='Очистить поле'>
-          <IconClose />
+          <CloseIcon />
         </button>
       )}
     </div>

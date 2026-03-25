@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 
-import { IconGoBack } from '@/assets';
+import { GoBackIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 
 import styles from './CharacterCardPage.module.css';
@@ -11,7 +11,7 @@ export const CharacterCard = () => {
   return (
     <main className={styles.container}>
       <button className={styles.button} onClick={() => navigate('/')}>
-        <IconGoBack />
+        <GoBackIcon />
         <span className={styles.buttonText}>GO BACK</span>
       </button>
       <section className={styles.loading}>
