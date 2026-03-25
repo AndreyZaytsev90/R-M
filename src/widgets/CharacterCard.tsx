@@ -22,7 +22,6 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
         <img src={RickSanchezIcon} alt='RickSanchezMainIcon' />
         <div>
           <h2 className={styles.character_card__name}>{character.name}</h2>
-          <EditIcon className={styles.character_card__edit}></EditIcon>
           <div className={styles.character_card__characteristics}>
             <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Gender</p>
@@ -40,6 +39,9 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
               <p className={styles.character_card__title}>Status</p>
               <p className={styles.character_card__value}>{character.status}</p>
             </div>
+          </div>
+          <div className={styles.character_card__buttons}>
+            <EditIcon></EditIcon>
           </div>
         </div>
       </div>
