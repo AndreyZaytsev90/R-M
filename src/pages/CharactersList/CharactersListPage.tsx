@@ -4,7 +4,7 @@ import { IconSearch, logoRickAndMorty } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TStatus } from '@/shared/types';
-import { CharacterCard } from '@/widgets/CharacterCard';
+import { CharacterCard, type TCharacter } from '@/widgets/CharacterCard';
 
 import styles from './CharactersListPage.module.css';
 
@@ -17,13 +17,13 @@ export const CharactersList = () => {
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
   const handleChangeSmall = (value: TStatus | null) => setSmallValue(value);
 
-  const character = {
+  const character: TCharacter = {
     id: 1,
     name: 'Rick Sanchez',
-    gender: 'Male',
+    gender: 'male',
     species: 'Human',
     location: 'Earth (C-137)',
-    status: 'Alive'
+    status: 'alive'
   };
 
   return (
