@@ -21,23 +21,23 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
       <div className={styles.character_card__content}>
         <img src={avatarRickSanchez} alt='avatarRickSanchez' />
         <div>
-          <h2>{character.name}</h2>
+          <h2 className={styles.character_card__name}>{character.name}</h2>
           <div className={styles.character_card__characteristics}>
-            <div>
+            <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Gender</p>
-              <p>{character.gender}</p>
+              <p className={styles.character_card__value}>{character.gender}</p>
             </div>
-            <div>
+            <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Species</p>
-              <p>{character.species}</p>
+              <p className={styles.character_card__value}>{character.species}</p>
             </div>
-            <div>
+            <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Location</p>
-              <p>{character.location}</p>
+              <p className={styles.character_card__value}>{character.location}</p>
             </div>
-            <div>
+            <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Status</p>
-              <p>{character.status}</p>
+              <p className={styles.character_card__value}>{character.status}</p>
             </div>
           </div>
         </div>
