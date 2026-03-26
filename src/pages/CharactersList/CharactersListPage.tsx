@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { RickAndMortyIcon, SearchIcon } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
-import { type TStatus } from '@/shared/types';
-import { CharacterCard, type TCharacter } from '@/widgets/CharacterCard';
+import { type TCharacter, type TStatus } from '@/shared/types';
+import { CharacterCard } from '@/widgets/CharacterCard';
 
 import styles from './CharactersListPage.module.css';
 
