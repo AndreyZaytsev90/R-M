@@ -25,11 +25,22 @@
   object-fit: cover;
 }
 
+.character_card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.character_card__name_wrapper {
+  display: flex;
+  align-items: flex-start;
+  min-height: 29px;
+  margin-bottom: 5px;
+}
+
 .character_card__name {
   display: block;
   font-size: 20px;
   font-weight: 500;
-  padding-bottom: 10px;
   color: var(--color-text);
   text-decoration: none;
 }
@@ -41,13 +52,19 @@
 .character_card__characteristics {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
 }
 
 .character_card__options {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.character_card__field {
+  display: flex;
+  align-items: center;
+  min-height: 21px;
 }
 
 .character_card__title {
@@ -60,10 +77,16 @@
   font-size: 14px;
   color: var(--color-text-secondary);
 }
+
 .character_card__status {
   display: flex;
   align-items: center;
   gap: 5px;
+  min-height: 21px;
+}
+
+.character_card__status_select {
+  margin-top: 0;
 }
 
 .character_card__buttons {

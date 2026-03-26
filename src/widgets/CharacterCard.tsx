@@ -20,14 +20,16 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
     <div className={styles.character_card}>
       <div className={styles.character_card__content}>
         <img src={RickSanchezIcon} alt='RickSanchezMainIcon' />
-        <div>
-          {isEdit ? (
-            <Input value={name} onChange={setName} variant='underlined' />
-          ) : (
-            <Link to={`/characters/character-card/${character.id}`} className={styles.character_card__name}>
-              {name}
-            </Link>
-          )}
+        <div className={styles.character_card__info}>
+          <div className={styles.character_card__name_wrapper}>
+            {isEdit ? (
+              <Input value={name} onChange={setName} variant='underlined' />
+            ) : (
+              <Link to={`/characters/character-card/${character.id}`} className={styles.character_card__name}>
+                {name}
+              </Link>
+            )}
+          </div>
 
           <div className={styles.character_card__characteristics}>
             <div className={styles.character_card__options}>
@@ -40,31 +42,36 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
             </div>
             <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Location</p>
-              {isEdit ? (
-                <Input value={location} onChange={setLocation} variant='underlined' />
-              ) : (
-                <p className={styles.character_card__value}>{location}</p>
-              )}
+              <div className={styles.character_card__field}>
+                {isEdit ? (
+                  <Input value={location} onChange={setLocation} variant='underlined' />
+                ) : (
+                  <p className={styles.character_card__value}>{location}</p>
+                )}
+              </div>
             </div>
             <div className={styles.character_card__options}>
               <p className={styles.character_card__title}>Status</p>
-              {isEdit ? (
-                <Select
-                  options={STATUS_OPTIONS}
-                  value={statusValue}
-                  placeholder='Alive'
-                  onChange={(value) => setStatusValue(value)}
-                  size='small'
-                  OptionsComponent={StatusOption}
-                />
-              ) : (
-                <div className={styles.character_card__status}>
-                  <p className={styles.character_card__value}>
-                    {statusValue && statusValue[0].toUpperCase() + statusValue.slice(1)}
-                  </p>
-                  {statusValue && <StatusIndicator status={statusValue}></StatusIndicator>}
-                </div>
-              )}
+              <div className={styles.character_card__field}>
+                {isEdit ? (
+                  <Select
+                    className={styles.character_card__status_select}
+                    options={STATUS_OPTIONS}
+                    value={statusValue}
+                    placeholder='Alive'
+                    onChange={(value) => setStatusValue(value)}
+                    size='small'
+                    OptionsComponent={StatusOption}
+                  />
+                ) : (
+                  <div className={styles.character_card__status}>
+                    <p className={styles.character_card__value}>
+                      {statusValue && statusValue[0].toUpperCase() + statusValue.slice(1)}
+                    </p>
+                    {statusValue && <StatusIndicator status={statusValue}></StatusIndicator>}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.character_card__buttons}>
