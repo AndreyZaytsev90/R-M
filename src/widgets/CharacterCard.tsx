@@ -16,6 +16,18 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   const [location, setLocation] = useState('Earth');
   const [statusValue, setStatusValue] = useState<TStatus | null>('alive');
 
+  const handleEditClick = () => {
+    setIsEdit(true);
+  };
+
+  const handleSaveClick = () => {
+    setIsEdit(false);
+  };
+
+  const handleCloseClick = () => {
+    setIsEdit(false);
+  };
+
   return (
     <div className={styles.character_card}>
       <div className={styles.character_card__content}>
@@ -59,7 +71,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                     options={STATUS_OPTIONS}
                     value={statusValue}
                     placeholder='Alive'
-                    onChange={(value) => setStatusValue(value)}
+                    onChange={setStatusValue}
                     size='small'
                     OptionsComponent={StatusOption}
                   />
@@ -68,7 +80,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                     <p className={styles.character_card__value}>
                       {statusValue && statusValue[0].toUpperCase() + statusValue.slice(1)}
                     </p>
-                    {statusValue && <StatusIndicator status={statusValue}></StatusIndicator>}
+                    {statusValue && <StatusIndicator status={statusValue} />}
                   </div>
                 )}
               </div>
@@ -77,11 +89,11 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
           <div className={styles.character_card__buttons}>
             {isEdit ? (
               <div className={styles.character_card__edit_buttons}>
-                <CloseIcon width={24} height={24} onClick={() => {}}></CloseIcon>
-                <SaveIcon onClick={() => setIsEdit(false)}></SaveIcon>
+                <CloseIcon width={24} height={24} onClick={handleCloseClick} />
+                <SaveIcon onClick={handleSaveClick} />
               </div>
             ) : (
-              <EditIcon onClick={() => setIsEdit(true)}></EditIcon>
+              <EditIcon onClick={handleEditClick} />
             )}
           </div>
         </div>
