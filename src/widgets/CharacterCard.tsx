@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 
-import { EditIcon, RickSanchezIcon, SaveIcon } from '@/assets';
-import { Input, STATUS_OPTIONS, Select, StatusOption, type TCharacter, type TStatus } from '@/shared';
+import { CloseIcon, EditIcon, RickSanchezIcon, SaveIcon } from '@/assets';
+import { Input, STATUS_OPTIONS, Select, StatusIndicator, StatusOption, type TCharacter, type TStatus } from '@/shared';
 
 import styles from './CharacterCard.module.css';
 
@@ -58,13 +58,21 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                   OptionsComponent={StatusOption}
                 />
               ) : (
-                <p className={styles.character_card__value}>{character.status}</p>
+                <div className={styles.character_card__status}>
+                  <p className={styles.character_card__value}>
+                    {statusValue && statusValue[0].toUpperCase() + statusValue.slice(1)}
+                  </p>
+                  {statusValue && <StatusIndicator status={statusValue}></StatusIndicator>}
+                </div>
               )}
             </div>
           </div>
           <div className={styles.character_card__buttons}>
             {isEdit ? (
-              <SaveIcon onClick={() => setIsEdit(false)}></SaveIcon>
+              <div className={styles.character_card__edit_buttons}>
+                <CloseIcon width={24} height={24} onClick={() => {}}></CloseIcon>
+                <SaveIcon onClick={() => setIsEdit(false)}></SaveIcon>
+              </div>
             ) : (
               <EditIcon onClick={() => setIsEdit(true)}></EditIcon>
             )}
