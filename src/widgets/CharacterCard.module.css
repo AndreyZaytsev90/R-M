@@ -52,7 +52,7 @@
 .character_card__characteristics {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 9px;
 }
 
 .character_card__options {
@@ -63,17 +63,19 @@
 
 .character_card__field {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   min-height: 21px;
 }
 
 .character_card__title {
+  margin: 0;
   font-size: 16px;
   font-weight: 500;
   color: var(--color-text);
 }
 
 .character_card__value {
+  margin: 0;
   font-size: 14px;
   color: var(--color-text-secondary);
 }

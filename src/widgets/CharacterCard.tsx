@@ -44,7 +44,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
               <p className={styles.character_card__title}>Location</p>
               <div className={styles.character_card__field}>
                 {isEdit ? (
-                  <Input value={location} onChange={setLocation} variant='underlined' />
+                  <Input value={location} onChange={setLocation} variant='underlined' size='small' />
                 ) : (
                   <p className={styles.character_card__value}>{location}</p>
                 )}
