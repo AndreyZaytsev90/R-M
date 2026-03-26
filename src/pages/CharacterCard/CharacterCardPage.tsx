@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router';
 import { GoBackIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 
-import styles from './CharacterCardPage.module.css';
+import styles from './CharacterCardPage.module.scss';
 
-export const CharacterCard = () => {
+export const CharacterCardPage = () => {
   const navigate = useNavigate();
 
   return (

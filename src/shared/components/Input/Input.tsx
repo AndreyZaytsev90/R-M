@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
 import { CloseIcon } from '@/assets';
 import { cn } from '@/shared/lib';
 
-import styles from './Input.module.css';
+import styles from './Input.module.scss';
 
 type TInputProps = {
   value: string;

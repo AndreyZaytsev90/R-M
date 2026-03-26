@@ -2,7 +2,7 @@ import { Outlet } from 'react-router';
 
 import { Footer, Header } from '@/shared/components';
 
-import styles from './App.module.css';
+import styles from './App.module.scss';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import { LargeLoadingIcon, SmallLoadingIcon } from '@/assets';
 
-import styles from './Loading.module.css';
+import styles from './Loading.module.scss';
 
 type TLoadingProps = {
   size: 'large' | 'small';

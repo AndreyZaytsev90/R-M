@@ -6,9 +6,9 @@ import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TCharacter, type TStatus } from '@/shared/types';
 import { CharacterCard } from '@/widgets/CharacterCard';
 
-import styles from './CharactersListPage.module.css';
+import styles from './CharactersListPage.module.scss';
 
-export const CharactersList = () => {
+export const CharactersListPage = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
   const [smallValue, setSmallValue] = useState<TStatus | null>('alive');
   const [borderedValue, setBorderedValue] = useState<string>('');

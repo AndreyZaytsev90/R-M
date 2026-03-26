@@ -3,7 +3,7 @@ import { type ComponentType, useEffect, useRef, useState } from 'react';
 import { ArrowDropdownIcon } from '@/assets';
 import { cn } from '@/shared/lib';
 
-import styles from './Select.module.css';
+import styles from './Select.module.scss';
 
 type TOption<T> = {
   label: string;

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { CloseIcon, EditIcon, RickSanchezIcon, SaveIcon } from '@/assets';
 import { Input, STATUS_OPTIONS, Select, StatusIndicator, StatusOption, type TCharacter, type TStatus } from '@/shared';
 
-import styles from './CharacterCard.module.css';
+import styles from './CharacterCard.module.scss';
 
 type TCharacterCardProps = {
   character: TCharacter;

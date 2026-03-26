@@ -1,7 +1,7 @@
 import { cn } from '@/shared/lib';
 import { type TStatus } from '@/shared/types';
 
-import styles from './StatusIndicator.module.css';
+import styles from './StatusIndicator.module.scss';
 
 type TStatusIndicatorProps = {
   status: TStatus;
