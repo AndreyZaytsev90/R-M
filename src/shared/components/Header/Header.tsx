@@ -1,4 +1,5 @@
 import { LangRusIcon, LightThemeIcon, MainIcon } from '@/assets';
+import { Button } from '@/shared/components';
 
 import styles from './Header.module.scss';
 
@@ -7,12 +8,12 @@ export const Header = () => {
     <header className={styles.header}>
       <MainIcon />
       <div className={styles.header__buttons}>
-        <button className={styles.header__button}>
+        <Button className={styles.header__button} variant='primary'>
           <LightThemeIcon />
-        </button>
-        <button className={styles.header__button}>
+        </Button>
+        <Button className={styles.header__button} variant='primary'>
           <LangRusIcon />
-        </button>
+        </Button>
       </div>
     </header>
   );

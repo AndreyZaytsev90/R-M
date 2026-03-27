@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import { CloseIcon, EditIcon, RickSanchezIcon, SaveIcon } from '@/assets';
 import {
+  Button,
   Input,
   STATUS_OPTIONS,
   Select,
@@ -109,11 +110,17 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
           <div className={styles.characterCard__buttons}>
             {isEdit ? (
               <div className={styles.characterCard__editButtons}>
-                <CloseIcon width={24} height={24} onClick={handleCloseClick} />
-                <SaveIcon onClick={handleSaveClick} />
+                <Button aria-label='Отмена' onClick={handleCloseClick}>
+                  <CloseIcon width={24} height={24} />
+                </Button>
+                <Button aria-label='Сохранить' onClick={handleSaveClick}>
+                  <SaveIcon />
+                </Button>
               </div>
             ) : (
-              <EditIcon onClick={handleEditClick} />
+              <Button aria-label='Редактировать' onClick={handleEditClick}>
+                <EditIcon />
+              </Button>
             )}
           </div>
         </div>

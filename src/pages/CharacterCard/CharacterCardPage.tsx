@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 
 import { GoBackIcon } from '@/assets';
-import { Loading } from '@/shared/components';
+import { Button, Loading } from '@/shared/components';
 
 import styles from './CharacterCardPage.module.scss';
 
@@ -10,10 +10,10 @@ export const CharacterCardPage = () => {
 
   return (
     <main className={styles.container}>
-      <button className={styles.button} onClick={() => navigate('/')}>
+      <Button className={styles.button} onClick={() => navigate('/')}>
         <GoBackIcon />
         <span className={styles.buttonText}>GO BACK</span>
-      </button>
+      </Button>
       <section className={styles.loading}>
         <Loading label='Loading character card...' size='large' />
         <Loading label='Loading character card...' size='small' />

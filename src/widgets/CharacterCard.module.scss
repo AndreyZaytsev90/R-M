@@ -108,6 +108,12 @@
     padding-right: 24px;
   }
 
+  &__editButtons {
+    display: flex;
+    flex-direction: row;
+    padding-right: 24px;
+  }
+
   &:hover &__buttons {
     opacity: 1;
   }
