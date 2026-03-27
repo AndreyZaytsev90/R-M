@@ -1,6 +1,7 @@
 import { type ComponentType, useEffect, useRef, useState } from 'react';
 
 import { ArrowDropdownIcon } from '@/assets';
+import { Button } from '@/shared/components';
 import { cn } from '@/shared/lib';
 
 import styles from './Select.module.scss';
@@ -79,7 +80,7 @@ export const Select = <T,>({
         className
       )}
     >
-      <button className={styles.select__button} onClick={onClickHandler}>
+      <Button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? (
           <OptionsComponent option={selectedOption} />
         ) : (
@@ -90,7 +91,7 @@ export const Select = <T,>({
             [styles['select__arrow--up']]: isOpen
           })}
         />
-      </button>
+      </Button>
       {isOpen && (
         <ul className={styles.select__list}>
           {options.map((option) => (

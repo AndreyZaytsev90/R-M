@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 
 import { CloseIcon } from '@/assets';
+import { Button } from '@/shared/components';
 import { cn } from '@/shared/lib';
 
 import styles from './Input.module.scss';
@@ -52,14 +53,13 @@ export const Input = ({
       />
 
       {value && (
-        <button
-          type='button'
+        <Button
           className={styles.input__clear}
           onClick={handleClear}
           aria-label='Очистить поле'
         >
           <CloseIcon />
-        </button>
+        </Button>
       )}
     </div>
   );
