@@ -2,7 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 
 import { CloseIcon, EditIcon, RickSanchezIcon, SaveIcon } from '@/assets';
-import { Input, STATUS_OPTIONS, Select, StatusIndicator, StatusOption, type TCharacter, type TStatus } from '@/shared';
+import {
+  Input,
+  STATUS_OPTIONS,
+  Select,
+  StatusIndicator,
+  StatusOption,
+  type TCharacter,
+  type TStatus
+} from '@/shared';
 
 import styles from './CharacterCard.module.scss';
 
@@ -16,7 +24,9 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   const [location, setLocation] = useState('Earth');
   const [statusValue, setStatusValue] = useState<TStatus | null>('alive');
 
-  const statusValueCard = statusValue && STATUS_OPTIONS.find((opt) => opt.value === statusValue)?.label;
+  const statusValueCard =
+    statusValue &&
+    STATUS_OPTIONS.find((opt) => opt.value === statusValue)?.label;
 
   const handleEditClick = () => {
     setIsEdit(true);
@@ -39,7 +49,10 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
             {isEdit ? (
               <Input value={name} onChange={setName} variant='underlined' />
             ) : (
-              <Link to={`/characters/${character.id}`} className={styles.characterCard__name}>
+              <Link
+                to={`/characters/${character.id}`}
+                className={styles.characterCard__name}
+              >
                 {name}
               </Link>
             )}
@@ -58,7 +71,12 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
               <p className={styles.characterCard__title}>Location</p>
               <div className={styles.characterCard__field}>
                 {isEdit ? (
-                  <Input value={location} onChange={setLocation} variant='underlined' size='small' />
+                  <Input
+                    value={location}
+                    onChange={setLocation}
+                    variant='underlined'
+                    size='small'
+                  />
                 ) : (
                   <p className={styles.characterCard__value}>{location}</p>
                 )}
@@ -79,7 +97,9 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                   />
                 ) : (
                   <div className={styles.characterCard__status}>
-                    <p className={styles.characterCard__value}>{statusValueCard}</p>
+                    <p className={styles.characterCard__value}>
+                      {statusValueCard}
+                    </p>
                     {statusValue && <StatusIndicator status={statusValue} />}
                   </div>
                 )}

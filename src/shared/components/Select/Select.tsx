@@ -54,7 +54,11 @@ export const Select = <T,>({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && event.target instanceof Node && !ref.current.contains(event.target)) {
+      if (
+        ref.current &&
+        event.target instanceof Node &&
+        !ref.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -67,15 +71,34 @@ export const Select = <T,>({
   }, []);
 
   return (
-    <div ref={ref} className={cn(styles.select, { [styles[`select--${size}`]]: size }, className)}>
+    <div
+      ref={ref}
+      className={cn(
+        styles.select,
+        { [styles[`select--${size}`]]: size },
+        className
+      )}
+    >
       <button className={styles.select__button} onClick={onClickHandler}>
-        {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
-        <ArrowDropdownIcon className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />
+        {selectedOption ? (
+          <OptionsComponent option={selectedOption} />
+        ) : (
+          placeholder
+        )}
+        <ArrowDropdownIcon
+          className={cn(styles.select__arrow, {
+            [styles['select__arrow--up']]: isOpen
+          })}
+        />
       </button>
       {isOpen && (
         <ul className={styles.select__list}>
           {options.map((option) => (
-            <li key={option.label} className={styles.select__option} onClick={() => optionClickHandler(option.value)}>
+            <li
+              key={option.label}
+              className={styles.select__option}
+              onClick={() => optionClickHandler(option.value)}
+            >
               <OptionsComponent option={option} />
             </li>
           ))}

@@ -15,7 +15,15 @@ type TInputProps = {
   disabled?: boolean;
 };
 
-export const Input = ({ value, onChange, placeholder, icon, variant, size = 'large', disabled }: TInputProps) => {
+export const Input = ({
+  value,
+  onChange,
+  placeholder,
+  icon,
+  variant,
+  size = 'large',
+  disabled
+}: TInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
@@ -31,7 +39,9 @@ export const Input = ({ value, onChange, placeholder, icon, variant, size = 'lar
         [styles[`input--${size}`]]: size !== 'large'
       })}
     >
-      {variant === 'bordered' && icon && <span className={styles.input__icon}>{icon}</span>}
+      {variant === 'bordered' && icon && (
+        <span className={styles.input__icon}>{icon}</span>
+      )}
       <input
         className={styles.input__field}
         type='text'
@@ -42,7 +52,12 @@ export const Input = ({ value, onChange, placeholder, icon, variant, size = 'lar
       />
 
       {value && (
-        <button type='button' className={styles.input__clear} onClick={handleClear} aria-label='Очистить поле'>
+        <button
+          type='button'
+          className={styles.input__clear}
+          onClick={handleClear}
+          aria-label='Очистить поле'
+        >
           <CloseIcon />
         </button>
       )}
