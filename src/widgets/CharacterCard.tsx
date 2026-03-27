@@ -39,7 +39,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
             {isEdit ? (
               <Input value={name} onChange={setName} variant='underlined' />
             ) : (
-              <Link to={`/characters/character-card/${character.id}`} className={styles.characterCard__name}>
+              <Link to={`/characters/${character.id}`} className={styles.characterCard__name}>
                 {name}
               </Link>
             )}

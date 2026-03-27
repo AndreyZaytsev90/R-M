@@ -13,7 +13,7 @@ ReactDOM.createRoot(root).render(
       <Route path='/' element={<App />}>
         <Route index element={<Navigate to='/characters' replace />} />
         <Route path='characters' element={<CharactersListPage />} />
-        <Route path='characters/character-card' element={<CharacterCardPage />} />
+        <Route path='characters/:id' element={<CharacterCardPage />} />
       </Route>
     </Routes>
   </BrowserRouter>
