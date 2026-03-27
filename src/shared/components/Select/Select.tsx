@@ -67,7 +67,7 @@ export const Select = <T,>({
   }, []);
 
   return (
-    <div ref={ref} className={cn(styles.select, styles[`select--${size}`], className)}>
+    <div ref={ref} className={cn(styles.select, { [styles[`select--${size}`]]: size }, className)}>
       <button className={styles.select__button} onClick={onClickHandler}>
         {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
         <ArrowDropdownIcon className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />

@@ -25,8 +25,13 @@ export const Input = ({ value, onChange, placeholder, icon, variant, size = 'lar
   };
 
   return (
-    <div className={cn(styles.input, styles[`input--${variant}`], styles[`input--${size}`])}>
-      {icon && <span className={styles.input__icon}>{icon}</span>}
+    <div
+      className={cn(styles.input, {
+        [styles[`input--${variant}`]]: variant,
+        [styles[`input--${size}`]]: size !== 'large'
+      })}
+    >
+      {variant === 'bordered' && icon && <span className={styles.input__icon}>{icon}</span>}
       <input
         className={styles.input__field}
         type='text'
