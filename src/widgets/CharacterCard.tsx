@@ -70,7 +70,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                     className={styles.character_card__status_select}
                     options={STATUS_OPTIONS}
                     value={statusValue}
-                    placeholder='Alive'
+                    placeholder='Выберите статус'
                     onChange={setStatusValue}
                     size='small'
                     OptionsComponent={StatusOption}

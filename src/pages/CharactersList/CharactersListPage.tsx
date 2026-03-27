@@ -4,7 +4,7 @@ import { RickAndMortyIcon, SearchIcon } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
 import { type TCharacter, type TStatus } from '@/shared/types';
-import { CharacterCard } from '@/widgets/CharacterCard';
+import { CharacterCard } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
