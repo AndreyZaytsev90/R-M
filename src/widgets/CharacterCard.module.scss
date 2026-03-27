@@ -1,10 +1,12 @@
-.character_card {
+.characterCard {
+  position: absolute;
   width: 508px;
   height: 248px;
   border: 1px solid var(--color-border-card);
   border-radius: 6px;
   background: var(--color-background);
   box-shadow: var(--shadow-card);
+  z-index: 1;
 
   &__content {
     position: relative;
@@ -25,7 +27,7 @@
     flex-direction: column;
   }
 
-  &__name_wrapper {
+  &__nameWrapper {
     display: flex;
     align-items: flex-start;
     min-height: 29px;
@@ -81,7 +83,7 @@
     gap: 5px;
     min-height: 21px;
 
-    &_select {
+    &Select {
       margin-top: 0;
     }
   }
@@ -100,7 +102,7 @@
     transition: opacity 0.2s ease-in-out;
   }
 
-  &__edit_buttons {
+  &__editButtons {
     padding-right: 24px;
     display: flex;
     flex-direction: row;

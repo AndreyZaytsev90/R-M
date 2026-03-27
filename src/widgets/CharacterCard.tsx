@@ -16,6 +16,8 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   const [location, setLocation] = useState('Earth');
   const [statusValue, setStatusValue] = useState<TStatus | null>('alive');
 
+  const statusValueCard = statusValue && STATUS_OPTIONS.find((opt) => opt.value === statusValue)?.label;
+
   const handleEditClick = () => {
     setIsEdit(true);
   };
@@ -29,45 +31,45 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   };
 
   return (
-    <div className={styles.character_card}>
-      <div className={styles.character_card__content}>
+    <div className={styles.characterCard}>
+      <div className={styles.characterCard__content}>
         <img src={RickSanchezIcon} alt='RickSanchezMainIcon' />
-        <div className={styles.character_card__info}>
-          <div className={styles.character_card__name_wrapper}>
+        <div className={styles.characterCard__info}>
+          <div className={styles.characterCard__nameWrapper}>
             {isEdit ? (
               <Input value={name} onChange={setName} variant='underlined' />
             ) : (
-              <Link to={`/characters/character-card/${character.id}`} className={styles.character_card__name}>
+              <Link to={`/characters/character-card/${character.id}`} className={styles.characterCard__name}>
                 {name}
               </Link>
             )}
           </div>
 
-          <div className={styles.character_card__characteristics}>
-            <div className={styles.character_card__options}>
-              <p className={styles.character_card__title}>Gender</p>
-              <p className={styles.character_card__value}>{character.gender}</p>
+          <div className={styles.characterCard__characteristics}>
+            <div className={styles.characterCard__options}>
+              <p className={styles.characterCard__title}>Gender</p>
+              <p className={styles.characterCard__value}>{character.gender}</p>
             </div>
-            <div className={styles.character_card__options}>
-              <p className={styles.character_card__title}>Species</p>
-              <p className={styles.character_card__value}>{character.species}</p>
+            <div className={styles.characterCard__options}>
+              <p className={styles.characterCard__title}>Species</p>
+              <p className={styles.characterCard__value}>{character.species}</p>
             </div>
-            <div className={styles.character_card__options}>
-              <p className={styles.character_card__title}>Location</p>
-              <div className={styles.character_card__field}>
+            <div className={styles.characterCard__options}>
+              <p className={styles.characterCard__title}>Location</p>
+              <div className={styles.characterCard__field}>
                 {isEdit ? (
                   <Input value={location} onChange={setLocation} variant='underlined' size='small' />
                 ) : (
-                  <p className={styles.character_card__value}>{location}</p>
+                  <p className={styles.characterCard__value}>{location}</p>
                 )}
               </div>
             </div>
-            <div className={styles.character_card__options}>
-              <p className={styles.character_card__title}>Status</p>
-              <div className={styles.character_card__field}>
+            <div className={styles.characterCard__options}>
+              <p className={styles.characterCard__title}>Status</p>
+              <div className={styles.characterCard__field}>
                 {isEdit ? (
                   <Select
-                    className={styles.character_card__status_select}
+                    className={styles.characterCard__statusSelect}
                     options={STATUS_OPTIONS}
                     value={statusValue}
                     placeholder='Выберите статус'
@@ -76,19 +78,17 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                     OptionsComponent={StatusOption}
                   />
                 ) : (
-                  <div className={styles.character_card__status}>
-                    <p className={styles.character_card__value}>
-                      {statusValue && statusValue[0].toUpperCase() + statusValue.slice(1)}
-                    </p>
+                  <div className={styles.characterCard__status}>
+                    <p className={styles.characterCard__value}>{statusValueCard}</p>
                     {statusValue && <StatusIndicator status={statusValue} />}
                   </div>
                 )}
               </div>
             </div>
           </div>
-          <div className={styles.character_card__buttons}>
+          <div className={styles.characterCard__buttons}>
             {isEdit ? (
-              <div className={styles.character_card__edit_buttons}>
+              <div className={styles.characterCard__editButtons}>
                 <CloseIcon width={24} height={24} onClick={handleCloseClick} />
                 <SaveIcon onClick={handleSaveClick} />
               </div>
