@@ -6,34 +6,34 @@
   &__field {
     margin: 0;
     padding: 0;
-    outline: none;
     transition: border-color 0.2s ease;
+    outline: none;
   }
 
   &__icon {
     position: absolute;
     left: 16px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: var(--color-text-secondary);
+    align-items: center;
     pointer-events: none;
+    color: var(--color-text-secondary);
   }
 
   &__clear {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateY(-50%);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 4px;
-    background: none;
     border: none;
-    cursor: pointer;
+    background: none;
     opacity: 0.5;
+    transform: translateY(-50%);
     transition: opacity 0.2s ease;
+    cursor: pointer;
 
     &:hover {
       opacity: 1;
@@ -45,16 +45,16 @@
   }
 
   &--bordered &__field {
+    padding: 0 40px 0 48px;
     width: 240px;
     height: 56px;
-    padding: 0 40px 0 48px;
-    color: var(--color-text);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 8px;
+    background: transparent;
     font-size: 16px;
     font-weight: 400;
     line-height: 150%;
-    background: transparent;
-    border: 1px solid var(--color-border-secondary);
-    border-radius: 8px;
+    color: var(--color-text);
 
     &:focus {
       border-color: var(--color-text-primary);
@@ -67,15 +67,15 @@
   }
 
   &--underlined &__field {
-    width: 178px;
     padding: 0 20px 2px 0;
-    color: var(--color-text-primary);
+    width: 178px;
+    border: none;
+    border-bottom: 1px solid var(--color-text);
+    background: transparent;
     font-size: 20px;
     font-weight: 500;
     line-height: 1;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--color-text);
+    color: var(--color-text-primary);
 
     &:focus {
       border-bottom-color: var(--color-text-primary);
@@ -91,10 +91,10 @@
     align-items: center;
 
     .input__field {
+      padding: 0 20px 1px 0;
       width: 120px;
       font-size: 14px;
       line-height: normal;
-      padding: 0 20px 1px 0;
     }
   }
 }

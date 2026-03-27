@@ -1,9 +1,9 @@
 .statusIndicator {
   display: inline-block;
+  flex-shrink: 0;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  flex-shrink: 0;
 
   &--alive {
     background-color: var(--color-status-alive);

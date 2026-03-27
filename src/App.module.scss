@@ -16,15 +16,15 @@
 
   &__footer {
     flex-shrink: 0;
-    height: 60px;
     width: 100%;
+    height: 60px;
     box-shadow: var(--shadow-primary);
   }
 
   &__container {
-    max-width: 1440px;
     margin: 0 auto;
     width: 100%;
+    max-width: 1440px;
     height: 100%;
   }
 }

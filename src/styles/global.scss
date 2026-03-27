@@ -3,10 +3,10 @@
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   font-family: 'Karla', sans-serif;
   font-weight: 400;
   line-height: 1.2;
-  box-sizing: border-box;
 }
 
 html,
@@ -93,8 +93,8 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
+  font-size: 100%;
   vertical-align: baseline;
 }
 
