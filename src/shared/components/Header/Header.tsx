@@ -1,18 +1,19 @@
-import { IconLangRus, IconLightTheme, IconMain } from '@/assets';
+import { LangRusIcon, LightThemeIcon, MainIcon } from '@/assets';
+import { Button } from '@/shared/components';
 
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
-      <IconMain />
+      <MainIcon />
       <div className={styles.header__buttons}>
-        <button className={styles.header__button}>
-          <IconLightTheme />
-        </button>
-        <button className={styles.header__button}>
-          <IconLangRus />
-        </button>
+        <Button className={styles.header__button} variant='primary'>
+          <LightThemeIcon />
+        </Button>
+        <Button className={styles.header__button} variant='primary'>
+          <LangRusIcon />
+        </Button>
       </div>
     </header>
   );

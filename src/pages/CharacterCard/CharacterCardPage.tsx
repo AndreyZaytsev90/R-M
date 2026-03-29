@@ -1,19 +1,19 @@
 import { useNavigate } from 'react-router';
 
-import { IconGoBack } from '@/assets';
-import { Loading } from '@/shared/components';
+import { GoBackIcon } from '@/assets';
+import { Button, Loading } from '@/shared/components';
 
-import styles from './CharacterCard.module.css';
+import styles from './CharacterCardPage.module.scss';
 
-export const CharacterCard = () => {
+export const CharacterCardPage = () => {
   const navigate = useNavigate();
 
   return (
     <main className={styles.container}>
-      <button className={styles.button} onClick={() => navigate('/')}>
-        <IconGoBack />
+      <Button className={styles.button} onClick={() => navigate('/')}>
+        <GoBackIcon />
         <span className={styles.buttonText}>GO BACK</span>
-      </button>
+      </Button>
       <section className={styles.loading}>
         <Loading label='Loading character card...' size='large' />
         <Loading label='Loading character card...' size='small' />

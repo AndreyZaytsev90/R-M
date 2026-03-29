@@ -1,0 +1,120 @@
+.characterCard {
+  position: absolute;
+  z-index: 1;
+  width: 508px;
+  height: 248px;
+  border: 1px solid var(--color-border-card);
+  border-radius: 6px;
+  background: var(--color-background);
+  box-shadow: var(--shadow-card);
+
+  &__content {
+    position: relative;
+    display: flex;
+    gap: 13px;
+    padding: 7px;
+
+    img {
+      width: 240px;
+      height: 234px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__nameWrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    min-height: 29px;
+  }
+
+  &__name {
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-text);
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__characteristics {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__field {
+    display: flex;
+    align-items: baseline;
+    min-height: 21px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  &__value {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 21px;
+
+    &Select {
+      margin-top: 0;
+    }
+  }
+
+  &__buttons {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  &__editButtons {
+    display: flex;
+    flex-direction: row;
+    padding-right: 24px;
+  }
+
+  &__editButtons {
+    display: flex;
+    flex-direction: row;
+    padding-right: 24px;
+  }
+
+  &:hover &__buttons {
+    opacity: 1;
+  }
+}

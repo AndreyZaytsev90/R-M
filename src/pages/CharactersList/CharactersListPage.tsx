@@ -1,20 +1,30 @@
 import { useState } from 'react';
 
-import { IconSearch, logoRickAndMorty } from '@/assets';
+import { RickAndMortyIcon, SearchIcon } from '@/assets';
 import { Input, Loading, Select, StatusOption } from '@/shared/components';
 import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
-import { type TStatus } from '@/shared/types';
+import { type TCharacter, type TStatus } from '@/shared/types';
+import { CharacterCard } from '@/widgets';
 
-import styles from './CharactersList.module.css';
+import styles from './CharactersListPage.module.scss';
 
-export const CharactersList = () => {
+export const CharactersListPage = () => {
   const [largeValue, setLargeValue] = useState<string | null>(null);
-  const [smallValue, setSmallValue] = useState<TStatus | null>('Alive');
+  const [smallValue, setSmallValue] = useState<TStatus | null>('alive');
   const [borderedValue, setBorderedValue] = useState<string>('');
   const [underlinedValue, setUnderlinedValue] = useState<string>('');
 
   const handleChangeLarge = (value: string | null) => setLargeValue(value);
   const handleChangeSmall = (value: TStatus | null) => setSmallValue(value);
+
+  const character: TCharacter = {
+    id: 1,
+    name: 'Rick Sanchez',
+    gender: 'Male',
+    species: 'Human',
+    location: 'Earth',
+    status: 'alive'
+  };
 
   return (
     <main className={styles.container}>
@@ -39,12 +49,13 @@ export const CharactersList = () => {
           value={borderedValue}
           onChange={setBorderedValue}
           variant='bordered'
-          icon={<IconSearch />}
+          icon={<SearchIcon />}
         />
         <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
       </div>
-      <img src={logoRickAndMorty} alt='Rick and Morty' width={600} height={200} />
+      <img src={RickAndMortyIcon} alt='Rick and Morty' width={600} height={200} />
       <div>
+        <CharacterCard character={character} />
         <Loading label='Loading characters...' size='large' />
       </div>
     </main>

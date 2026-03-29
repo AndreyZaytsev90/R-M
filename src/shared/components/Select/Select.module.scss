@@ -1,0 +1,86 @@
+.select {
+  position: relative;
+
+  &--large {
+    width: 240px;
+
+    .select__button {
+      padding: 0 14px;
+      height: 56px;
+      font-size: 16px;
+    }
+
+    .select__list {
+      margin-top: 8px;
+      padding: 0 14px;
+    }
+
+    .select__option {
+      padding: 10px 0;
+      font-size: 16px;
+    }
+
+    .select__arrow {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &--small {
+    width: 95px;
+
+    .select__button {
+      padding: 0 5px;
+      height: 21px;
+      font-size: 14px;
+    }
+
+    .select__list {
+      margin-top: 5px;
+      padding: 0 5px;
+    }
+
+    .select__option {
+      padding: 6px 0;
+      font-size: 14px;
+    }
+
+    .select__arrow {
+      width: 7px;
+      height: 7px;
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-background);
+  }
+
+  &__list {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-background);
+    list-style: none;
+  }
+
+  &__option {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  &__arrow {
+    transition: transform 0.2s;
+
+    &--up {
+      transform: rotate(180deg);
+    }
+  }
+}

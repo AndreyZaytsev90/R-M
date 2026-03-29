@@ -1,9 +1,10 @@
 import { type ComponentType, useEffect, useRef, useState } from 'react';
 
-import { IconArrowDropdown } from '@/assets';
+import { ArrowDropdownIcon } from '@/assets';
+import { Button } from '@/shared/components';
 import { cn } from '@/shared/lib';
 
-import styles from './Select.module.css';
+import styles from './Select.module.scss';
 
 type TOption<T> = {
   label: string;
@@ -21,6 +22,7 @@ type TSelectProps<T> = {
   onChange: (value: T | null) => void;
   size: 'large' | 'small';
   OptionsComponent?: ComponentType<TOptionsComponentProps<T>>;
+  className?: string;
 };
 
 const DefaultOptionsComponent = <T,>({ option }: TOptionsComponentProps<T>) => {
@@ -33,7 +35,8 @@ export const Select = <T,>({
   value,
   onChange,
   OptionsComponent = DefaultOptionsComponent,
-  size
+  size,
+  className
 }: TSelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,7 +55,11 @@ export const Select = <T,>({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && event.target instanceof Node && !ref.current.contains(event.target)) {
+      if (
+        ref.current &&
+        event.target instanceof Node &&
+        !ref.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -65,15 +72,34 @@ export const Select = <T,>({
   }, []);
 
   return (
-    <div ref={ref} className={cn(styles.select, styles[`select--${size}`])}>
-      <button className={styles.select__button} onClick={onClickHandler}>
-        {selectedOption ? <OptionsComponent option={selectedOption} /> : placeholder}
-        <IconArrowDropdown className={cn(styles.select__arrow, { [styles['select__arrow--up']]: isOpen })} />
-      </button>
+    <div
+      ref={ref}
+      className={cn(
+        styles.select,
+        { [styles[`select--${size}`]]: size },
+        className
+      )}
+    >
+      <Button className={styles.select__button} onClick={onClickHandler}>
+        {selectedOption ? (
+          <OptionsComponent option={selectedOption} />
+        ) : (
+          placeholder
+        )}
+        <ArrowDropdownIcon
+          className={cn(styles.select__arrow, {
+            [styles['select__arrow--up']]: isOpen
+          })}
+        />
+      </Button>
       {isOpen && (
         <ul className={styles.select__list}>
           {options.map((option) => (
-            <li key={option.label} className={styles.select__option} onClick={() => optionClickHandler(option.value)}>
+            <li
+              key={option.label}
+              className={styles.select__option}
+              onClick={() => optionClickHandler(option.value)}
+            >
               <OptionsComponent option={option} />
             </li>
           ))}
