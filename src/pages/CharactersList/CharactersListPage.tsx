@@ -1,21 +1,37 @@
 import { useState } from 'react';
 
 import { RickAndMortyIcon, SearchIcon } from '@/assets';
-import { Input, Loading, Select, StatusOption } from '@/shared/components';
-import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
-import { type TCharacter, type TStatus } from '@/shared/types';
+import { Input, Loading, Select } from '@/shared/components';
+import {
+  GENDER_OPTIONS,
+  SPECIES_OPTIONS,
+  STATUS_OPTIONS
+} from '@/shared/constants';
+import { type TCharacter, type TFilterType } from '@/shared/types';
 import { CharacterCard } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
-  const [largeValue, setLargeValue] = useState<string | null>(null);
-  const [smallValue, setSmallValue] = useState<TStatus | null>('alive');
-  const [borderedValue, setBorderedValue] = useState<string>('');
-  const [underlinedValue, setUnderlinedValue] = useState<string>('');
+  const [selectedSpecies, setSelectedSpecies] = useState<string | null>(null);
+  const [selectedGender, setSelectedGender] = useState<string | null>(null);
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
 
-  const handleChangeLarge = (value: string | null) => setLargeValue(value);
-  const handleChangeSmall = (value: TStatus | null) => setSmallValue(value);
+  const [borderedValue, setBorderedValue] = useState<string>('');
+
+  const handleFilterChange = (type: TFilterType, value: string | null) => {
+    switch (type) {
+      case 'species':
+        setSelectedSpecies(value);
+        break;
+      case 'gender':
+        setSelectedGender(value);
+        break;
+      case 'status':
+        setSelectedStatus(value);
+        break;
+    }
+  };
 
   const character: TCharacter = {
     id: 1,
@@ -28,22 +44,13 @@ export const CharactersListPage = () => {
 
   return (
     <main className={styles.container}>
+      <img
+        src={RickAndMortyIcon}
+        alt='Rick and Morty'
+        width={600}
+        height={200}
+      />
       <div className={styles.selects}>
-        <Select
-          options={SPECIES_OPTIONS}
-          placeholder='Species'
-          value={largeValue}
-          onChange={handleChangeLarge}
-          size='large'
-        />
-        <Select
-          options={STATUS_OPTIONS}
-          value={smallValue}
-          placeholder='Alive'
-          onChange={handleChangeSmall}
-          size='small'
-          OptionsComponent={StatusOption}
-        />
         <Input
           placeholder='Filter by name...'
           value={borderedValue}
@@ -51,13 +58,36 @@ export const CharactersListPage = () => {
           variant='bordered'
           icon={<SearchIcon />}
         />
-        <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
+        <Select
+          options={SPECIES_OPTIONS}
+          placeholder='Species'
+          value={selectedSpecies}
+          onChange={(value) => handleFilterChange('species', value)}
+          size='large'
+        />
+        <Select
+          options={GENDER_OPTIONS}
+          placeholder='Gender'
+          value={selectedGender}
+          onChange={(value) => handleFilterChange('gender', value)}
+          size='large'
+        />
+        <Select
+          options={STATUS_OPTIONS}
+          placeholder='Status'
+          value={selectedStatus}
+          onChange={(value) => handleFilterChange('status', value)}
+          size='large'
+        />
       </div>
-      <img src={RickAndMortyIcon} alt='Rick and Morty' width={600} height={200} />
-      <div>
+
+      <div className={styles.cardList}>
         <CharacterCard character={character} />
-        <Loading label='Loading characters...' size='large' />
+        <CharacterCard character={character} />
+        <CharacterCard character={character} />
+        <CharacterCard character={character} />
       </div>
+      <Loading size='small' />
     </main>
   );
 };
