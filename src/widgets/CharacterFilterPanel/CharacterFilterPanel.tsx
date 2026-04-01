@@ -12,30 +12,16 @@ import type { TFilterType } from '@/shared/types';
 import styles from './CharacterFilterPanel.module.scss';
 
 export const CharacterFilterPanel = () => {
-  const [selectSpeciesValue, setSelectSpeciesValue] = useState<string | null>(
-    null
-  );
-  const [selectGenderValue, setSelectGenderValue] = useState<string | null>(
-    null
-  );
-  const [selectStatusValue, setSelectStatusValue] = useState<string | null>(
-    null
-  );
+  const [filters, setFilters] = useState<Record<TFilterType, string | null>>({
+    species: null,
+    gender: null,
+    status: null
+  });
 
-  const [inputSearchValue, setInputSearchValue] = useState<string>('');
+  const [inputSearchValue, setInputSearchValue] = useState('');
 
   const handleFilterChange = (type: TFilterType, value: string | null) => {
-    switch (type) {
-      case 'species':
-        setSelectSpeciesValue(value);
-        break;
-      case 'gender':
-        setSelectGenderValue(value);
-        break;
-      case 'status':
-        setSelectStatusValue(value);
-        break;
-    }
+    setFilters((prev) => ({ ...prev, [type]: value }));
   };
 
   return (
@@ -50,21 +36,21 @@ export const CharacterFilterPanel = () => {
       <Select
         options={SPECIES_OPTIONS}
         placeholder='Species'
-        value={selectSpeciesValue}
+        value={filters.species}
         onChange={(value) => handleFilterChange('species', value)}
         size='large'
       />
       <Select
         options={GENDER_OPTIONS}
         placeholder='Gender'
-        value={selectGenderValue}
+        value={filters.gender}
         onChange={(value) => handleFilterChange('gender', value)}
         size='large'
       />
       <Select
         options={STATUS_OPTIONS}
         placeholder='Status'
-        value={selectStatusValue}
+        value={filters.status}
         onChange={(value) => handleFilterChange('status', value)}
         size='large'
       />

@@ -8,6 +8,7 @@ export type TSpecies =
   | 'Robot'
   | 'Cronenberg'
   | 'Disease';
+
 export type TFilterType = 'species' | 'gender' | 'status';
 
 export type TCharacter = {
