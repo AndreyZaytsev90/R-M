@@ -42,7 +42,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   };
 
   return (
-    <div className={styles.characterCard}>
+    <main className={styles.characterCard}>
       <div className={styles.characterCard__content}>
         <img src={RickSanchezIcon} alt='RickSanchezMainIcon' />
         <div className={styles.characterCard__info}>
@@ -125,6 +125,6 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
