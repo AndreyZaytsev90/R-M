@@ -1,22 +1,11 @@
-import { useState } from 'react';
-
-import { RickAndMortyIcon, SearchIcon } from '@/assets';
-import { Input, Loading, Select, StatusOption } from '@/shared/components';
-import { SPECIES_OPTIONS, STATUS_OPTIONS } from '@/shared/constants';
-import { type TCharacter, type TStatus } from '@/shared/types';
-import { CharacterCard } from '@/widgets';
+import { RickAndMortyIcon } from '@/assets';
+import { Loading } from '@/shared/components';
+import { type TCharacter } from '@/shared/types';
+import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
-  const [largeValue, setLargeValue] = useState<string | null>(null);
-  const [smallValue, setSmallValue] = useState<TStatus | null>('alive');
-  const [borderedValue, setBorderedValue] = useState<string>('');
-  const [underlinedValue, setUnderlinedValue] = useState<string>('');
-
-  const handleChangeLarge = (value: string | null) => setLargeValue(value);
-  const handleChangeSmall = (value: TStatus | null) => setSmallValue(value);
-
   const character: TCharacter = {
     id: 1,
     name: 'Rick Sanchez',
@@ -28,36 +17,20 @@ export const CharactersListPage = () => {
 
   return (
     <main className={styles.container}>
-      <div className={styles.selects}>
-        <Select
-          options={SPECIES_OPTIONS}
-          placeholder='Species'
-          value={largeValue}
-          onChange={handleChangeLarge}
-          size='large'
-        />
-        <Select
-          options={STATUS_OPTIONS}
-          value={smallValue}
-          placeholder='Alive'
-          onChange={handleChangeSmall}
-          size='small'
-          OptionsComponent={StatusOption}
-        />
-        <Input
-          placeholder='Filter by name...'
-          value={borderedValue}
-          onChange={setBorderedValue}
-          variant='bordered'
-          icon={<SearchIcon />}
-        />
-        <Input value={underlinedValue} onChange={setUnderlinedValue} variant='underlined' />
-      </div>
-      <img src={RickAndMortyIcon} alt='Rick and Morty' width={600} height={200} />
-      <div>
+      <img
+        src={RickAndMortyIcon}
+        alt='Rick and Morty'
+        width={600}
+        height={200}
+      />
+      <CharacterFilterPanel />
+      <section className={styles.cardList}>
         <CharacterCard character={character} />
-        <Loading label='Loading characters...' size='large' />
-      </div>
+        <CharacterCard character={character} />
+        <CharacterCard character={character} />
+        <CharacterCard character={character} />
+      </section>
+      <Loading size='small' />
     </main>
   );
 };

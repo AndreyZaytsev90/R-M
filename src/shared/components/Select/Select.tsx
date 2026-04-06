@@ -53,6 +53,10 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
+  const handleOptionClick = (optionValue: T) => () => {
+    optionClickHandler(optionValue);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -87,9 +91,10 @@ export const Select = <T,>({
           placeholder
         )}
         <ArrowDropdownIcon
-          className={cn(styles.select__arrow, {
-            [styles['select__arrow--up']]: isOpen
-          })}
+          className={cn(
+            styles.select__arrow,
+            isOpen && styles['select__arrow--up']
+          )}
         />
       </Button>
       {isOpen && (
@@ -98,7 +103,7 @@ export const Select = <T,>({
             <li
               key={option.label}
               className={styles.select__option}
-              onClick={() => optionClickHandler(option.value)}
+              onClick={handleOptionClick(option.value)}
             >
               <OptionsComponent option={option} />
             </li>

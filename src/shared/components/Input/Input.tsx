@@ -35,10 +35,11 @@ export const Input = ({
 
   return (
     <div
-      className={cn(styles.input, {
-        [styles[`input--${variant}`]]: variant,
-        [styles[`input--${size}`]]: size !== 'large'
-      })}
+      className={cn(
+        styles.input,
+        styles[`input--${variant}`],
+        styles[`input--${size}`]
+      )}
     >
       {variant === 'bordered' && icon && (
         <span className={styles.input__icon}>{icon}</span>
