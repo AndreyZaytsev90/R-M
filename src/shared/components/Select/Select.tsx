@@ -53,10 +53,6 @@ export const Select = <T,>({
     setIsOpen(false);
   };
 
-  const handleOptionClick = (optionValue: T) => () => {
-    optionClickHandler(optionValue);
-  };
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -103,7 +99,7 @@ export const Select = <T,>({
             <li
               key={option.label}
               className={styles.select__option}
-              onClick={handleOptionClick(option.value)}
+              onClick={() => optionClickHandler(option.value)}
             >
               <OptionsComponent option={option} />
             </li>
