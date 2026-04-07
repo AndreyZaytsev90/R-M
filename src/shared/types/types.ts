@@ -11,11 +11,32 @@ export type TSpecies =
 
 export type TFilterType = 'species' | 'gender' | 'status';
 
+export type TLocation = {
+  name: string;
+  url: string;
+};
+
 export type TCharacter = {
   id: number;
   name: string;
-  gender: TGender;
-  species: TSpecies;
-  location: string;
   status: TStatus;
+  species: TSpecies;
+  type: string;
+  gender: TGender;
+  origin: TLocation;
+  location: TLocation;
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
+};
+
+export type TCharactersResponse = {
+  info: {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+  };
+  results: TCharacter[];
 };

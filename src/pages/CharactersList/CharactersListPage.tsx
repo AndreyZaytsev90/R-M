@@ -1,19 +1,34 @@
+import { useEffect, useState } from 'react';
+
 import { RickAndMortyIcon } from '@/assets';
+import { getCharacters } from '@/shared/api/rickAndMortyApi';
 import { Loading } from '@/shared/components';
-import { type TCharacter } from '@/shared/types';
+import { type TCharactersResponse } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
-  const character: TCharacter = {
-    id: 1,
-    name: 'Rick Sanchez',
-    gender: 'Male',
-    species: 'Human',
-    location: 'Earth',
-    status: 'alive'
-  };
+  const [characters, setCharacters] = useState<TCharactersResponse | null>(
+    null
+  );
+
+  console.log('ПЕРСОНАЖИ', characters);
+
+  useEffect(() => {
+    const loadCharacters = async () => {
+      try {
+        const response = await getCharacters();
+        if (response) {
+          setCharacters(response);
+        }
+      } catch (error) {
+        console.error('Error loading characters:', error);
+      }
+    };
+
+    loadCharacters();
+  }, []);
 
   return (
     <main className={styles.container}>
@@ -25,10 +40,10 @@ export const CharactersListPage = () => {
       />
       <CharacterFilterPanel />
       <section className={styles.cardList}>
-        <CharacterCard character={character} />
-        <CharacterCard character={character} />
-        <CharacterCard character={character} />
-        <CharacterCard character={character} />
+        {characters &&
+          characters.results.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
       </section>
       <Loading size='small' />
     </main>
