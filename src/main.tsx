@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 
 import App from '@/App';
@@ -16,5 +17,6 @@ ReactDOM.createRoot(root).render(
         <Route path='characters/:id' element={<CharacterCardPage />} />
       </Route>
     </Routes>
+    <Toaster position='bottom-right' />
   </BrowserRouter>
 );

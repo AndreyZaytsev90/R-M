@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { RickAndMortyIcon } from '@/assets';
 import { getCharacters } from '@/shared/api/rickAndMortyApi';
@@ -12,21 +13,29 @@ export const CharactersListPage = () => {
   const [characters, setCharacters] = useState<TCharactersResponse | null>(
     null
   );
-
-  console.log('ПЕРСОНАЖИ', characters);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const loadCharacters = async () => {
       try {
-        const response = await getCharacters();
-        if (response) {
-          setCharacters(response);
+        setIsLoading(true);
+        const data = await getCharacters();
+        if (data) {
+          setCharacters(data);
+          setHasError(false);
         }
       } catch (error) {
-        console.error('Error loading characters:', error);
+        let message = 'Не удалось загрузить список персонажей';
+        if (error instanceof Error) {
+          message = error.message;
+        }
+        setHasError(true);
+        toast.error(message);
+      } finally {
+        setIsLoading(false);
       }
     };
-
     loadCharacters();
   }, []);
 
@@ -39,13 +48,14 @@ export const CharactersListPage = () => {
         height={200}
       />
       <CharacterFilterPanel />
-      <section className={styles.cardList}>
-        {characters &&
-          characters.results.map((character) => (
+      {!hasError && characters && (
+        <section className={styles.cardList}>
+          {characters.results.map((character) => (
             <CharacterCard key={character.id} character={character} />
           ))}
-      </section>
-      <Loading size='small' />
+        </section>
+      )}
+      {isLoading && <Loading size='small' />}
     </main>
   );
 };
