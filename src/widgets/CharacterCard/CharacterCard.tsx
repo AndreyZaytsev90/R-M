@@ -10,7 +10,8 @@ import {
   StatusIndicator,
   StatusOption,
   type TCharacter,
-  type TStatus
+  type TStatus,
+  normalizeStatus
 } from '@/shared';
 
 import styles from './CharacterCard.module.scss';
@@ -24,7 +25,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   const [name, setName] = useState(character.name);
   const [location, setLocation] = useState(character.location.name);
   const [statusValue, setStatusValue] = useState<TStatus | null>(
-    character.status
+    normalizeStatus(character.status)
   );
 
   const statusValueCard =
