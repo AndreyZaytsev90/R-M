@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
+import axios from 'axios';
+
 import { RickAndMortyIcon } from '@/assets';
-import { getCharacters } from '@/shared/api/rickAndMortyApi';
+import { getCharacters } from '@/shared/api';
 import { Loading } from '@/shared/components';
 import { type TCharactersResponse } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
@@ -27,7 +29,12 @@ export const CharactersListPage = () => {
         }
       } catch (error) {
         let message = 'Не удалось загрузить список персонажей';
-        if (error instanceof Error) {
+
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            message = error.response.data?.message ?? message;
+          }
+        } else if (error instanceof Error) {
           message = error.message;
         }
         setHasError(true);

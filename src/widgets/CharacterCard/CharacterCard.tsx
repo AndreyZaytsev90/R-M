@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 
+import clsx from 'clsx';
+
 import { CloseIcon, EditIcon, SaveIcon } from '@/assets';
 import {
   Button,
@@ -55,7 +57,11 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
             ) : (
               <Link
                 to={`/characters/${character.id}`}
-                className={styles.characterCard__name}
+                className={clsx(
+                  styles.characterCard__name,
+                  styles.nameTruncate
+                )}
+                title={name}
               >
                 {name}
               </Link>
