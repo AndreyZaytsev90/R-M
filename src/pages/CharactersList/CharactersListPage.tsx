@@ -2,11 +2,11 @@ import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
+import { useCharacters } from '../../shared/hooks/useCharacters';
 import styles from './CharactersListPage.module.scss';
-import { useCharacters } from './hooks/useCharacters';
 
 export const CharactersListPage = () => {
-  const { characters, isLoading, hasError } = useCharacters();
+  const { characters, isLoading, hasError, isEmpty } = useCharacters();
 
   return (
     <main className={styles.container}>
@@ -17,7 +17,7 @@ export const CharactersListPage = () => {
         height={200}
       />
       <CharacterFilterPanel />
-      {!hasError && characters && (
+      {!hasError && characters && !isEmpty && (
         <section className={styles.cardList}>
           {characters.results.map((character) => (
             <CharacterCard key={character.id} character={character} />

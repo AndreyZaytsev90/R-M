@@ -12,6 +12,7 @@ export const useCharacters = () => {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     const loadCharacters = async () => {
@@ -21,6 +22,11 @@ export const useCharacters = () => {
         if (data) {
           setCharacters(data);
           setHasError(false);
+          const isEmptyResult = !data.results || data.results.length === 0;
+          setIsEmpty(isEmptyResult);
+          if (isEmptyResult) {
+            toast.error('No characters found');
+          }
         }
       } catch (error) {
         let message = 'Failed to load character list';
@@ -41,5 +47,5 @@ export const useCharacters = () => {
     loadCharacters();
   }, []);
 
-  return { characters, isLoading, hasError };
+  return { characters, isLoading, hasError, isEmpty };
 };
