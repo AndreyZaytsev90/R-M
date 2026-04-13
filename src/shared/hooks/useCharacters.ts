@@ -15,10 +15,12 @@ export const useCharacters = () => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const loadCharacters = async () => {
       try {
         setIsLoading(true);
-        const data = await getCharacters();
+        const data = await getCharacters(controller.signal);
         if (data) {
           setCharacters(data);
           setHasError(false);
@@ -29,6 +31,7 @@ export const useCharacters = () => {
           }
         }
       } catch (error) {
+        if (axios.isCancel(error)) return;
         let message = 'Failed to load character list';
 
         if (axios.isAxiosError(error)) {
@@ -45,6 +48,7 @@ export const useCharacters = () => {
       }
     };
     loadCharacters();
+    return () => controller.abort();
   }, []);
 
   return { characters, isLoading, hasError, isEmpty };
