@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 
-import { CloseIcon, EditIcon, RickSanchezIcon, SaveIcon } from '@/assets';
+import clsx from 'clsx';
+
+import { CloseIcon, EditIcon, SaveIcon } from '@/assets';
 import {
   Button,
   Input,
@@ -10,7 +12,8 @@ import {
   StatusIndicator,
   StatusOption,
   type TCharacter,
-  type TStatus
+  type TStatus,
+  normalizeStatus
 } from '@/shared';
 
 import styles from './CharacterCard.module.scss';
@@ -21,9 +24,11 @@ type TCharacterCardProps = {
 
 export const CharacterCard = ({ character }: TCharacterCardProps) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [name, setName] = useState('Rick Sanchez');
-  const [location, setLocation] = useState('Earth');
-  const [statusValue, setStatusValue] = useState<TStatus | null>('alive');
+  const [name, setName] = useState(character.name);
+  const [location, setLocation] = useState(character.location.name);
+  const [statusValue, setStatusValue] = useState<TStatus | null>(
+    normalizeStatus(character.status)
+  );
 
   const statusValueCard =
     statusValue &&
@@ -44,7 +49,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   return (
     <article className={styles.characterCard}>
       <div className={styles.characterCard__content}>
-        <img src={RickSanchezIcon} alt='RickSanchezMainIcon' />
+        <img src={character.image} alt={character.name} />
         <div className={styles.characterCard__info}>
           <div className={styles.characterCard__nameWrapper}>
             {isEdit ? (
@@ -52,7 +57,11 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
             ) : (
               <Link
                 to={`/characters/${character.id}`}
-                className={styles.characterCard__name}
+                className={clsx(
+                  styles.characterCard__name,
+                  styles.nameTruncate
+                )}
+                title={name}
               >
                 {name}
               </Link>
@@ -91,7 +100,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                     className={styles.characterCard__statusSelect}
                     options={STATUS_OPTIONS}
                     value={statusValue}
-                    placeholder='Выберите статус'
+                    placeholder='Выберите'
                     onChange={setStatusValue}
                     size='small'
                     OptionsComponent={StatusOption}

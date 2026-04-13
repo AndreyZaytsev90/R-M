@@ -6,6 +6,21 @@
   background: var(--color-background);
   box-shadow: var(--shadow-card);
 
+  .nameTruncate {
+    overflow: hidden; // скрыть лишнее
+    text-overflow: ellipsis; // добавить «…» в конце
+    white-space: nowrap; // запретить перенос
+  }
+
+  &__nameWrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    min-height: 29px;
+    flex: 1 1 0; // позволяем элементу растягиваться и сжиматься
+    min-width: 0; // без этого text‑overflow не срабатывает
+  }
+
   &__content {
     position: relative;
     display: flex;
@@ -36,6 +51,7 @@
     display: block;
     font-size: 20px;
     font-weight: 500;
+    max-width: 200px;
     text-decoration: none;
     color: var(--color-text);
 

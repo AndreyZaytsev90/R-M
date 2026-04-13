@@ -1,19 +1,50 @@
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+
+import axios from 'axios';
+
 import { RickAndMortyIcon } from '@/assets';
+import { getCharacters } from '@/shared/api';
 import { Loading } from '@/shared/components';
-import { type TCharacter } from '@/shared/types';
+import { type TCharactersResponse } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
-  const character: TCharacter = {
-    id: 1,
-    name: 'Rick Sanchez',
-    gender: 'Male',
-    species: 'Human',
-    location: 'Earth',
-    status: 'alive'
-  };
+  const [characters, setCharacters] = useState<TCharactersResponse | null>(
+    null
+  );
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const loadCharacters = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getCharacters();
+        if (data) {
+          setCharacters(data);
+          setHasError(false);
+        }
+      } catch (error) {
+        let message = 'Не удалось загрузить список персонажей';
+
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            message = error.response.data?.message ?? message;
+          }
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+        setHasError(true);
+        toast.error(message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadCharacters();
+  }, []);
 
   return (
     <main className={styles.container}>
@@ -24,13 +55,14 @@ export const CharactersListPage = () => {
         height={200}
       />
       <CharacterFilterPanel />
-      <section className={styles.cardList}>
-        <CharacterCard character={character} />
-        <CharacterCard character={character} />
-        <CharacterCard character={character} />
-        <CharacterCard character={character} />
-      </section>
-      <Loading size='small' />
+      {!hasError && characters && (
+        <section className={styles.cardList}>
+          {characters.results.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </section>
+      )}
+      {isLoading && <Loading size='small' />}
     </main>
   );
 };
