@@ -7,6 +7,7 @@ import { getCharacters } from '@/shared/api';
 import type { TCharactersResponse } from '@/shared/types';
 
 type IFilterParams = {
+  name?: string | null;
   species?: string | null;
   gender?: string | null;
   status?: string | null;
