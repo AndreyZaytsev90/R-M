@@ -40,3 +40,5 @@ export type TCharactersResponse = {
   };
   results: TCharacter[];
 };
+
+export type TSelectOption<T> = { label: string; value: T };

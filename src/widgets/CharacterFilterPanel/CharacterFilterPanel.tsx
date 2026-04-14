@@ -5,11 +5,11 @@ import {
   SPECIES_OPTIONS,
   STATUS_OPTIONS
 } from '@/shared/constants';
-import type { TFilterType } from '@/shared/types';
+import { type TFilterType } from '@/shared/types';
 
 import styles from './CharacterFilterPanel.module.scss';
 
-type IFilterPanelProps = {
+type TCharacterFilterPanelProps = {
   filters: {
     name: string | null;
     species: string | null;
@@ -24,7 +24,7 @@ export const CharacterFilterPanel = ({
   filters,
   onSearchChange,
   onFilterChange
-}: IFilterPanelProps) => {
+}: TCharacterFilterPanelProps) => {
   return (
     <div className={styles.selects}>
       <Input
