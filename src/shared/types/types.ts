@@ -9,7 +9,7 @@ export type TSpecies =
   | 'Cronenberg'
   | 'Disease';
 
-export type TFilterType = 'species' | 'gender' | 'status';
+export type TFilterType = 'name' | 'species' | 'gender' | 'status';
 
 export type TLocation = {
   name: string;

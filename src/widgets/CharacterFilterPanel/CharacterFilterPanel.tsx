@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { SearchIcon } from '@/assets';
 import { Input, Select } from '@/shared/components';
 import {
@@ -11,25 +9,28 @@ import type { TFilterType } from '@/shared/types';
 
 import styles from './CharacterFilterPanel.module.scss';
 
-export const CharacterFilterPanel = () => {
-  const [filters, setFilters] = useState<Record<TFilterType, string | null>>({
-    species: null,
-    gender: null,
-    status: null
-  });
-
-  const [inputSearchValue, setInputSearchValue] = useState('');
-
-  const handleFilterChange = (type: TFilterType, value: string | null) => {
-    setFilters((prev) => ({ ...prev, [type]: value }));
+type IFilterPanelProps = {
+  filters: {
+    name: string | null;
+    species: string | null;
+    gender: string | null;
+    status: string | null;
   };
+  onSearchChange: (value: string) => void;
+  onFilterChange: (type: TFilterType, value: string | null) => void;
+};
 
+export const CharacterFilterPanel = ({
+  filters,
+  onSearchChange,
+  onFilterChange
+}: IFilterPanelProps) => {
   return (
     <div className={styles.selects}>
       <Input
         placeholder='Filter by name...'
-        value={inputSearchValue}
-        onChange={setInputSearchValue}
+        value={filters.name || ''}
+        onChange={(value) => onSearchChange(value)}
         variant='bordered'
         icon={<SearchIcon />}
       />
@@ -37,21 +38,21 @@ export const CharacterFilterPanel = () => {
         options={SPECIES_OPTIONS}
         placeholder='Species'
         value={filters.species}
-        onChange={(value) => handleFilterChange('species', value)}
+        onChange={(value) => onFilterChange('species', value)}
         size='large'
       />
       <Select
         options={GENDER_OPTIONS}
         placeholder='Gender'
         value={filters.gender}
-        onChange={(value) => handleFilterChange('gender', value)}
+        onChange={(value) => onFilterChange('gender', value)}
         size='large'
       />
       <Select
         options={STATUS_OPTIONS}
         placeholder='Status'
         value={filters.status}
-        onChange={(value) => handleFilterChange('status', value)}
+        onChange={(value) => onFilterChange('status', value)}
         size='large'
       />
     </div>

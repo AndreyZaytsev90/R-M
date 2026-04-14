@@ -6,7 +6,13 @@ import axios from 'axios';
 import { getCharacters } from '@/shared/api';
 import type { TCharactersResponse } from '@/shared/types';
 
-export const useCharacters = () => {
+type IFilterParams = {
+  species?: string | null;
+  gender?: string | null;
+  status?: string | null;
+};
+
+export const useCharacters = (filters: IFilterParams = {}) => {
   const [characters, setCharacters] = useState<TCharactersResponse | null>(
     null
   );
@@ -20,7 +26,8 @@ export const useCharacters = () => {
     const loadCharacters = async () => {
       try {
         setIsLoading(true);
-        const data = await getCharacters(controller.signal);
+
+        const data = await getCharacters(controller.signal, filters);
         if (data) {
           setCharacters(data);
           setHasError(false);
@@ -47,9 +54,15 @@ export const useCharacters = () => {
         setIsLoading(false);
       }
     };
-    loadCharacters();
-    return () => controller.abort();
-  }, []);
+
+    const timer = setTimeout(() => {
+      loadCharacters();
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [filters]);
 
   return { characters, isLoading, hasError, isEmpty };
 };
