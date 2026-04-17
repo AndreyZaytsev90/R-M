@@ -29,17 +29,21 @@ export const useCharacters = (filters: IFilterParams = {}) => {
         setIsLoading(true);
 
         const data = await getCharacters(controller.signal, filters);
+
         if (data) {
           setCharacters(data);
           setHasError(false);
+
           const isEmptyResult = !data.results || data.results.length === 0;
           setIsEmpty(isEmptyResult);
+
           if (isEmptyResult) {
             toast.error('No characters found');
           }
         }
       } catch (error) {
         if (axios.isCancel(error)) return;
+
         let message = 'Failed to load character list';
 
         if (axios.isAxiosError(error)) {
@@ -49,6 +53,7 @@ export const useCharacters = (filters: IFilterParams = {}) => {
         } else if (error instanceof Error) {
           message = error.message;
         }
+
         setHasError(true);
         toast.error(message);
       } finally {
@@ -59,6 +64,7 @@ export const useCharacters = (filters: IFilterParams = {}) => {
     const timer = setTimeout(() => {
       loadCharacters();
     }, 500);
+
     return () => {
       clearTimeout(timer);
       controller.abort();
