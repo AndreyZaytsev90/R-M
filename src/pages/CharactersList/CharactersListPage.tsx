@@ -1,50 +1,29 @@
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-
-import axios from 'axios';
+import { useState } from 'react';
 
 import { RickAndMortyIcon } from '@/assets';
-import { getCharacters } from '@/shared/api';
 import { Loading } from '@/shared/components';
-import { type TCharactersResponse } from '@/shared/types';
+import type { TFilterType } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
+import { useCharacters } from '../../shared/hooks/useCharacters';
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
-  const [characters, setCharacters] = useState<TCharactersResponse | null>(
-    null
-  );
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const [filters, setFilters] = useState<Record<TFilterType, string | null>>({
+    name: null,
+    species: null,
+    gender: null,
+    status: null
+  });
+  const { characters, isLoading, hasError, isEmpty } = useCharacters(filters);
 
-  useEffect(() => {
-    const loadCharacters = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getCharacters();
-        if (data) {
-          setCharacters(data);
-          setHasError(false);
-        }
-      } catch (error) {
-        let message = 'Не удалось загрузить список персонажей';
+  const handleFilterChange = (type: TFilterType, value: string | null) => {
+    setFilters((prev) => ({ ...prev, [type]: value }));
+  };
 
-        if (axios.isAxiosError(error)) {
-          if (error.response) {
-            message = error.response.data?.message ?? message;
-          }
-        } else if (error instanceof Error) {
-          message = error.message;
-        }
-        setHasError(true);
-        toast.error(message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadCharacters();
-  }, []);
+  const handleSearchChange = (value: string) => {
+    setFilters((prev) => ({ ...prev, name: value }));
+  };
 
   return (
     <main className={styles.container}>
@@ -54,8 +33,12 @@ export const CharactersListPage = () => {
         width={600}
         height={200}
       />
-      <CharacterFilterPanel />
-      {!hasError && characters && (
+      <CharacterFilterPanel
+        filters={filters}
+        onSearchChange={handleSearchChange}
+        onFilterChange={handleFilterChange}
+      />
+      {!hasError && characters && !isEmpty && (
         <section className={styles.cardList}>
           {characters.results.map((character) => (
             <CharacterCard key={character.id} character={character} />

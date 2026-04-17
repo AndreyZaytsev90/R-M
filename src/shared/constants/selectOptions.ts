@@ -1,6 +1,4 @@
-import { type TStatus } from '@/shared/types';
-
-export type TSelectOption<T> = { label: string; value: T };
+import type { TSelectOption, TStatus } from '@/shared/types';
 
 export const SPECIES_OPTIONS: TSelectOption<string>[] = [
   { label: 'Human', value: 'human' },

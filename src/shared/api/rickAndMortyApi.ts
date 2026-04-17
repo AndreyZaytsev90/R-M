@@ -1,6 +1,16 @@
 import { apiClient } from './apiClient';
 
-export const getCharacters = async () => {
-  const response = await apiClient.get('/character');
+type IGetCharactersParams = {
+  name?: string | null;
+  species?: string | null;
+  gender?: string | null;
+  status?: string | null;
+};
+
+export const getCharacters = async (
+  signal?: AbortSignal,
+  params?: IGetCharactersParams
+) => {
+  const response = await apiClient.get('/character', { signal, params });
   return response.data;
 };

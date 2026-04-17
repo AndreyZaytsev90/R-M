@@ -6,3 +6,4 @@ export * from './Loading/Loading';
 export * from './Select/Select';
 export * from './StatusIndicator/StatusIndicator';
 export * from './StatusOption/StatusOption';
+export * from './ErrorFallback/ErrorFallback';

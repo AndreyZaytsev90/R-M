@@ -9,7 +9,7 @@ export type TSpecies =
   | 'Cronenberg'
   | 'Disease';
 
-export type TFilterType = 'species' | 'gender' | 'status';
+export type TFilterType = 'name' | 'species' | 'gender' | 'status';
 
 export type TLocation = {
   name: string;
@@ -40,3 +40,5 @@ export type TCharactersResponse = {
   };
   results: TCharacter[];
 };
+
+export type TSelectOption<T> = { label: string; value: T };
