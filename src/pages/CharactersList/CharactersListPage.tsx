@@ -82,13 +82,19 @@ export const CharactersListPage = () => {
         onFilterChange={handleFilterChange}
       />
       {!isError && characters.length > 0 && (
-        <section className={styles.cardList}>
-          {visibleCharacters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
+        <>
+          <section className={styles.cardList}>
+            {visibleCharacters.map((character) => (
+              <CharacterCard key={character.id} character={character} />
+            ))}
+          </section>
 
-          {isLoadMore && <Loading size='small' />}
-        </section>
+          {isLoadMore && (
+            <div className={styles.loadingContainer}>
+              <Loading size='small' />
+            </div>
+          )}
+        </>
       )}
 
       {isLoading && <Loading size='small' />}
