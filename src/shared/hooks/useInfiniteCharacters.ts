@@ -11,7 +11,7 @@ type IFilterParams = {
 
 export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
   return useInfiniteQuery({
-    queryKey: ['characters', filters], // при смене filters — сбросит всё и начнёт заново
+    queryKey: ['characters', filters],
 
     queryFn: ({ signal, pageParam }) =>
       getCharacters(signal, { ...filters, page: pageParam }),
@@ -19,7 +19,7 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
     initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
-      if (!lastPage.info.next) return undefined; // страниц больше нет → стоп
+      if (!lastPage.info.next) return undefined;
 
       const url = new URL(lastPage.info.next);
       const page = url.searchParams.get('page');

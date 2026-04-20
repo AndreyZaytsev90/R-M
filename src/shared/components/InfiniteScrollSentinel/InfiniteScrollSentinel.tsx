@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { DEBOUNCE_DELAY } from '@/shared/constants/debounce';
+import { DEBOUNCE_DELAY } from '@/shared/constants';
 
 type TInfiniteScrollSentinelProps = {
   totalCount: number;

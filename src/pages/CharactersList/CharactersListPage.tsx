@@ -1,10 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components/InfiniteScrollSentinel/InfiniteScrollSentinel';
-import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants/debounce';
-import { VISIBLE_PAGE_SIZE } from '@/shared/constants/pagination';
+import {
+  DEBOUNCE_DELAY,
+  FILTERS_DEBOUNCE_DELAY,
+  VISIBLE_PAGE_SIZE
+} from '@/shared/constants';
 import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
 import type { TFilterType } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
@@ -19,6 +22,7 @@ export const CharactersListPage = () => {
     status: null
   });
   const [visibleCount, setVisibleCount] = useState(VISIBLE_PAGE_SIZE);
+  const [isLoadMore, setIsLoadMore] = useState(false);
 
   const debouncedFilters = useDebounce(filters, FILTERS_DEBOUNCE_DELAY);
 
@@ -48,10 +52,21 @@ export const CharactersListPage = () => {
   };
 
   const onLoadMoreHandler = () => {
-    setVisibleCount((prev) =>
-      Math.min(prev + VISIBLE_PAGE_SIZE, characters.length)
-    );
+    setIsLoadMore(true);
   };
+
+  useEffect(() => {
+    if (isLoadMore) {
+      const timer = setTimeout(() => {
+        setVisibleCount((prev) =>
+          Math.min(prev + VISIBLE_PAGE_SIZE, characters.length)
+        );
+        setIsLoadMore(false);
+      }, DEBOUNCE_DELAY);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoadMore, characters.length]);
 
   return (
     <main className={styles.container}>
@@ -71,9 +86,13 @@ export const CharactersListPage = () => {
           {visibleCharacters.map((character) => (
             <CharacterCard key={character.id} character={character} />
           ))}
+
+          {isLoadMore && <Loading size='small' />}
         </section>
       )}
-      {(isLoading || isFetchingNextPage) && <Loading size='small' />}
+
+      {isLoading && <Loading size='small' />}
+
       <InfiniteScrollSentinel
         visibleCount={visibleCount}
         totalCount={characters.length}
