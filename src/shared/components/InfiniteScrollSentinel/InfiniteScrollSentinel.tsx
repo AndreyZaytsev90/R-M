@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react';
 
+import { Loading } from '@/shared';
 import { DEBOUNCE_DELAY } from '@/shared/constants';
+
+import styles from './InfiniteScrollSentinel.module.scss';
 
 type TInfiniteScrollSentinelProps = {
   totalCount: number;
   visibleCount: number;
+  isLoadMore: boolean;
   onLoadMore: () => void;
   fetchNextPage: () => Promise<unknown>;
   hasNextPage: boolean;
@@ -14,6 +18,7 @@ type TInfiniteScrollSentinelProps = {
 export const InfiniteScrollSentinel = ({
   totalCount,
   visibleCount,
+  isLoadMore,
   onLoadMore,
   fetchNextPage,
   hasNextPage,
@@ -60,5 +65,14 @@ export const InfiniteScrollSentinel = ({
     fetchNextPage,
     onLoadMore
   ]);
-  return <div ref={sentinelRef} />;
+  return (
+    <>
+      {isLoadMore && (
+        <div className={styles.loading}>
+          <Loading size='small' />
+        </div>
+      )}
+      <div ref={sentinelRef} />
+    </>
+  );
 };
