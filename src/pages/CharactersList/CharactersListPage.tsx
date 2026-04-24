@@ -21,14 +21,13 @@ export const CharactersListPage = () => {
   const debouncedFilters = useDebounce(filters, FILTERS_DEBOUNCE_DELAY);
 
   const {
-    visibleCharacters,
     characters,
-    isLoading,
-    isError,
-    isLoadMore,
+    visibleCharacters,
     visibleCount,
+    isLoading,
+    isLoadMore,
+    isError,
     onLoadMore,
-    resetVisible,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage
@@ -36,7 +35,6 @@ export const CharactersListPage = () => {
 
   const handleFilterChange = (type: TFilterType, value: string | null) => {
     setFilters((prev) => ({ ...prev, [type]: value }));
-    resetVisible();
   };
 
   const handleSearchChange = (value: string) => {
@@ -57,22 +55,20 @@ export const CharactersListPage = () => {
         onFilterChange={handleFilterChange}
       />
       {!isError && characters.length > 0 && (
-        <>
-          <section className={styles.cardList}>
-            {visibleCharacters.map((character) => (
-              <CharacterCard key={character.id} character={character} />
-            ))}
-          </section>
-        </>
+        <section className={styles.cardList}>
+          {visibleCharacters.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </section>
       )}
 
       {isLoading && <Loading size='small' />}
 
       <InfiniteScrollSentinel
-        visibleCount={visibleCount}
         totalCount={characters.length}
-        isLoadMore={isLoadMore}
+        visibleCount={visibleCount}
         onLoadMore={onLoadMore}
+        isLoadMore={isLoadMore}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}

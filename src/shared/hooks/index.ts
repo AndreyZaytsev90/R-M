@@ -1,2 +1,2 @@
-export * from './useInfiniteCharacters';
+export * from './useInfiniteCharactersTQ';
 export * from './useDebounce';
