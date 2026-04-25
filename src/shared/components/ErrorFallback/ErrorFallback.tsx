@@ -1,6 +1,6 @@
 import { type FallbackProps } from 'react-error-boundary';
 
 export function ErrorFallback({ error }: FallbackProps) {
-  const message = error instanceof Error ? error.message : 'Неизвестная ошибка';
-  return <div>Что-то пошло не так: {message}</div>;
+  const message = error instanceof Error ? error.message : 'Unknown error';
+  return <div>Something went wrong: {message}</div>;
 }

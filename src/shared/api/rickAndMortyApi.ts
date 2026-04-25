@@ -5,6 +5,7 @@ type IGetCharactersParams = {
   species?: string | null;
   gender?: string | null;
   status?: string | null;
+  page?: number;
 };
 
 export const getCharacters = async (

@@ -7,6 +7,7 @@ export const SPECIES_OPTIONS: TSelectOption<string>[] = [
   { label: 'Animal', value: 'animal' },
   { label: 'Robot', value: 'robot' }
 ];
+
 export const GENDER_OPTIONS: TSelectOption<string>[] = [
   { label: 'Female', value: 'female' },
   { label: 'Male', value: 'male' },

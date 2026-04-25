@@ -2,10 +2,12 @@ import { useState } from 'react';
 
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
+import { InfiniteScrollSentinel } from '@/shared/components';
+import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants';
+import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
 import type { TFilterType } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
-import { useCharacters } from '../../shared/hooks/useCharacters';
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
@@ -15,14 +17,28 @@ export const CharactersListPage = () => {
     gender: null,
     status: null
   });
-  const { characters, isLoading, hasError, isEmpty } = useCharacters(filters);
+
+  const debouncedFilters = useDebounce(filters, FILTERS_DEBOUNCE_DELAY);
+
+  const {
+    characters,
+    visibleCharacters,
+    visibleCount,
+    isLoading,
+    isLoadMore,
+    isError,
+    onLoadMore,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
+  } = useInfiniteCharacters(debouncedFilters);
 
   const handleFilterChange = (type: TFilterType, value: string | null) => {
     setFilters((prev) => ({ ...prev, [type]: value }));
   };
 
   const handleSearchChange = (value: string) => {
-    setFilters((prev) => ({ ...prev, name: value }));
+    handleFilterChange('name', value);
   };
 
   return (
@@ -38,14 +54,25 @@ export const CharactersListPage = () => {
         onSearchChange={handleSearchChange}
         onFilterChange={handleFilterChange}
       />
-      {!hasError && characters && !isEmpty && (
+      {!isError && characters.length > 0 && (
         <section className={styles.cardList}>
-          {characters.results.map((character) => (
+          {visibleCharacters.map((character) => (
             <CharacterCard key={character.id} character={character} />
           ))}
         </section>
       )}
+
       {isLoading && <Loading size='small' />}
+
+      <InfiniteScrollSentinel
+        totalCount={characters.length}
+        visibleCount={visibleCount}
+        onLoadMore={onLoadMore}
+        isLoadMore={isLoadMore}
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+      />
     </main>
   );
 };

@@ -1,0 +1,3 @@
+export const DEBOUNCE_DELAY = 1000;
+
+export const FILTERS_DEBOUNCE_DELAY = 1000;
