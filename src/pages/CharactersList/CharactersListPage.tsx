@@ -4,7 +4,8 @@ import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components';
 import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants';
-import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
+import { useDebounce } from '@/shared/hooks';
+import { useInfiniteCharacters } from '@/shared/hooks/useInfiniteCharacters';
 import type { TFilterType } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
@@ -30,7 +31,8 @@ export const CharactersListPage = () => {
     onLoadMore,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    updateCharacter
   } = useInfiniteCharacters(debouncedFilters);
 
   const handleFilterChange = (type: TFilterType, value: string | null) => {
@@ -57,7 +59,11 @@ export const CharactersListPage = () => {
       {!isError && characters.length > 0 && (
         <section className={styles.cardList}>
           {visibleCharacters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
+            <CharacterCard
+              key={character.id}
+              character={character}
+              onUpdate={updateCharacter}
+            />
           ))}
         </section>
       )}

@@ -20,9 +20,9 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
   const [status, setStatus] = useState<TLoadStatus>('idle');
   const [nextPage, setNextPage] = useState<number | undefined>(2);
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
+  const [isLoadMore, setIsLoadMore] = useState(false);
 
   const abortControllerRef = useRef<AbortController | null>(null);
-  const isLoadMoreRef = useRef(false);
 
   useEffect(() => {
     abortControllerRef.current?.abort();
@@ -75,23 +75,28 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
   }, [nextPage, isFetchingNextPage, filters]);
 
   useEffect(() => {
-    if (!isLoadMoreRef.current) return;
+    if (!isLoadMore) return;
 
     const timer = setTimeout(() => {
       setVisibleCount((prev) =>
         Math.min(prev + VISIBLE_PAGE_SIZE, characters.length)
       );
-      isLoadMoreRef.current = false;
+      setIsLoadMore(false);
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timer);
-  }, [characters.length]);
+  }, [isLoadMore, characters.length]);
 
-  const onLoadMore = () => {
-    if (!isLoadMoreRef.current) {
-      isLoadMoreRef.current = true;
-    }
-  };
+  const onLoadMore = () => setIsLoadMore(true);
+
+  const updateCharacter = useCallback(
+    (id: number, updated: Partial<TCharacter>) => {
+      setCharacters((prev) =>
+        prev.map((char) => (char.id === id ? { ...char, ...updated } : char))
+      );
+    },
+    []
+  );
 
   return {
     characters,
@@ -99,10 +104,11 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
     visibleCount,
     isLoading: status === 'loading',
     isError: status === 'error',
-    isLoadMore: isLoadMoreRef.current,
+    isLoadMore,
     onLoadMore,
     fetchNextPage,
     hasNextPage: nextPage !== undefined,
-    isFetchingNextPage
+    isFetchingNextPage,
+    updateCharacter
   };
 };

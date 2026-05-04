@@ -20,9 +20,10 @@ import styles from './CharacterCard.module.scss';
 
 type TCharacterCardProps = {
   character: TCharacter;
+  onUpdate: (id: number, updated: Partial<TCharacter>) => void; // добавить
 };
 
-export const CharacterCard = ({ character }: TCharacterCardProps) => {
+export const CharacterCard = ({ character, onUpdate }: TCharacterCardProps) => {
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState(character.name);
   const [location, setLocation] = useState(character.location.name);
@@ -30,19 +31,23 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
     normalizeStatus(character.status)
   );
 
-  const statusValueCard =
-    statusValue &&
-    STATUS_OPTIONS.find((opt) => opt.value === statusValue)?.label;
-
   const handleEditClick = () => {
     setIsEdit(true);
   };
 
   const handleSaveClick = () => {
+    onUpdate(character.id, {
+      name,
+      location: { ...character.location, name: location },
+      status: statusValue ?? character.status
+    });
     setIsEdit(false);
   };
 
   const handleCloseClick = () => {
+    setName(character.name);
+    setLocation(character.location.name);
+    setStatusValue(normalizeStatus(character.status));
     setIsEdit(false);
   };
 
@@ -61,9 +66,9 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                   styles.characterCard__name,
                   styles.nameTruncate
                 )}
-                title={name}
+                title={character.name}
               >
-                {name}
+                {character.name}
               </Link>
             )}
           </div>
@@ -88,7 +93,9 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                     size='small'
                   />
                 ) : (
-                  <p className={styles.characterCard__value}>{location}</p>
+                  <p className={styles.characterCard__value}>
+                    {character.location.name}
+                  </p>
                 )}
               </div>
             </div>
@@ -108,9 +115,14 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
                 ) : (
                   <div className={styles.characterCard__status}>
                     <p className={styles.characterCard__value}>
-                      {statusValueCard}
+                      {STATUS_OPTIONS.find(
+                        (opt) => opt.value === normalizeStatus(character.status)
+                      )?.label ?? character.status}
                     </p>
-                    {statusValue && <StatusIndicator status={statusValue} />}
+                    {(() => {
+                      const s = normalizeStatus(character.status);
+                      return s ? <StatusIndicator status={s} /> : null;
+                    })()}
                   </div>
                 )}
               </div>
