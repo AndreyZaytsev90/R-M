@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getCharacters } from '@/shared/api';
 
@@ -87,7 +87,7 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
     return () => clearTimeout(timer);
   }, [isLoadMore, characters.length]);
 
-  const onLoadMore = () => setIsLoadMore(true);
+  const onLoadMore = useCallback(() => setIsLoadMore(true), []);
 
   const updateCharacter = useCallback(
     (id: number, updated: Partial<TCharacter>) => {
@@ -98,9 +98,14 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
     []
   );
 
+  const visibleCharacters = useMemo(
+    () => characters.slice(0, visibleCount),
+    [characters, visibleCount]
+  );
+
   return {
     characters,
-    visibleCharacters: characters.slice(0, visibleCount),
+    visibleCharacters,
     visibleCount,
     isLoading: status === 'loading',
     isError: status === 'error',
