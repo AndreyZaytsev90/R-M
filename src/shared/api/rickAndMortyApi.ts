@@ -15,3 +15,8 @@ export const getCharacters = async (
   const response = await apiClient.get('/character', { signal, params });
   return response.data;
 };
+
+export const getCharacterById = async (id: number, signal?: AbortSignal) => {
+  const response = await apiClient.get(`/character/${id}`, { signal });
+  return response.data;
+};

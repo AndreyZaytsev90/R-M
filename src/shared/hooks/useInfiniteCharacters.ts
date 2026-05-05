@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getCharacters } from '@/shared/api';
 
 import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '../constants';
-import type { TCharacter } from '../types';
+import type { TCharacter, TLoadStatus } from '../types';
 
 type IFilterParams = {
   name?: string | null;
@@ -11,8 +11,6 @@ type IFilterParams = {
   gender?: string | null;
   status?: string | null;
 };
-
-type TLoadStatus = 'idle' | 'loading' | 'error' | 'success';
 
 export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
   const [characters, setCharacters] = useState<TCharacter[]>([]);

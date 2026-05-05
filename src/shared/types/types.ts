@@ -11,6 +11,8 @@ export type TSpecies =
 
 export type TFilterType = 'name' | 'species' | 'gender' | 'status';
 
+export type TLoadStatus = 'idle' | 'loading' | 'error' | 'success';
+
 export type TLocation = {
   name: string;
   url: string;

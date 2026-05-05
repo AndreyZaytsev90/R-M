@@ -4,8 +4,7 @@ import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components';
 import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants';
-import { useDebounce } from '@/shared/hooks';
-import { useInfiniteCharacters } from '@/shared/hooks/useInfiniteCharacters';
+import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
 import type { TFilterType } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
