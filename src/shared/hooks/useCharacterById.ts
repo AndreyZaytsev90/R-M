@@ -19,7 +19,7 @@ export const useCharacterById = (id: number) => {
       setStatus('loading');
 
       try {
-        const data = await getCharacterById(id, controller.signal);
+        const { data } = await getCharacterById(id, controller.signal);
         if (!controller.signal.aborted) {
           setCharacter(data);
           setStatus('success');

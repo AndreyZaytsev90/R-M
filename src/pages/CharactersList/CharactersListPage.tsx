@@ -80,6 +80,8 @@ export const CharactersListPage = () => {
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
+        isLoading={isLoading}
+        isError={isError}
       />
     </main>
   );
