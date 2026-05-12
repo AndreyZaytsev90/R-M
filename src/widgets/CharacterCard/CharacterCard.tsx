@@ -53,6 +53,8 @@ export const CharacterCard = React.memo(
       setIsEdit(false);
     };
 
+    const normalizedStatus = normalizeStatus(character.status);
+
     return (
       <article className={styles.characterCard}>
         <div className={styles.characterCard__content}>
@@ -123,10 +125,9 @@ export const CharacterCard = React.memo(
                       <p className={styles.characterCard__value}>
                         {character.status}
                       </p>
-                      {(() => {
-                        const s = normalizeStatus(character.status);
-                        return s ? <StatusIndicator status={s} /> : null;
-                      })()}
+                      {normalizedStatus && (
+                        <StatusIndicator status={normalizedStatus} />
+                      )}
                     </div>
                   )}
                 </div>
