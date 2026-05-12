@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
@@ -30,16 +30,20 @@ export const CharactersListPage = () => {
     onLoadMore,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    updateCharacter
   } = useInfiniteCharacters(debouncedFilters);
 
-  const handleFilterChange = (type: TFilterType, value: string | null) => {
-    setFilters((prev) => ({ ...prev, [type]: value }));
-  };
+  const handleFilterChange = useCallback(
+    (type: TFilterType, value: string | null) => {
+      setFilters((prev) => ({ ...prev, [type]: value }));
+    },
+    []
+  );
 
-  const handleSearchChange = (value: string) => {
-    handleFilterChange('name', value);
-  };
+  const handleSearchChange = useCallback((value: string) => {
+    setFilters((prev) => ({ ...prev, name: value }));
+  }, []);
 
   return (
     <main className={styles.container}>
@@ -57,7 +61,11 @@ export const CharactersListPage = () => {
       {!isError && characters.length > 0 && (
         <section className={styles.cardList}>
           {visibleCharacters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
+            <CharacterCard
+              key={character.id}
+              character={character}
+              onUpdate={updateCharacter}
+            />
           ))}
         </section>
       )}

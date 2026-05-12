@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getCharacters } from '@/shared/api';
 
 import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '../constants';
-import type { TCharacter } from '../types';
+import type { TCharacter, TLoadStatus } from '../types';
 
 type IFilterParams = {
   name?: string | null;
@@ -12,17 +12,15 @@ type IFilterParams = {
   status?: string | null;
 };
 
-type TLoadStatus = 'idle' | 'loading' | 'error' | 'success';
-
 export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
   const [characters, setCharacters] = useState<TCharacter[]>([]);
   const [visibleCount, setVisibleCount] = useState(VISIBLE_PAGE_SIZE);
   const [status, setStatus] = useState<TLoadStatus>('idle');
   const [nextPage, setNextPage] = useState<number | undefined>(2);
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
+  const [isLoadMore, setIsLoadMore] = useState(false);
 
   const abortControllerRef = useRef<AbortController | null>(null);
-  const isLoadMoreRef = useRef(false);
 
   useEffect(() => {
     abortControllerRef.current?.abort();
@@ -75,34 +73,45 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
   }, [nextPage, isFetchingNextPage, filters]);
 
   useEffect(() => {
-    if (!isLoadMoreRef.current) return;
+    if (!isLoadMore) return;
 
     const timer = setTimeout(() => {
       setVisibleCount((prev) =>
         Math.min(prev + VISIBLE_PAGE_SIZE, characters.length)
       );
-      isLoadMoreRef.current = false;
+      setIsLoadMore(false);
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timer);
-  }, [characters.length]);
+  }, [isLoadMore, characters.length]);
 
-  const onLoadMore = () => {
-    if (!isLoadMoreRef.current) {
-      isLoadMoreRef.current = true;
-    }
-  };
+  const onLoadMore = useCallback(() => setIsLoadMore(true), []);
+
+  const updateCharacter = useCallback(
+    (id: number, updated: Partial<TCharacter>) => {
+      setCharacters((prev) =>
+        prev.map((char) => (char.id === id ? { ...char, ...updated } : char))
+      );
+    },
+    []
+  );
+
+  const visibleCharacters = useMemo(
+    () => characters.slice(0, visibleCount),
+    [characters, visibleCount]
+  );
 
   return {
     characters,
-    visibleCharacters: characters.slice(0, visibleCount),
+    visibleCharacters,
     visibleCount,
     isLoading: status === 'loading',
     isError: status === 'error',
-    isLoadMore: isLoadMoreRef.current,
+    isLoadMore,
     onLoadMore,
     fetchNextPage,
     hasNextPage: nextPage !== undefined,
-    isFetchingNextPage
+    isFetchingNextPage,
+    updateCharacter
   };
 };
