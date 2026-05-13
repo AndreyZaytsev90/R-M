@@ -6,11 +6,15 @@ import type { TCharacter, TLoadStatus } from '../types';
 
 export const useCharacterById = (id: number) => {
   const [character, setCharacter] = useState<TCharacter | null>(null);
-  const [status, setStatus] = useState<TLoadStatus>('idle');
+  const [status, setStatus] = useState<TLoadStatus>('loading');
 
   const abortRef = useRef<AbortController | null>(null);
 
+  const isInvalidId = !id || isNaN(id);
+
   useEffect(() => {
+    if (isInvalidId) return;
+
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
@@ -37,7 +41,7 @@ export const useCharacterById = (id: number) => {
   }, [id]);
 
   return {
-    character,
+    character: isInvalidId ? null : character,
     isLoading: status === 'loading',
     isError: status === 'error'
   };

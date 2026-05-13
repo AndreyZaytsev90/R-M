@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
 
 import { GoBackIcon } from '@/assets';
 import { Button, Loading } from '@/shared/components';
@@ -35,7 +35,7 @@ export const CharacterCardPage = () => {
     return (
       <main className={styles.container}>
         {backButton}
-        <p>Character not found</p>
+        <Navigate to='/characters/404NotFound' replace />
       </main>
     );
 

@@ -13,7 +13,9 @@ function App() {
         </div>
       </div>
       <div className={styles.app__content}>
-        <div className={styles.app__container}>
+        <div
+          className={`${styles.app__container} ${styles.app__contentContainer}`}
+        >
           <Outlet />
         </div>
       </div>
