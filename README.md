@@ -1,73 +1,136 @@
-# React + TypeScript + Vite
+# Rick and Morty Characters
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Интерактивное веб-приложение для просмотра персонажей из вселенной **Rick and Morty**. Построено на основе публичного [Rick and Morty API](https://rickandmortyapi.com/).
 
-Currently, two official plugins are available:
+## 🚀 Демо
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Проект развёрнут и доступен по ссылке:  
+**[https://rick-and-morty-characters.netlify.app](https://rick-and-morty-characters.netlify.app)** _(указать актуальную ссылку)_
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📋 Функционал
 
-## Expanding the ESLint configuration
+- **Просмотр списка персонажей** — бесконечный скролл с подгрузкой данных
+- **Фильтрация и поиск** — по имени, статусу, виду, полу
+- **Карточка персонажа** — детальная информация с изображением
+- **Редактирование** — возможность изменить имя, статус, локацию персонажа (локально)
+- **Адаптивная 404 страница** — при несуществующем ID или невалидном маршруте
+- **Обработка ошибок** — graceful fallback при проблемах с API
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 Технологический стек
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Категория        | Технологии                            |
+| ---------------- | ------------------------------------- |
+| **Framework**    | React 19, TypeScript                  |
+| **Build**        | Vite                                  |
+| **State & Data** | React Query (TanStack Query), Axios   |
+| **Routing**      | React Router v7                       |
+| **Styling**      | SCSS Modules                          |
+| **UI/UX**        | react-hot-toast, react-error-boundary |
+| **Linting**      | ESLint, Prettier, Stylelint           |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📁 Структура проекта
+
+```
+src/
+├── pages/              # Страницы приложения
+│   ├── CharactersList/ # Список персонажей
+│   ├── CharacterCard/  # Карточка персонажа
+│   └── NotFound/       # 404 страница
+├── widgets/            # Крупные блоки (CharacterCard, CharacterFilterPanel)
+├── shared/             # Переиспользуемый код
+│   ├── api/            # API-клиент
+│   ├── components/     # Базовые UI-компоненты
+│   ├── hooks/          # Кастомные хуки
+│   ├── types/          # TypeScript типы
+│   └── constants/      # Константы
+├── assets/             # Изображения, иконки
+└── styles/             # Глобальные стили
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Установка и запуск
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Требования
+
+- Node.js ≥ 18
+- npm / yarn / pnpm
+
+### 1. Клонирование и установка зависимостей
+
+```bash
+git clone <repository-url>
+cd rick-and-morty
+
+# npm
+npm install
+
+# yarn
+yarn install
 ```
+
+### 2. Запуск разработки
+
+```bash
+# npm
+npm run dev
+
+# yarn
+yarn dev
+```
+
+Приложение доступно по адресу: **http://localhost:5173**
+
+### 3. Сборка для продакшена
+
+```bash
+# npm
+npm run build
+
+# yarn
+yarn build
+```
+
+Результат в папке `dist/`
+
+### 4. Предпросмотр сборки
+
+```bash
+# npm
+npm run preview
+
+# yarn
+yarn preview
+```
+
+---
+
+## 🧹 Проверка кода
+
+```bash
+# ESLint
+npm run lint    # или yarn lint
+
+# Stylelint (SCSS)
+npm run lint:style    # или yarn lint:style
+```
+
+---
+
+## 📝 Примечания
+
+- API: [Rick and Morty API](https://rickandmortyapi.com/documentation/)
+- Проект использует **Feature-Sliced Design** подход (pages/widgets/shared)
+- Типизация API через **orval** (см. `orval.config.ts`)
+
+---
+
+## 👨‍💻 Автор
+
+NLP-Core-Team
