@@ -5,7 +5,7 @@
 ## 🚀 Демо
 
 Проект развёрнут и доступен по ссылке:  
-**[https://rick-and-morty-characters.netlify.app](https://rick-and-morty-characters.netlify.app)** _(указать актуальную ссылку)_
+**[https://andreyzaytsev90.github.io/R-M/](https://andreyzaytsev90.github.io/R-M/)**
 
 ---
 
@@ -85,7 +85,7 @@ npm run dev
 yarn dev
 ```
 
-Приложение доступно по адресу: **http://localhost:5173**
+Приложение доступно по адресу: **https://andreyzaytsev90.github.io/R-M/**
 
 ### 3. Сборка для продакшена
 
@@ -163,10 +163,6 @@ npm run deploy
 
 ### Ссылка на сайт
 
-После деплоя сайт будет доступен по адресу:
-
-```
-https://<ваш-username>.github.io/<имя-репозитория>/
-```
+https://andreyzaytsev90.github.io/R-M/
 
 > **Важно:** Убедитесь, что `base` в `vite.config.ts` совпадает с именем репозитория.

@@ -19,7 +19,7 @@ const root = document.getElementById('root')!;
 ReactDOM.createRoot(root).render(
   <QueryClientProvider client={queryClient}>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <BrowserRouter>
+      <BrowserRouter basename='/R-M'>
         <Routes>
           <Route path='/' element={<App />}>
             <Route index element={<Navigate to='/characters' replace />} />
