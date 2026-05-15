@@ -32,6 +32,14 @@
   min-height: calc(100vh - 200px);
 }
 
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 200px);
+}
+
 .character {
   display: flex;
   flex-direction: column;

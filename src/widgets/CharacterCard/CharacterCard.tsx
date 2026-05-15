@@ -14,6 +14,7 @@ import {
   StatusOption,
   type TCharacter,
   type TStatus,
+  capitalize,
   normalizeStatus
 } from '@/shared';
 
@@ -123,7 +124,7 @@ export const CharacterCard = React.memo(
                   ) : (
                     <div className={styles.characterCard__status}>
                       <p className={styles.characterCard__value}>
-                        {character.status}
+                        {capitalize(character.status)}
                       </p>
                       {normalizedStatus && (
                         <StatusIndicator status={normalizedStatus} />
