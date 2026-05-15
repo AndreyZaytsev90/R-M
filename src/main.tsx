@@ -24,9 +24,7 @@ ReactDOM.createRoot(root).render(
           <Route path='/' element={<App />}>
             <Route index element={<Navigate to='/characters' replace />} />
             <Route path='characters' element={<CharactersListPage />} />
-            <Route path='characters/404NotFound' element={<NotFoundPage />} />
             <Route path='characters/:id' element={<CharacterCardPage />} />
-
             <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>

@@ -1,5 +1,4 @@
-import NotFound from '@/assets/icons/NotFound.png';
-import RickAndMortyIcon from '@/assets/icons/RickAndMortyIcon.png';
-import RickSanchezIcon from '@/assets/icons/RickSanchezIcon.png';
+import NotFound from '@/assets/icons/NotFound.webp';
+import RickAndMortyIcon from '@/assets/icons/RickAndMortyIcon.webp';
 
-export { RickAndMortyIcon, RickSanchezIcon, NotFound };
+export { RickAndMortyIcon, NotFound };

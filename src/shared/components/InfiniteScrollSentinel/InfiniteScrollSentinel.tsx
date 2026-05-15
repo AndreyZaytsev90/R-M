@@ -34,17 +34,14 @@ export const InfiniteScrollSentinel = ({
     if (!sentinel) return;
 
     const observer = new IntersectionObserver((entries) => {
-      if (
-        entries[0].isIntersecting &&
-        !isFetchingNextPage &&
-        !isLoading &&
-        !isError
-      ) {
-        if (visibleCount < totalCount) {
-          onLoadMore();
-        } else if (hasNextPage) {
-          fetchNextPage();
-        }
+      const [entry] = entries;
+      if (!entry?.isIntersecting) return;
+      if (isFetchingNextPage || isLoading || isError) return;
+
+      if (visibleCount < totalCount) {
+        onLoadMore();
+      } else if (hasNextPage) {
+        fetchNextPage();
       }
     });
 
