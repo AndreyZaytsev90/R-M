@@ -102,7 +102,13 @@ export const CharacterCard = React.memo(
                       size='small'
                     />
                   ) : (
-                    <p className={styles.characterCard__value}>
+                    <p
+                      className={clsx(
+                        styles.characterCard__value,
+                        styles.nameTruncate
+                      )}
+                      title={character.location.name}
+                    >
                       {character.location.name}
                     </p>
                   )}

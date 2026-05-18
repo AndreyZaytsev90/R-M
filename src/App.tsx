@@ -8,7 +8,7 @@ function App() {
   return (
     <div className={styles.app}>
       <div className={styles.app__header}>
-        <div className={styles.app__container}>
+        <div className={styles.app__headerContainer}>
           <Header />
         </div>
       </div>
@@ -20,7 +20,7 @@ function App() {
         </div>
       </div>
       <div className={styles.app__footer}>
-        <div className={styles.app__container}>
+        <div className={styles.app__footerContainer}>
           <Footer />
         </div>
       </div>
