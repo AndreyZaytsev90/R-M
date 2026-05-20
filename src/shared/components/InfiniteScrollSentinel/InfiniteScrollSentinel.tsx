@@ -12,6 +12,8 @@ type TInfiniteScrollSentinelProps = {
   fetchNextPage: () => Promise<unknown>;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
+  isLoading?: boolean;
+  isError?: boolean;
 };
 
 export const InfiniteScrollSentinel = ({
@@ -21,7 +23,9 @@ export const InfiniteScrollSentinel = ({
   isLoadMore,
   fetchNextPage,
   hasNextPage,
-  isFetchingNextPage
+  isFetchingNextPage,
+  isLoading,
+  isError
 }: TInfiniteScrollSentinelProps) => {
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -30,12 +34,14 @@ export const InfiniteScrollSentinel = ({
     if (!sentinel) return;
 
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isFetchingNextPage) {
-        if (visibleCount < totalCount) {
-          onLoadMore();
-        } else if (hasNextPage) {
-          fetchNextPage();
-        }
+      const [entry] = entries;
+      if (!entry?.isIntersecting) return;
+      if (isFetchingNextPage || isLoading || isError) return;
+
+      if (visibleCount < totalCount) {
+        onLoadMore();
+      } else if (hasNextPage) {
+        fetchNextPage();
       }
     });
 
@@ -46,17 +52,19 @@ export const InfiniteScrollSentinel = ({
     totalCount,
     hasNextPage,
     isFetchingNextPage,
+    isLoading,
+    isError,
     fetchNextPage,
     onLoadMore
   ]);
 
   return (
     <>
-      {isFetchingNextPage || isLoadMore}
-
-      <div className={styles.loading}>
-        <Loading size='small' />
-      </div>
+      {(isFetchingNextPage || isLoadMore) && (
+        <div className={styles.loading}>
+          <Loading size='small' />
+        </div>
+      )}
 
       <div ref={sentinelRef} />
     </>

@@ -14,6 +14,7 @@ import {
   StatusOption,
   type TCharacter,
   type TStatus,
+  capitalize,
   normalizeStatus
 } from '@/shared';
 
@@ -52,6 +53,8 @@ export const CharacterCard = React.memo(
       setStatusValue(normalizeStatus(character.status));
       setIsEdit(false);
     };
+
+    const normalizedStatus = normalizeStatus(character.status);
 
     return (
       <article className={styles.characterCard}>
@@ -99,7 +102,13 @@ export const CharacterCard = React.memo(
                       size='small'
                     />
                   ) : (
-                    <p className={styles.characterCard__value}>
+                    <p
+                      className={clsx(
+                        styles.characterCard__value,
+                        styles.nameTruncate
+                      )}
+                      title={character.location.name}
+                    >
                       {character.location.name}
                     </p>
                   )}
@@ -121,12 +130,11 @@ export const CharacterCard = React.memo(
                   ) : (
                     <div className={styles.characterCard__status}>
                       <p className={styles.characterCard__value}>
-                        {character.status}
+                        {capitalize(character.status)}
                       </p>
-                      {(() => {
-                        const s = normalizeStatus(character.status);
-                        return s ? <StatusIndicator status={s} /> : null;
-                      })()}
+                      {normalizedStatus && (
+                        <StatusIndicator status={normalizedStatus} />
+                      )}
                     </div>
                   )}
                 </div>

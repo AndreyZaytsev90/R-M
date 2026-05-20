@@ -70,17 +70,21 @@ export const CharactersListPage = () => {
         </section>
       )}
 
-      {isLoading && <Loading size='small' />}
+      {isLoading && <Loading size='large' />}
 
-      <InfiniteScrollSentinel
-        totalCount={characters.length}
-        visibleCount={visibleCount}
-        onLoadMore={onLoadMore}
-        isLoadMore={isLoadMore}
-        fetchNextPage={fetchNextPage}
-        hasNextPage={hasNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-      />
+      {!isLoading && (
+        <InfiniteScrollSentinel
+          totalCount={characters.length}
+          visibleCount={visibleCount}
+          onLoadMore={onLoadMore}
+          isLoadMore={isLoadMore}
+          fetchNextPage={fetchNextPage}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          isLoading={isLoading}
+          isError={isError}
+        />
+      )}
     </main>
   );
 };

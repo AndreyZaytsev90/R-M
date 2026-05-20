@@ -7,9 +7,10 @@
   box-shadow: var(--shadow-card);
 
   .nameTruncate {
-    overflow: hidden; // скрыть лишнее
-    text-overflow: ellipsis; // добавить «…» в конце
-    white-space: nowrap; // запретить перенос
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 220px;
   }
 
   &__nameWrapper {
@@ -17,8 +18,8 @@
     align-items: flex-start;
     margin-bottom: 5px;
     min-height: 29px;
-    flex: 1 1 0; // позволяем элементу растягиваться и сжиматься
-    min-width: 0; // без этого text‑overflow не срабатывает
+    flex: 1 1 0;
+    min-width: 0;
   }
 
   &__content {
@@ -38,6 +39,7 @@
   &__info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
 
   &__nameWrapper {

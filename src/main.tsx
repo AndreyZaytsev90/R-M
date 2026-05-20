@@ -9,6 +9,7 @@ import App from '@/App';
 import { CharacterCardPage, CharactersListPage } from '@/pages';
 import '@/styles/global.scss';
 
+import { NotFoundPage } from './pages/NotFound/NotFoundPage';
 import { ErrorFallback } from './shared/components';
 
 const queryClient = new QueryClient();
@@ -18,12 +19,13 @@ const root = document.getElementById('root')!;
 ReactDOM.createRoot(root).render(
   <QueryClientProvider client={queryClient}>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <BrowserRouter>
+      <BrowserRouter basename='/R-M'>
         <Routes>
           <Route path='/' element={<App />}>
             <Route index element={<Navigate to='/characters' replace />} />
             <Route path='characters' element={<CharactersListPage />} />
             <Route path='characters/:id' element={<CharacterCardPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>
         <Toaster position='bottom-right' />

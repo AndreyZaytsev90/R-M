@@ -4,6 +4,7 @@ import { GoBackIcon } from '@/assets';
 import { Button, Loading } from '@/shared/components';
 import { useCharacterById } from '@/shared/hooks/useCharacterById';
 
+import { NotFoundPage } from '../NotFound/NotFoundPage';
 import styles from './CharacterCardPage.module.scss';
 import { CharacterInfoList } from './CharacterInfoList';
 
@@ -35,7 +36,9 @@ export const CharacterCardPage = () => {
     return (
       <main className={styles.container}>
         {backButton}
-        <p>Character not found</p>
+        <div className={styles.notFound}>
+          <NotFoundPage />
+        </div>
       </main>
     );
 

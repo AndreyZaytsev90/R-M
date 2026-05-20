@@ -5,13 +5,28 @@
 
   &__header {
     flex-shrink: 0;
+    width: 100%;
     height: 60px;
     box-shadow: var(--shadow-primary);
   }
 
+  &__headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 210px;
+    max-width: 1440px;
+    height: 100%;
+  }
+
   &__content {
+    display: flex;
     flex-grow: 1;
+    flex-direction: column;
+    margin: 0 auto;
     width: 100%;
+    max-width: 1440px;
   }
 
   &__footer {
@@ -21,10 +36,25 @@
     box-shadow: var(--shadow-primary);
   }
 
+  &__footerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1440px;
+    height: 100%;
+  }
+
+  &__contentContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+  }
+
   &__container {
     margin: 0 auto;
     width: 100%;
-    max-width: 1220px;
+    max-width: 1044px;
     height: 100%;
   }
 }

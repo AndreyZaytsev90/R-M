@@ -8,15 +8,10 @@ type IGetCharactersParams = {
   page?: number;
 };
 
-export const getCharacters = async (
+export const getCharacters = (
   signal?: AbortSignal,
   params?: IGetCharactersParams
-) => {
-  const response = await apiClient.get('/character', { signal, params });
-  return response.data;
-};
+) => apiClient.get('/character', { signal, params });
 
-export const getCharacterById = async (id: number, signal?: AbortSignal) => {
-  const response = await apiClient.get(`/character/${id}`, { signal });
-  return response.data;
-};
+export const getCharacterById = (id: number, signal?: AbortSignal) =>
+  apiClient.get(`/character/${id}`, { signal });

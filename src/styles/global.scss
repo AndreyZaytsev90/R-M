@@ -112,6 +112,13 @@ section {
   display: block;
 }
 
+html {
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 body {
   font-family: 'Karla', sans-serif;
   line-height: 1;

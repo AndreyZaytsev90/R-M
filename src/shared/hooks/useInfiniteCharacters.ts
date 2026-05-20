@@ -34,7 +34,7 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
 
     const loadCharacters = async () => {
       try {
-        const data = await getCharacters(controller.signal, {
+        const { data } = await getCharacters(controller.signal, {
           ...filters,
           page: 1
         });
@@ -42,6 +42,7 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
         if (controller.signal.aborted) return;
 
         setCharacters(data.results);
+        setNextPage(data.info.next ? 2 : undefined);
         setStatus('success');
       } catch {
         setStatus('error');
@@ -59,12 +60,12 @@ export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
     setIsFetchingNextPage(true);
 
     try {
-      const data = await getCharacters(undefined, {
+      const { data } = await getCharacters(undefined, {
         ...filters,
         page: nextPage
       });
       setCharacters((prev) => [...prev, ...data.results]);
-      setNextPage(nextPage + 1);
+      setNextPage(data.info.next ? nextPage + 1 : undefined);
     } catch {
       setStatus('error');
     } finally {
