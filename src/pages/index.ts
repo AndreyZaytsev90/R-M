@@ -1,4 +1,4 @@
-export * from './CharacterCard/CharacterCardPage';
-export * from './CharacterCard/CharacterInfoList';
-export * from './CharactersList/CharactersListPage';
+export * from './CharacterCardPage/CharacterCardPage';
+export * from './CharacterCardPage/CharacterInfoList';
+export * from './CharactersListPage/CharactersListPage';
 export * from './NotFound/NotFoundContent';
