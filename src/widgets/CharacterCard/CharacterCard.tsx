@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { CloseIcon, EditIcon, SaveIcon } from '@/assets';
 import {
   Button,
+  CHARACTER_STATUSES,
   Input,
   STATUS_OPTIONS,
   Select,
@@ -14,7 +15,6 @@ import {
   StatusOption,
   type TCharacter,
   type TStatus,
-  capitalize,
   normalizeStatus
 } from '@/shared';
 
@@ -130,7 +130,9 @@ export const CharacterCard = React.memo(
                   ) : (
                     <div className={styles.characterCard__status}>
                       <p className={styles.characterCard__value}>
-                        {capitalize(character.status)}
+                        {normalizedStatus
+                          ? CHARACTER_STATUSES[normalizedStatus]
+                          : character.status}
                       </p>
                       {normalizedStatus && (
                         <StatusIndicator status={normalizedStatus} />

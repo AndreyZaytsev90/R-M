@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components';
-import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants';
+import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants/debounce';
 import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
 import type { TFilterType } from '@/shared/types';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
@@ -18,7 +18,10 @@ export const CharactersListPage = () => {
     status: null
   });
 
-  const debouncedFilters = useDebounce(filters, FILTERS_DEBOUNCE_DELAY);
+  const [debouncedFilters, isPending] = useDebounce(
+    filters,
+    FILTERS_DEBOUNCE_DELAY
+  );
 
   const {
     characters,
@@ -58,6 +61,9 @@ export const CharactersListPage = () => {
         onSearchChange={handleSearchChange}
         onFilterChange={handleFilterChange}
       />
+
+      {isPending && <Loading size='small' />}
+
       {!isError && characters.length > 0 && (
         <section className={styles.cardList}>
           {visibleCharacters.map((character) => (
