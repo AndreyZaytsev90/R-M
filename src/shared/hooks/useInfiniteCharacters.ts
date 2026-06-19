@@ -3,16 +3,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getCharacters } from '@/shared/api';
 
 import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '../constants';
-import type { TCharacter, TLoadStatus } from '../types';
+import type { IFilterParams, TCharacter, TLoadStatus } from '../types';
 
-type IFilterParams = {
-  name?: string | null;
-  species?: string | null;
-  gender?: string | null;
-  status?: string | null;
-};
-
-export const useInfiniteCharacters = (filters: IFilterParams = {}) => {
+export const useInfiniteCharacters = (filters: IFilterParams) => {
   const [characters, setCharacters] = useState<TCharacter[]>([]);
   const [visibleCount, setVisibleCount] = useState(VISIBLE_PAGE_SIZE);
   const [status, setStatus] = useState<TLoadStatus>('idle');

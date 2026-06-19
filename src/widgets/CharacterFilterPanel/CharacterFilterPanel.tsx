@@ -7,17 +7,12 @@ import {
   SPECIES_OPTIONS,
   STATUS_OPTIONS
 } from '@/shared/constants';
-import { type TFilterType } from '@/shared/types';
+import { type IFilterParams, type TFilterType } from '@/shared/types';
 
 import styles from './CharacterFilterPanel.module.scss';
 
 type TCharacterFilterPanelProps = {
-  filters: {
-    name: string | null;
-    species: string | null;
-    gender: string | null;
-    status: string | null;
-  };
+  filters: IFilterParams;
   onSearchChange: (value: string) => void;
   onFilterChange: (type: TFilterType, value: string | null) => void;
 };

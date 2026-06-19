@@ -18,6 +18,13 @@ export type TLocation = {
   url: string;
 };
 
+export type IFilterParams = {
+  name: string | null;
+  species: string | null;
+  gender: string | null;
+  status: string | null;
+};
+
 export type TCharacter = {
   id: number;
   name: string;

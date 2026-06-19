@@ -1,22 +1,23 @@
-import { useCallback, useState } from 'react';
-
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components';
 import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants/debounce';
 import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/useAppHooks';
 import type { TFilterType } from '@/shared/types';
+import {
+  setGender,
+  setName,
+  setSpecies,
+  setStatus
+} from '@/stores/slices/charactersFilters';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
-  const [filters, setFilters] = useState<Record<TFilterType, string | null>>({
-    name: null,
-    species: null,
-    gender: null,
-    status: null
-  });
+  const dispatch = useAppDispatch();
+  const filters = useAppSelector((state) => state.charactersFilters);
 
   const [debouncedFilters, isPending] = useDebounce(
     filters,
@@ -37,16 +38,26 @@ export const CharactersListPage = () => {
     updateCharacter
   } = useInfiniteCharacters(debouncedFilters);
 
-  const handleFilterChange = useCallback(
-    (type: TFilterType, value: string | null) => {
-      setFilters((prev) => ({ ...prev, [type]: value }));
-    },
-    []
-  );
+  const handleSearchChange = (value: string) => {
+    dispatch(setName(value || null));
+  };
 
-  const handleSearchChange = useCallback((value: string) => {
-    setFilters((prev) => ({ ...prev, name: value }));
-  }, []);
+  const handleFilterChange = (type: TFilterType, value: string | null) => {
+    switch (type) {
+      case 'name':
+        dispatch(setName(value));
+        break;
+      case 'species':
+        dispatch(setSpecies(value));
+        break;
+      case 'gender':
+        dispatch(setGender(value));
+        break;
+      case 'status':
+        dispatch(setStatus(value));
+        break;
+    }
+  };
 
   return (
     <main className={styles.container}>
