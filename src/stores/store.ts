@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import { charactersReducer } from './slices/characters';
 import { charactersFiltersReducer } from './slices/charactersFilters';
 
 const rootReducer = combineReducers({
-  charactersFilters: charactersFiltersReducer
+  charactersFilters: charactersFiltersReducer,
+  characters: charactersReducer
 });
 
 export const store = configureStore({

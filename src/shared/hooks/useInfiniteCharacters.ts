@@ -1,15 +1,24 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getCharacters } from '@/shared/api';
+import {
+  addCharacters,
+  resetCharacters,
+  setCharacters,
+  setNextPage,
+  setStatus
+} from '@/stores/slices/characters';
 
 import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '../constants';
-import type { IFilterParams, TCharacter, TLoadStatus } from '../types';
+import type { IFilterParams, TCharacter } from '../types';
+import { useAppDispatch, useAppSelector } from './useAppHooks';
 
 export const useInfiniteCharacters = (filters: IFilterParams) => {
-  const [characters, setCharacters] = useState<TCharacter[]>([]);
+  const dispatch = useAppDispatch();
+  const { characters, status, nextPage } = useAppSelector(
+    (state) => state.characters
+  );
   const [visibleCount, setVisibleCount] = useState(VISIBLE_PAGE_SIZE);
-  const [status, setStatus] = useState<TLoadStatus>('idle');
-  const [nextPage, setNextPage] = useState<number | undefined>(2);
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
   const [isLoadMore, setIsLoadMore] = useState(false);
 
@@ -20,10 +29,10 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
     const controller = new AbortController();
     abortControllerRef.current = controller;
 
-    setCharacters([]);
+    dispatch(resetCharacters());
     setVisibleCount(VISIBLE_PAGE_SIZE);
-    setNextPage(2);
-    setStatus('loading');
+    dispatch(setNextPage(2));
+    dispatch(setStatus('loading'));
 
     const loadCharacters = async () => {
       try {
@@ -34,37 +43,39 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
 
         if (controller.signal.aborted) return;
 
-        setCharacters(data.results);
-        setNextPage(data.info.next ? 2 : undefined);
-        setStatus('success');
+        dispatch(setCharacters(data.results));
+        dispatch(setNextPage(data.info.next ? 2 : undefined));
+        dispatch(setStatus('success'));
       } catch {
-        setStatus('error');
+        dispatch(setStatus('error'));
       }
     };
 
     loadCharacters();
 
     return () => controller.abort();
-  }, [filters]);
+  }, [filters, dispatch]);
 
   const fetchNextPage = useCallback(async () => {
     if (!nextPage || isFetchingNextPage) return;
 
     setIsFetchingNextPage(true);
+    dispatch(setStatus('loading'));
 
     try {
       const { data } = await getCharacters(undefined, {
         ...filters,
         page: nextPage
       });
-      setCharacters((prev) => [...prev, ...data.results]);
-      setNextPage(data.info.next ? nextPage + 1 : undefined);
+      dispatch(addCharacters(data.results));
+      dispatch(setNextPage(data.info.next ? nextPage + 1 : undefined));
+      dispatch(setStatus('success'));
     } catch {
-      setStatus('error');
+      dispatch(setStatus('error'));
     } finally {
       setIsFetchingNextPage(false);
     }
-  }, [nextPage, isFetchingNextPage, filters]);
+  }, [nextPage, isFetchingNextPage, filters, dispatch]);
 
   useEffect(() => {
     if (!isLoadMore) return;
@@ -83,11 +94,12 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
 
   const updateCharacter = useCallback(
     (id: number, updated: Partial<TCharacter>) => {
-      setCharacters((prev) =>
-        prev.map((char) => (char.id === id ? { ...char, ...updated } : char))
+      const updatedList = characters.map((char) =>
+        char.id === id ? { ...char, ...updated } : char
       );
+      dispatch(setCharacters(updatedList));
     },
-    []
+    [characters, dispatch]
   );
 
   const visibleCharacters = useMemo(
