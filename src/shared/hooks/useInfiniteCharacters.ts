@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getCharacters } from '@/shared/api';
+import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '@/shared/constants';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import type { IFilterParams, TCharacter } from '@/shared/types';
 import {
   addCharacters,
   resetCharacters,
@@ -8,10 +11,6 @@ import {
   setNextPage,
   setStatus
 } from '@/stores/slices/characters';
-
-import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '../constants';
-import type { IFilterParams, TCharacter } from '../types';
-import { useAppDispatch, useAppSelector } from './useAppHooks';
 
 export const useInfiniteCharacters = (filters: IFilterParams) => {
   const dispatch = useAppDispatch();

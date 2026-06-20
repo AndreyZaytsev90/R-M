@@ -1,9 +1,13 @@
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components';
-import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants/debounce';
-import { useDebounce, useInfiniteCharacters } from '@/shared/hooks';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/useAppHooks';
+import { FILTERS_DEBOUNCE_DELAY } from '@/shared/constants';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDebounce,
+  useInfiniteCharacters
+} from '@/shared/hooks';
 import type { TFilterType } from '@/shared/types';
 import {
   setGender,

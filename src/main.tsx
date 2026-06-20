@@ -7,12 +7,10 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import App from '@/App';
-import { CharacterCardPage, CharactersListPage } from '@/pages';
+import { CharacterCardPage, CharactersListPage, NotFoundPage } from '@/pages';
+import { ErrorFallback } from '@/shared/components';
+import { store } from '@/stores/store';
 import '@/styles/global.scss';
-
-import { NotFoundPage } from './pages/NotFound/NotFoundPage';
-import { ErrorFallback } from './shared/components';
-import { store } from './stores/store';
 
 const queryClient = new QueryClient();
 

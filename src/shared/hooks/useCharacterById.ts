@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { fetchCharacter } from '@/stores/slices/character';
-
-import { useAppDispatch, useAppSelector } from './useAppHooks';
 
 export const useCharacterById = (id: number) => {
   const dispatch = useAppDispatch();

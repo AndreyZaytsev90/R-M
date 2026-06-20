@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { characterReducer } from './slices/character';
-import { charactersReducer } from './slices/characters';
-import { charactersFiltersReducer } from './slices/charactersFilters';
+import { characterReducer } from '@/stores/slices/character';
+import { charactersReducer } from '@/stores/slices/characters';
+import { charactersFiltersReducer } from '@/stores/slices/charactersFilters';
 
 const rootReducer = combineReducers({
   charactersFilters: charactersFiltersReducer,
