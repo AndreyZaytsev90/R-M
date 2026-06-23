@@ -1,40 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { getCharacterById } from '@/shared/api';
-
-import type { TCharacter, TLoadStatus } from '../types';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { fetchCharacter } from '@/stores/slices/character';
 
 export const useCharacterById = (id: number) => {
-  const [character, setCharacter] = useState<TCharacter | null>(null);
-  const [status, setStatus] = useState<TLoadStatus>('loading');
+  const dispatch = useAppDispatch();
+  const { character, status } = useAppSelector((state) => state.character);
 
   const isInvalidId = !id || isNaN(id);
 
   useEffect(() => {
-    if (isInvalidId) return;
-
-    const controller = new AbortController();
-
-    const fetchCharacter = async () => {
-      setStatus('loading');
-
-      try {
-        const { data } = await getCharacterById(id, controller.signal);
-        if (!controller.signal.aborted) {
-          setCharacter(data);
-          setStatus('success');
-        }
-      } catch {
-        if (!controller.signal.aborted) {
-          setStatus('error');
-        }
-      }
-    };
-
-    fetchCharacter();
-
-    return () => controller.abort();
-  }, [id, isInvalidId]);
+    if (id) {
+      dispatch(fetchCharacter(id));
+    }
+  }, [id, dispatch]);
 
   return {
     character: isInvalidId ? null : character,

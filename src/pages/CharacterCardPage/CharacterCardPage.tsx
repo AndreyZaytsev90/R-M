@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from 'react-router';
 
 import { GoBackIcon } from '@/assets';
+import { NotFoundPage } from '@/pages';
 import { Button, Loading } from '@/shared/components';
-import { useCharacterById } from '@/shared/hooks/useCharacterById';
+import { useCharacterById } from '@/shared/hooks';
 
-import { NotFoundPage } from '../NotFound/NotFoundPage';
 import styles from './CharacterCardPage.module.scss';
 import { CharacterInfoList } from './CharacterInfoList';
 
