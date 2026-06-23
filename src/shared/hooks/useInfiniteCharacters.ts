@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getCharacters } from '@/shared/api';
 import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '@/shared/constants';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { getNextPageFromUrl } from '@/shared/lib';
 import type { IFilterParams, TCharacter } from '@/shared/types';
 import {
   addCharacters,
@@ -30,7 +31,6 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
 
     dispatch(resetCharacters());
     setVisibleCount(VISIBLE_PAGE_SIZE);
-    dispatch(setNextPage(2));
     dispatch(setStatus('loading'));
 
     const loadCharacters = async () => {
@@ -43,7 +43,10 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
         if (controller.signal.aborted) return;
 
         dispatch(setCharacters(data.results));
-        dispatch(setNextPage(data.info.next ? 2 : undefined));
+
+        const next = getNextPageFromUrl(data.info.next);
+        dispatch(setNextPage(next));
+
         dispatch(setStatus('success'));
       } catch {
         dispatch(setStatus('error'));
@@ -67,7 +70,10 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
         page: nextPage
       });
       dispatch(addCharacters(data.results));
-      dispatch(setNextPage(data.info.next ? nextPage + 1 : undefined));
+
+      const next = getNextPageFromUrl(data.info.next);
+      dispatch(setNextPage(next));
+
       dispatch(setStatus('success'));
     } catch {
       dispatch(setStatus('error'));

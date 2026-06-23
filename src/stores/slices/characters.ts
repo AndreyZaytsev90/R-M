@@ -9,14 +9,14 @@ import type { TCharacter, TLoadStatus } from '@/shared/types';
 
 interface CharactersState {
   characters: TCharacter[];
-  nextPage: number | undefined;
+  nextPage?: number;
   status: TLoadStatus;
   error: string | null;
 }
 
 const initialState: CharactersState = {
   characters: [],
-  nextPage: 1,
+  nextPage: undefined,
   status: 'idle',
   error: null
 };
@@ -48,7 +48,7 @@ const charactersSlice = createSlice({
     },
     resetCharacters: (state) => {
       state.characters = [];
-      state.nextPage = 1;
+      state.nextPage = undefined;
       state.status = 'idle';
       state.error = null;
     }
