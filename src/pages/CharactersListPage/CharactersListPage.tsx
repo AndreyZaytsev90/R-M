@@ -1,3 +1,5 @@
+import { shallowEqual } from 'react-redux';
+
 import { RickAndMortyIcon } from '@/assets';
 import { Loading } from '@/shared/components';
 import { InfiniteScrollSentinel } from '@/shared/components';
@@ -10,18 +12,21 @@ import {
 } from '@/shared/hooks';
 import type { TFilterType } from '@/shared/types';
 import {
-  setGender,
-  setName,
-  setSpecies,
-  setStatus
-} from '@/stores/slices/charactersFilters';
+  setFilterGender,
+  setFilterName,
+  setFilterSpecies,
+  setFilterStatus
+} from '@/stores/slices/characters';
 import { CharacterCard, CharacterFilterPanel } from '@/widgets';
 
 import styles from './CharactersListPage.module.scss';
 
 export const CharactersListPage = () => {
   const dispatch = useAppDispatch();
-  const filters = useAppSelector((state) => state.charactersFilters);
+  const filters = useAppSelector(
+    (state) => state.characters.filters,
+    shallowEqual
+  );
 
   const [debouncedFilters, isPending] = useDebounce(
     filters,
@@ -43,22 +48,22 @@ export const CharactersListPage = () => {
   } = useInfiniteCharacters(debouncedFilters);
 
   const handleSearchChange = (value: string) => {
-    dispatch(setName(value || null));
+    dispatch(setFilterName(value || null));
   };
 
   const handleFilterChange = (type: TFilterType, value: string | null) => {
     switch (type) {
       case 'name':
-        dispatch(setName(value));
+        dispatch(setFilterName(value));
         break;
       case 'species':
-        dispatch(setSpecies(value));
+        dispatch(setFilterSpecies(value));
         break;
       case 'gender':
-        dispatch(setGender(value));
+        dispatch(setFilterGender(value));
         break;
       case 'status':
-        dispatch(setStatus(value));
+        dispatch(setFilterStatus(value));
         break;
     }
   };

@@ -5,20 +5,27 @@ import {
 } from '@reduxjs/toolkit';
 
 import { getCharacters } from '@/shared/api';
-import type { TCharacter, TLoadStatus } from '@/shared/types';
+import type { IFilterParams, TCharacter, TLoadStatus } from '@/shared/types';
 
 interface CharactersState {
   characters: TCharacter[];
   nextPage?: number;
   status: TLoadStatus;
   error: string | null;
+  filters: IFilterParams;
 }
 
 const initialState: CharactersState = {
   characters: [],
   nextPage: undefined,
   status: 'idle',
-  error: null
+  error: null,
+  filters: {
+    name: null,
+    species: null,
+    gender: null,
+    status: null
+  }
 };
 
 export const fetchCharacters = createAsyncThunk(
@@ -51,6 +58,18 @@ const charactersSlice = createSlice({
       state.nextPage = undefined;
       state.status = 'idle';
       state.error = null;
+    },
+    setFilterName: (state, action: PayloadAction<string | null>) => {
+      state.filters.name = action.payload;
+    },
+    setFilterSpecies: (state, action: PayloadAction<string | null>) => {
+      state.filters.species = action.payload;
+    },
+    setFilterGender: (state, action: PayloadAction<string | null>) => {
+      state.filters.gender = action.payload;
+    },
+    setFilterStatus: (state, action: PayloadAction<string | null>) => {
+      state.filters.status = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -74,7 +93,11 @@ export const {
   addCharacters,
   setNextPage,
   setStatus,
-  resetCharacters
+  resetCharacters,
+  setFilterName,
+  setFilterSpecies,
+  setFilterGender,
+  setFilterStatus
 } = charactersSlice.actions;
 
 export const charactersReducer = charactersSlice.reducer;
