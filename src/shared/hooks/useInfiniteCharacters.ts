@@ -31,6 +31,7 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
 
     dispatch(resetCharacters());
     setVisibleCount(VISIBLE_PAGE_SIZE);
+    //dispatch(setNextPage(2));
     dispatch(setStatus('loading'));
 
     const loadCharacters = async () => {
@@ -58,9 +59,12 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
     return () => controller.abort();
   }, [filters, dispatch]);
 
-  const fetchNextPage = useCallback(async () => {
-    if (!nextPage || isFetchingNextPage) return;
+  const isFetchingRef = useRef(false);
 
+  const fetchNextPage = useCallback(async () => {
+    if (!nextPage || isFetchingRef.current) return;
+
+    isFetchingRef.current = true;
     setIsFetchingNextPage(true);
     dispatch(setStatus('loading'));
 
@@ -78,9 +82,10 @@ export const useInfiniteCharacters = (filters: IFilterParams) => {
     } catch {
       dispatch(setStatus('error'));
     } finally {
+      isFetchingRef.current = false;
       setIsFetchingNextPage(false);
     }
-  }, [nextPage, isFetchingNextPage, filters, dispatch]);
+  }, [nextPage, filters, dispatch]);
 
   useEffect(() => {
     if (!isLoadMore) return;

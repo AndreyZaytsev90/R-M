@@ -1,10 +1,5 @@
-import {
-  type PayloadAction,
-  createAsyncThunk,
-  createSlice
-} from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { getCharacters } from '@/shared/api';
 import type { IFilterParams, TCharacter, TLoadStatus } from '@/shared/types';
 
 interface CharactersState {
@@ -27,14 +22,6 @@ const initialState: CharactersState = {
     status: null
   }
 };
-
-export const fetchCharacters = createAsyncThunk(
-  'characters/fetchCharacters',
-  async (page: number) => {
-    const response = await getCharacters(undefined, { page });
-    return response.data.results;
-  }
-);
 
 const charactersSlice = createSlice({
   name: 'characters',
@@ -71,20 +58,6 @@ const charactersSlice = createSlice({
     setFilterStatus: (state, action: PayloadAction<string | null>) => {
       state.filters.status = action.payload;
     }
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchCharacters.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchCharacters.fulfilled, (state, action) => {
-        state.characters = action.payload;
-        state.status = 'success';
-      })
-      .addCase(fetchCharacters.rejected, (state, action) => {
-        state.status = 'error';
-        state.error = action.error.message || null;
-      });
   }
 });
 
