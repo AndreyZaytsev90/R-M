@@ -1,51 +1,31 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import type { IFilterParams, TCharacter, TLoadStatus } from '@/shared/types';
+import { VISIBLE_PAGE_SIZE } from '@/shared/constants';
+import type { IFilterParams, TCharacter } from '@/shared/types';
 
 interface CharactersState {
-  characters: TCharacter[];
-  nextPage?: number;
-  status: TLoadStatus;
-  error: string | null;
   filters: IFilterParams;
+  accumulatedCharacters: TCharacter[];
+  currentPage: number;
+  visibleCount: number;
 }
 
 const initialState: CharactersState = {
-  characters: [],
-  nextPage: undefined,
-  status: 'idle',
-  error: null,
   filters: {
     name: null,
     species: null,
     gender: null,
     status: null
-  }
+  },
+  accumulatedCharacters: [],
+  currentPage: 1,
+  visibleCount: VISIBLE_PAGE_SIZE
 };
 
 const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    setCharacters: (state, action: PayloadAction<TCharacter[]>) => {
-      state.characters = action.payload;
-      state.status = 'success';
-    },
-    addCharacters: (state, action: PayloadAction<TCharacter[]>) => {
-      state.characters.push(...action.payload);
-    },
-    setNextPage: (state, action: PayloadAction<number | undefined>) => {
-      state.nextPage = action.payload;
-    },
-    setStatus: (state, action: PayloadAction<TLoadStatus>) => {
-      state.status = action.payload;
-    },
-    resetCharacters: (state) => {
-      state.characters = [];
-      state.nextPage = undefined;
-      state.status = 'idle';
-      state.error = null;
-    },
     setFilterName: (state, action: PayloadAction<string | null>) => {
       state.filters.name = action.payload;
     },
@@ -57,20 +37,42 @@ const charactersSlice = createSlice({
     },
     setFilterStatus: (state, action: PayloadAction<string | null>) => {
       state.filters.status = action.payload;
+    },
+    resetFilters: (state) => {
+      state.filters = { name: null, species: null, gender: null, status: null };
+      state.accumulatedCharacters = [];
+      state.currentPage = 1;
+      state.visibleCount = VISIBLE_PAGE_SIZE;
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
+    addUniqueCharacters: (state, action: PayloadAction<TCharacter[]>) => {
+      const ids = new Set(state.accumulatedCharacters.map((c) => c.id));
+      const newOnes = action.payload.filter((c) => !ids.has(c.id));
+      if (newOnes.length) state.accumulatedCharacters.push(...newOnes);
+    },
+    clearCharacters: (state) => {
+      state.accumulatedCharacters = [];
+      state.currentPage = 1;
+      state.visibleCount = VISIBLE_PAGE_SIZE;
+    },
+    setVisibleCount: (state, action: PayloadAction<number>) => {
+      state.visibleCount = action.payload;
     }
   }
 });
 
 export const {
-  setCharacters,
-  addCharacters,
-  setNextPage,
-  setStatus,
-  resetCharacters,
   setFilterName,
   setFilterSpecies,
   setFilterGender,
-  setFilterStatus
+  setFilterStatus,
+  resetFilters,
+  setCurrentPage,
+  addUniqueCharacters,
+  clearCharacters,
+  setVisibleCount
 } = charactersSlice.actions;
 
 export const charactersReducer = charactersSlice.reducer;

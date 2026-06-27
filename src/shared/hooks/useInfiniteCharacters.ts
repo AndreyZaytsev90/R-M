@@ -1,133 +1,108 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { shallowEqual } from 'react-redux';
 
-import { getCharacters } from '@/shared/api';
+import { useGetCharactersQuery } from '@/shared/api/apiSlice';
 import { DEBOUNCE_DELAY, VISIBLE_PAGE_SIZE } from '@/shared/constants';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { getNextPageFromUrl } from '@/shared/lib';
 import type { IFilterParams, TCharacter } from '@/shared/types';
 import {
-  addCharacters,
-  resetCharacters,
-  setCharacters,
-  setNextPage,
-  setStatus
+  addUniqueCharacters,
+  clearCharacters,
+  setCurrentPage,
+  setVisibleCount
 } from '@/stores/slices/characters';
 
 export const useInfiniteCharacters = (filters: IFilterParams) => {
   const dispatch = useAppDispatch();
-  const { characters, status, nextPage } = useAppSelector(
-    (state) => state.characters
+
+  const { accumulatedCharacters, currentPage, visibleCount } = useAppSelector(
+    (state) => state.characters,
+    shallowEqual
   );
-  const [visibleCount, setVisibleCount] = useState(VISIBLE_PAGE_SIZE);
-  const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
+
   const [isLoadMore, setIsLoadMore] = useState(false);
 
-  const abortControllerRef = useRef<AbortController | null>(null);
+  const { data, isLoading, isError, isFetching } = useGetCharactersQuery({
+    ...filters,
+    page: currentPage
+  });
+
+  const filtersString = JSON.stringify(filters);
+  const prevFiltersStringRef = useRef(filtersString);
 
   useEffect(() => {
-    abortControllerRef.current?.abort();
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
+    if (prevFiltersStringRef.current !== filtersString) {
+      dispatch(clearCharacters());
+      prevFiltersStringRef.current = filtersString;
+    }
+  }, [dispatch, filtersString]);
 
-    dispatch(resetCharacters());
-    setVisibleCount(VISIBLE_PAGE_SIZE);
-    //dispatch(setNextPage(2));
-    dispatch(setStatus('loading'));
-
-    const loadCharacters = async () => {
-      try {
-        const { data } = await getCharacters(controller.signal, {
-          ...filters,
-          page: 1
-        });
-
-        if (controller.signal.aborted) return;
-
-        dispatch(setCharacters(data.results));
-
-        const next = getNextPageFromUrl(data.info.next);
-        dispatch(setNextPage(next));
-
-        dispatch(setStatus('success'));
-      } catch {
-        dispatch(setStatus('error'));
-      }
-    };
-
-    loadCharacters();
-
-    return () => controller.abort();
-  }, [filters, dispatch]);
+  useEffect(() => {
+    if (!data?.results) return;
+    dispatch(addUniqueCharacters(data.results));
+  }, [data?.results, dispatch]);
 
   const isFetchingRef = useRef(false);
 
   const fetchNextPage = useCallback(async () => {
-    if (!nextPage || isFetchingRef.current) return;
-
+    if (!data?.info?.next || isFetchingRef.current) return;
     isFetchingRef.current = true;
-    setIsFetchingNextPage(true);
-    dispatch(setStatus('loading'));
+    dispatch(setCurrentPage(currentPage + 1));
+  }, [data?.info?.next, currentPage, dispatch]);
 
-    try {
-      const { data } = await getCharacters(undefined, {
-        ...filters,
-        page: nextPage
-      });
-      dispatch(addCharacters(data.results));
-
-      const next = getNextPageFromUrl(data.info.next);
-      dispatch(setNextPage(next));
-
-      dispatch(setStatus('success'));
-    } catch {
-      dispatch(setStatus('error'));
-    } finally {
+  useEffect(() => {
+    if (!isFetching) {
       isFetchingRef.current = false;
-      setIsFetchingNextPage(false);
     }
-  }, [nextPage, filters, dispatch]);
+  }, [isFetching]);
 
   useEffect(() => {
     if (!isLoadMore) return;
-
     const timer = setTimeout(() => {
-      setVisibleCount((prev) =>
-        Math.min(prev + VISIBLE_PAGE_SIZE, characters.length)
+      dispatch(
+        setVisibleCount(
+          Math.min(
+            visibleCount + VISIBLE_PAGE_SIZE,
+            accumulatedCharacters.length
+          )
+        )
       );
       setIsLoadMore(false);
     }, DEBOUNCE_DELAY);
-
     return () => clearTimeout(timer);
-  }, [isLoadMore, characters.length]);
+  }, [isLoadMore, accumulatedCharacters.length, visibleCount, dispatch]);
 
   const onLoadMore = useCallback(() => setIsLoadMore(true), []);
 
   const updateCharacter = useCallback(
     (id: number, updated: Partial<TCharacter>) => {
-      const updatedList = characters.map((char) =>
-        char.id === id ? { ...char, ...updated } : char
+      dispatch(
+        addUniqueCharacters(
+          accumulatedCharacters.map((c) =>
+            c.id === id ? { ...c, ...updated } : c
+          )
+        )
       );
-      dispatch(setCharacters(updatedList));
     },
-    [characters, dispatch]
+    [accumulatedCharacters, dispatch]
   );
 
   const visibleCharacters = useMemo(
-    () => characters.slice(0, visibleCount),
-    [characters, visibleCount]
+    () => accumulatedCharacters.slice(0, visibleCount),
+    [accumulatedCharacters, visibleCount]
   );
 
   return {
-    characters,
+    characters: accumulatedCharacters,
     visibleCharacters,
     visibleCount,
-    isLoading: status === 'loading',
-    isError: status === 'error',
+    isLoading,
+    isError,
     isLoadMore,
     onLoadMore,
     fetchNextPage,
-    hasNextPage: nextPage !== undefined,
-    isFetchingNextPage,
+    hasNextPage: !!data?.info?.next,
+    isFetchingNextPage: isFetching,
     updateCharacter
   };
 };
