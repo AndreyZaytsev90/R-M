@@ -1,29 +1,23 @@
 /** @type {import('jest').Config} */
 export default {
-  testEnvironment: 'node',
+  // jsdom — эмуляция браузера, нужна для тестов React-компонентов
+  testEnvironment: 'jsdom',
 
   // Все файлы *.test.ts / *.spec.ts в src
   testMatch: ['**/src/**/*.{test,spec}.{ts,tsx}'],
 
   // Преобразование TypeScript через ts-jest
   transform: {
-    '^.+\.tsx?$': [
-      'ts-jest',
-      {
-        tsconfig: {
-          // Нужно для корректных импортов CJS-пакетов (например, clsx)
-          esModuleInterop: true,
-          // Алиас «@/*» для проверки типов (аналог tsconfig.app.json)
-          baseUrl: '.',
-          paths: { '@/*': ['src/*'] }
-        }
-      }
-    ]
+    '^.+\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }]
   },
 
-  // Алиас «@/*» — аналог resolve.alias из vite.config.ts
+  // Маппинг ресурсов, которые Jest не умеет обрабатывать «из коробки»
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    // Алиас «@/*» — аналог resolve.alias из vite.config.ts
+    '^@/(.*)$': '<rootDir>/src/$1',
+    // CSS-модули: каждый ключ styles возвращает само имя класса (styles.select → 'select')
+    '\.module\.(css|scss|sass)$': 'identity-obj-proxy'
+    // SVG-иконки не маппим здесь: они мокаются в тестах через jest.mock('@/assets', ...)
   },
 
   // Игнорируем node_modules при поиске тестов
