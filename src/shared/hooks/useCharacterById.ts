@@ -1,23 +1,17 @@
-import { useEffect } from 'react';
-
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { fetchCharacter } from '@/stores/slices/character';
+import { useGetCharacterByIdQuery } from '@/shared/api/apiSlice';
 
 export const useCharacterById = (id: number) => {
-  const dispatch = useAppDispatch();
-  const { character, status } = useAppSelector((state) => state.character);
-
-  const isInvalidId = !id || isNaN(id);
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchCharacter(id));
-    }
-  }, [id, dispatch]);
+  const {
+    data: character,
+    isLoading,
+    isError
+  } = useGetCharacterByIdQuery(id, {
+    skip: !id || isNaN(id)
+  });
 
   return {
-    character: isInvalidId ? null : character,
-    isLoading: status === 'loading',
-    isError: status === 'error'
+    character: character ?? null,
+    isLoading,
+    isError
   };
 };

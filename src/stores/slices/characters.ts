@@ -1,80 +1,78 @@
-import {
-  type PayloadAction,
-  createAsyncThunk,
-  createSlice
-} from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { getCharacters } from '@/shared/api';
-import type { TCharacter, TLoadStatus } from '@/shared/types';
+import { VISIBLE_PAGE_SIZE } from '@/shared/constants';
+import type { IFilterParams, TCharacter } from '@/shared/types';
 
 interface CharactersState {
-  characters: TCharacter[];
-  nextPage: number | undefined;
-  status: TLoadStatus;
-  error: string | null;
+  filters: IFilterParams;
+  accumulatedCharacters: TCharacter[];
+  currentPage: number;
+  visibleCount: number;
 }
 
 const initialState: CharactersState = {
-  characters: [],
-  nextPage: 1,
-  status: 'idle',
-  error: null
+  filters: {
+    name: null,
+    species: null,
+    gender: null,
+    status: null
+  },
+  accumulatedCharacters: [],
+  currentPage: 1,
+  visibleCount: VISIBLE_PAGE_SIZE
 };
-
-export const fetchCharacters = createAsyncThunk(
-  'characters/fetchCharacters',
-  async (page: number) => {
-    const response = await getCharacters(undefined, { page });
-    return response.data.results;
-  }
-);
 
 const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    setCharacters: (state, action: PayloadAction<TCharacter[]>) => {
-      state.characters = action.payload;
-      state.status = 'success';
+    setFilterName: (state, action: PayloadAction<string | null>) => {
+      state.filters.name = action.payload;
     },
-    addCharacters: (state, action: PayloadAction<TCharacter[]>) => {
-      state.characters.push(...action.payload);
+    setFilterSpecies: (state, action: PayloadAction<string | null>) => {
+      state.filters.species = action.payload;
     },
-    setNextPage: (state, action: PayloadAction<number | undefined>) => {
-      state.nextPage = action.payload;
+    setFilterGender: (state, action: PayloadAction<string | null>) => {
+      state.filters.gender = action.payload;
     },
-    setStatus: (state, action: PayloadAction<TLoadStatus>) => {
-      state.status = action.payload;
+    setFilterStatus: (state, action: PayloadAction<string | null>) => {
+      state.filters.status = action.payload;
     },
-    resetCharacters: (state) => {
-      state.characters = [];
-      state.nextPage = 1;
-      state.status = 'idle';
-      state.error = null;
+    resetFilters: (state) => {
+      state.filters = { name: null, species: null, gender: null, status: null };
+      state.accumulatedCharacters = [];
+      state.currentPage = 1;
+      state.visibleCount = VISIBLE_PAGE_SIZE;
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
+    addUniqueCharacters: (state, action: PayloadAction<TCharacter[]>) => {
+      const ids = new Set(state.accumulatedCharacters.map((c) => c.id));
+      const newOnes = action.payload.filter((c) => !ids.has(c.id));
+      if (newOnes.length) state.accumulatedCharacters.push(...newOnes);
+    },
+    clearCharacters: (state) => {
+      state.accumulatedCharacters = [];
+      state.currentPage = 1;
+      state.visibleCount = VISIBLE_PAGE_SIZE;
+    },
+    setVisibleCount: (state, action: PayloadAction<number>) => {
+      state.visibleCount = action.payload;
     }
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchCharacters.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchCharacters.fulfilled, (state, action) => {
-        state.characters = action.payload;
-        state.status = 'success';
-      })
-      .addCase(fetchCharacters.rejected, (state, action) => {
-        state.status = 'error';
-        state.error = action.error.message || null;
-      });
   }
 });
 
 export const {
-  setCharacters,
-  addCharacters,
-  setNextPage,
-  setStatus,
-  resetCharacters
+  setFilterName,
+  setFilterSpecies,
+  setFilterGender,
+  setFilterStatus,
+  resetFilters,
+  setCurrentPage,
+  addUniqueCharacters,
+  clearCharacters,
+  setVisibleCount
 } = charactersSlice.actions;
 
 export const charactersReducer = charactersSlice.reducer;

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    // Jest исполняет тесты в CommonJS — переопределяем ESNext из tsconfig.app.json
+    "module": "commonjs",
+    "moduleResolution": "node",
+    // verbatimModuleSyntax запрещает ESM-синтаксис в CJS-файлах, для тестов не нужен
+    "verbatimModuleSyntax": false,
+    // ts-jest компилирует в CJS, нужен интероп с CommonJS-пакетами (clsx и др.)
+    "esModuleInterop": true,
+    // jest добавляет глобалы test/expect/describe к типам vite/client
+    "types": ["vite/client", "jest"],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo"
+  }
+}
